@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/geekreflex/devto-clone#readme",
   "dependencies": {
+    "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "concurrently": "^7.2.2",
     "cookie-parser": "^1.4.6",
@@ -34,5 +35,5 @@
   "devDependencies": {
     "nodemon": "^2.0.19"
   },
-  "type": "module"
+  "type": "commonjs"
 }
