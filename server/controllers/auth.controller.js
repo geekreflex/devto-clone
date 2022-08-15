@@ -87,10 +87,30 @@ const userRegisterAuth = expressAsyncHandler(async (req, res) => {
 
       return res
         .status(201)
-        .json({ status: 'success', message: 'Registered successfully' })
-        .cookie('user_access_token', generateToken(user._id));
+        .cookie('user_access_token', generateToken(user._id))
+        .json({ status: 'success', message: 'Registered successfully' });
     });
   });
 });
 
-module.exports = { githubAuth, userRegisterAuth };
+/**
+ *
+ */
+const userLoginAuth = expressAsyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+
+  User.findOne({ email }, (err, user) => {
+    if (err) {
+      return res.status(400).json({ status: 'failed', message: 'err' });
+    }
+
+    if (user && user.matchPassword(password)) {
+      return res
+        .status(200)
+        .cookie('user_access_token', generateToken(user._id))
+        .json({ status: 'success', message: 'Logged in successfully' });
+    }
+  });
+});
+
+module.exports = { githubAuth, userRegisterAuth, userLoginAuth };
