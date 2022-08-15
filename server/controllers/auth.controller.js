@@ -1,8 +1,9 @@
 const User = require('../models/user.model');
 const axios = require('axios');
 const generateToken = require('../utils/generateToken');
+const expressAsyncHandler = require('express-async-handler');
 
-const githubAuth = (req, res) => {
+const githubAuth = expressAsyncHandler(async (req, res) => {
   const requestToken = req.query.code;
 
   axios({
@@ -31,8 +32,7 @@ const githubAuth = (req, res) => {
 
         if (user) {
           return res
-            .status(200)
-            .json({ token: generateToken(user._id) })
+            .cookie('user_access_token', generateToken(user._id))
             .redirect('http://localhost:3000');
         }
 
@@ -47,21 +47,19 @@ const githubAuth = (req, res) => {
         newUser.save((err, data) => {
           if (err) {
             return res.status(400).json({
-              status: 'failed',
               message: 'User signup failed with github',
             });
           }
 
           res
-            .status(200)
-            .json({
-              token: generateToken(data._id),
-            })
+            .cookie('user_access_token', generateToken(data._id))
             .redirect('http://localhost:3000');
         });
       });
     });
   });
-};
+});
+
+const registerUser = expressAsyncHandler(async (req, res) => {});
 
 module.exports = { githubAuth };
