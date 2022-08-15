@@ -31,7 +31,8 @@ const githubAuth = (req, res) => {
 
         if (user) {
           return res
-            .cookie('user_access_token', generateToken(user._id))
+            .status(200)
+            .json({ token: generateToken(user._id) })
             .redirect('http://localhost:3000');
         }
 
@@ -46,12 +47,16 @@ const githubAuth = (req, res) => {
         newUser.save((err, data) => {
           if (err) {
             return res.status(400).json({
+              status: 'failed',
               message: 'User signup failed with github',
             });
           }
 
           res
-            .cookie('user_access_token', generateToken(data._id))
+            .status(200)
+            .json({
+              token: generateToken(data._id),
+            })
             .redirect('http://localhost:3000');
         });
       });
