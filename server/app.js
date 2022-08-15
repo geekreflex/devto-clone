@@ -18,9 +18,7 @@ app.use(
   })
 );
 app.use(cookieParser());
-
-app.use('/auth', authRoute);
-app.use('/api/users', userRoute);
+app.use(express.json());
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/build')));
@@ -32,6 +30,9 @@ if (process.env.NODE_ENV === 'production') {
     res.send('API is running...');
   });
 }
+
+app.use('/auth', authRoute);
+app.use('/api/users', userRoute);
 
 app.use(notFound);
 app.use(errorHandler);

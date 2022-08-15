@@ -26,7 +26,7 @@ const githubAuth = expressAsyncHandler(async (req, res) => {
         if (err) {
           console.log(err);
           return res.status(400).json({
-            message: 'Error occured',
+            message: `Error ocurred ${err}`,
           });
         }
 
@@ -44,15 +44,15 @@ const githubAuth = expressAsyncHandler(async (req, res) => {
           loginType: 'github',
         });
 
-        newUser.save((err, data) => {
+        newUser.save((err, user) => {
           if (err) {
             return res.status(400).json({
-              message: 'User signup failed with github',
+              message: `User signup failed with github ${err}`,
             });
           }
 
           res
-            .cookie('user_access_token', generateToken(data._id))
+            .cookie('user_access_token', generateToken(user._id))
             .redirect('http://localhost:3000');
         });
       });
@@ -60,6 +60,37 @@ const githubAuth = expressAsyncHandler(async (req, res) => {
   });
 });
 
-const registerUser = expressAsyncHandler(async (req, res) => {});
+const userRegisterAuth = expressAsyncHandler(async (req, res) => {
+  const { name, email, password } = req.body;
+  User.findOne({ email }, (err, user) => {
+    if (err) {
+      return res.status(400).json({ message: `Error ocurred ${err}` });
+    }
 
-module.exports = { githubAuth };
+    if (user) {
+      return res.status(201).json({ message: 'Email already exists' });
+    }
+
+    const newUser = new User({
+      name,
+      email,
+      password,
+      loginType: 'email',
+    });
+
+    newUser.save((err, user) => {
+      if (err) {
+        return res.status(400).json({
+          message: `Error ocurred ${err}`,
+        });
+      }
+
+      return res
+        .status(201)
+        .json({ status: 'success', message: 'Registered successfully' })
+        .cookie('user_access_token', generateToken(user._id));
+    });
+  });
+});
+
+module.exports = { githubAuth, userRegisterAuth };
