@@ -8,6 +8,13 @@ function App() {
       >
         Login with github
       </button>
+      <button
+        onClick={() =>
+          (window.location.href = 'http://localhost:8400/auth/google')
+        }
+      >
+        Login with google
+      </button>
     </div>
   );
 }

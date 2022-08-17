@@ -31,7 +31,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.use('/auth', authRoute);
+app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);
 
 app.use(notFound);

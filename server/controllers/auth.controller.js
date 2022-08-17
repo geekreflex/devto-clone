@@ -2,6 +2,7 @@ const User = require('../models/user.model');
 const axios = require('axios');
 const generateToken = require('../utils/generateToken');
 const expressAsyncHandler = require('express-async-handler');
+const { OAuth2Client } = require('google-auth-library');
 
 const githubAuth = expressAsyncHandler(async (req, res) => {
   const requestToken = req.query.code;
@@ -36,11 +37,13 @@ const githubAuth = expressAsyncHandler(async (req, res) => {
             .redirect('http://localhost:3000');
         }
 
+        let password = email + process.env.JWT_SECRET;
         const newUser = new User({
           name,
           email,
           avatar: avatar_url,
           location,
+          password,
           loginType: 'github',
         });
 
@@ -58,6 +61,17 @@ const githubAuth = expressAsyncHandler(async (req, res) => {
       });
     });
   });
+});
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+const googleAuth = expressAsyncHandler(async (req, res) => {
+  const { idToken } = req.body;
+  client
+    .verifyIdToken({ idToken, audience: process.env.GOOGLE_CLIENT_ID })
+    .then((response) => {
+      console.log(response);
+      // const { email_verified, name, email,  } = response.payload
+    });
 });
 
 const userRegisterAuth = expressAsyncHandler(async (req, res) => {
@@ -113,4 +127,4 @@ const userLoginAuth = expressAsyncHandler(async (req, res) => {
   });
 });
 
-module.exports = { githubAuth, userRegisterAuth, userLoginAuth };
+module.exports = { githubAuth, userRegisterAuth, userLoginAuth, googleAuth };

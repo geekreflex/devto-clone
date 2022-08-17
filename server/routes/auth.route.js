@@ -5,6 +5,7 @@ const {
   githubAuth,
   userRegisterAuth,
   userLoginAuth,
+  googleAuth,
 } = require('../controllers/auth.controller');
 
 router.get('/github', (_, res) => {
@@ -15,5 +16,7 @@ router.get('/github', (_, res) => {
 router.get('/github/callback', githubAuth);
 router.post('/register', userRegisterAuth);
 router.post('/login', userLoginAuth);
+
+router.post('/google', googleAuth);
 
 module.exports = router;
