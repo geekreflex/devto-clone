@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GoogleLogin } from 'react-google-login';
+import { gapi } from 'gapi-script';
 import axios from 'axios';
 
 const GoogleAuthLogin = () => {
-  const responseGoogle = (response) => {
-    console.log(response);
-    sendGoogleToken(response.tokenId);
-  };
+  useEffect(() => {
+    const init = () => {
+      gapi.auth2.getAuthInstance({
+        clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+        scope: 'email',
+      });
+    };
 
-  const sendGoogleToken = (tokenId) => {
+    gapi.load('client:auth2', init);
+  }, []);
+
+  const responseGoogle = (response) => {
     axios
       .post(`${process.env.REACT_APP_API_URL}/auth/google`, {
-        idToken: tokenId,
+        idToken: response.tokenId,
       })
       .then((res) => console.log(res.data))
       .catch((err) => console.log('GOOGLE SIGNIN ERROR', err.response));
@@ -24,9 +31,11 @@ const GoogleAuthLogin = () => {
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
         render={(renderProps) => (
-          <button onClick={renderProps.onClick}>Login With Google</button>
+          <button onClick={renderProps.onClick} disabled={renderProps.disabled}>
+            Login With Google
+          </button>
         )}
-      ></GoogleLogin>
+      />
     </div>
   );
 };
