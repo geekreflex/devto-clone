@@ -1,11 +1,9 @@
-import GithubAuthLogin from './components/auth/GithubAuthLogin';
-import GoogleAuthLogin from './components/auth/GoogleAuthLogin';
+import Header from './components/nav/Header';
 
 function App() {
   return (
     <div className="App">
-      <GithubAuthLogin />
-      <GoogleAuthLogin />
+      <Header />
     </div>
   );
 }
