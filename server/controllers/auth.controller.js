@@ -85,7 +85,6 @@ const googleAuth = expressAsyncHandler(async (req, res) => {
       if (email_verified) {
         User.findOne({ email }).exec((err, user) => {
           if (user) {
-            console.log('user', user);
             return res
               .cookie('user_access_token', generateToken(user._id))
               .json({

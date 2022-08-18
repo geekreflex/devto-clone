@@ -5,12 +5,14 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import { getTokenFromStorage } from './features/authSlice';
+import GlobalStyles from './styles/GlobalStyles';
 
 store.dispatch(getTokenFromStorage());
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <GlobalStyles />
       <App />
     </Provider>
   </React.StrictMode>

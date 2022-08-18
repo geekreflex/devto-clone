@@ -28,7 +28,9 @@ const GoogleAuthLogin = () => {
     };
     axios
       .post(url, { idToken }, config)
-      .then((res) => console.log(res.data))
+      .then(() => {
+        window.location.href = '/';
+      })
       .catch((err) => console.log('GOOGLE SIGNIN ERROR', err.response));
   };
 
