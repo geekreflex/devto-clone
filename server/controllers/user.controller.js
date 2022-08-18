@@ -17,4 +17,20 @@ const getUserProfile = asyncHandler(async (req, res) => {
   });
 });
 
-module.exports = { getUserProfile };
+const checkUsername = asyncHandler(async (req, res) => {
+  const { username } = req.body;
+
+  User.find({ username }, (err, user) => {
+    if (!err) {
+      if (user.length > 0) {
+        return res.json({ status: 'failed', message: 'Username is taken' });
+      }
+
+      return res.json({ status: 'success', message: 'Username is available' });
+    }
+  });
+
+  console.log(username);
+});
+
+module.exports = { getUserProfile, checkUsername };
