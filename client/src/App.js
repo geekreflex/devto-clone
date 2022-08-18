@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Header from './components/nav/Header';
+import Header from './components/Header';
 import { getUserProfileAsync } from './features/userSlice';
 
 function App() {
