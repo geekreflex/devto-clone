@@ -22,8 +22,8 @@ const postSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-postSchema.pre('save', function (next) {
-  let genSlug = slugify(this.title, { lower: true });
+postSchema.pre('save', async function (next) {
+  let genSlug = await slugify(this.title, { lower: true });
   this.slug = `${genSlug}-${randomStr()}`;
   next();
 });

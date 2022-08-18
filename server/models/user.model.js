@@ -13,6 +13,12 @@ const userSchema = mongoose.Schema(
     email: {
       type: String,
       required: true,
+      unique: true,
+    },
+    username: {
+      type: String,
+      unique: true,
+      required: true,
     },
     password: {
       type: String,
@@ -24,6 +30,10 @@ const userSchema = mongoose.Schema(
       type: String,
       enum: ['github', 'twitter', 'email'],
       required: true,
+    },
+    admin: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

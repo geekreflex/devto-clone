@@ -48,6 +48,7 @@ const githubAuth = expressAsyncHandler(async (req, res) => {
           location,
           password,
           loginType: 'github',
+          username: email,
         });
 
         newUser.save((err, user) => {
@@ -81,6 +82,7 @@ const googleAuth = expressAsyncHandler(async (req, res) => {
   client
     .verifyIdToken({ idToken, audience: process.env.GOOGLE_CLIENT_ID })
     .then((response) => {
+      console.log(response);
       const { email_verified, name, email, picture } = response.payload;
       if (email_verified) {
         User.findOne({ email }).exec((err, user) => {
@@ -100,6 +102,7 @@ const googleAuth = expressAsyncHandler(async (req, res) => {
             password,
             avatar: picture,
             loginType: 'google',
+            username: email,
           });
 
           newUser.save((err, user) => {
@@ -125,7 +128,7 @@ const googleAuth = expressAsyncHandler(async (req, res) => {
  * Email register
  */
 const userRegisterAuth = expressAsyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, username } = req.body;
   User.findOne({ email }, (err, user) => {
     if (err) {
       return res.status(400).json({ message: `Error ocurred ${err}` });
@@ -140,6 +143,7 @@ const userRegisterAuth = expressAsyncHandler(async (req, res) => {
       email,
       password,
       loginType: 'email',
+      username,
     });
 
     newUser.save((err, user) => {
