@@ -21,5 +21,5 @@ const HeaderWrap = styled.div`
   display: flex;
   width: 100%;
   height: 70px;
-  background-color: #333;
+  background-color: ${(props) => props.theme.primary};
 `;
