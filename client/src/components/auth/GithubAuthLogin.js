@@ -1,10 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 
 const GithubAuthLogin = () => {
   const githubBtnRef = useRef();
-  useEffect(() => {
-    setTimeout(() => ((githubBtnRef.current.disabled = false), 3000));
-  }, []);
 
   const onGithubLogin = () => {
     const url = `${process.env.REACT_APP_API_URL}/auth/github`;
@@ -13,7 +10,7 @@ const GithubAuthLogin = () => {
 
   return (
     <div>
-      <button ref={githubBtnRef} disabled onClick={onGithubLogin}>
+      <button ref={githubBtnRef} onClick={onGithubLogin}>
         Login with Github
       </button>
     </div>

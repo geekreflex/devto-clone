@@ -11,12 +11,6 @@ const app = express();
 const authRoute = require('./routes/auth.route');
 const userRoute = require('./routes/user.route');
 
-app.use(
-  cors({
-    credentials: true,
-    origin: 'http://localhost:3000',
-  })
-);
 app.use(cookieParser());
 app.use(express.json());
 
@@ -30,6 +24,14 @@ if (process.env.NODE_ENV === 'production') {
     res.send('API is running...');
   });
 }
+
+app.use(
+  cors({
+    credentials: true,
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200,
+  })
+);
 
 app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);

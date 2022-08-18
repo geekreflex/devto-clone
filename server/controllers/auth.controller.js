@@ -72,17 +72,26 @@ const githubAuth = expressAsyncHandler(async (req, res) => {
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const googleAuth = expressAsyncHandler(async (req, res) => {
   const { idToken } = req.body;
+
+  if (!idToken) {
+    console.log('token required: ', idToken);
+    return;
+  }
+
   client
     .verifyIdToken({ idToken, audience: process.env.GOOGLE_CLIENT_ID })
     .then((response) => {
-      console.log(response);
       const { email_verified, name, email, picture } = response.payload;
       if (email_verified) {
         User.findOne({ email }).exec((err, user) => {
           if (user) {
+            console.log('user', user);
             return res
               .cookie('user_access_token', generateToken(user._id))
-              .redirect('http://localhost:3000');
+              .json({
+                status: 'success',
+                message: 'Successfully logged in with google',
+              });
           }
 
           const password = email + process.env.JWT_SECRET;
@@ -101,9 +110,12 @@ const googleAuth = expressAsyncHandler(async (req, res) => {
               });
             }
 
-            res
+            return res
               .cookie('user_access_token', generateToken(user._id))
-              .redirect('http://localhost:3000');
+              .json({
+                status: 'success',
+                message: 'Successfully logged in with google',
+              });
           });
         });
       }

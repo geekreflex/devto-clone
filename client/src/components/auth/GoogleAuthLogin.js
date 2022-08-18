@@ -16,10 +16,18 @@ const GoogleAuthLogin = () => {
   }, []);
 
   const responseGoogle = (response) => {
+    const url = `${process.env.REACT_APP_API_URL}/auth/google`;
+    let idToken = response.tokenId;
+
+    const config = {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    };
     axios
-      .post(`${process.env.REACT_APP_API_URL}/auth/google`, {
-        idToken: response.tokenId,
-      })
+      .post(url, { idToken }, config)
       .then((res) => console.log(res.data))
       .catch((err) => console.log('GOOGLE SIGNIN ERROR', err.response));
   };
