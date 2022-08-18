@@ -1,6 +1,7 @@
 const Post = require('../models/post.model');
 const expressAsyncHandler = require('express-async-handler');
 const { generateSlug } = require('../utils/generateSlug');
+const User = require('../models/user.model');
 
 const getPosts = expressAsyncHandler(async (req, res) => {
   Post.find((err, posts) => {
@@ -95,7 +96,21 @@ const deletePost = expressAsyncHandler(async (req, res) => {
 
 const getOnePost = expressAsyncHandler(async (req, res) => {
   const { username, postSlug } = req.params;
-  console.log(username, postSlug);
+  const user = await User.find({ username });
+  Post.findOne({ user: user[0]._id, slug: postSlug }, (err, post) => {
+    if (err) {
+      return res.status(400).json({
+        status: 'failed',
+        message: 'Error occured',
+      });
+    }
+
+    return res.status(200).json({
+      status: 'success',
+      payload: post,
+      message: 'Post retrieved successfully',
+    });
+  }).populate('user');
 });
 
 module.exports = {
