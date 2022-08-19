@@ -34,6 +34,7 @@ const HeaderWrap = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  box-shadow: ${(props) => props.theme.headerShadow};
 `;
 
 const HeaderInner = styled.div`

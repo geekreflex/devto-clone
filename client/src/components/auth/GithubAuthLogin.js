@@ -10,7 +10,11 @@ const GithubAuthLogin = () => {
 
   return (
     <div>
-      <button ref={githubBtnRef} onClick={onGithubLogin}>
+      <button
+        style={{ backgroundColor: '#24292e' }}
+        ref={githubBtnRef}
+        onClick={onGithubLogin}
+      >
         Login with Github
       </button>
     </div>

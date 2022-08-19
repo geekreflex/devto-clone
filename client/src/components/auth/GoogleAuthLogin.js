@@ -41,7 +41,11 @@ const GoogleAuthLogin = () => {
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
         render={(renderProps) => (
-          <button onClick={renderProps.onClick} disabled={renderProps.disabled}>
+          <button
+            style={{ backgroundColor: '#000000' }}
+            onClick={renderProps.onClick}
+            disabled={renderProps.disabled}
+          >
             Login With Google
           </button>
         )}

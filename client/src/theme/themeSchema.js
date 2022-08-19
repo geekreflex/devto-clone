@@ -8,7 +8,9 @@ export const lightTheme = {
   textColor2: '#404040',
   danger: '#b91c1c',
   shadow: '0 1px 2px rgba(0,0,0,.7)',
-  borderColor: '#3d3d3d',
+  borderColor: '#d6d6d7',
+  headerShadow: '0 1px 1px rgba(0, 0, 0, 0.1)',
+  cardShadow: '0 0 0 1px rgba(23, 23, 23, 0.1)',
 };
 
 export const darkTheme = {
@@ -22,4 +24,6 @@ export const darkTheme = {
   danger: '#b91c1c',
   shadow: '0 1px 2px rgba(0,0,0,.7)',
   borderColor: '#3d3d3d',
+  headerShadow: '0 1px 1px rgb(0,0,0)',
+  cardShadow: '0 0 0 1px rgba(255, 255, 255, 0.15)',
 };

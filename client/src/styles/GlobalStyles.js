@@ -16,7 +16,8 @@ body {
 }
 
 a {
-  text-decoration: none
+  text-decoration: none;
+  color: ${(props) => props.theme.brandColor}
 }
 
 svg {

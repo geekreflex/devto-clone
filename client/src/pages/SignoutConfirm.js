@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ButtonFill } from '../styles/DefaultStyles';
-import { useDispatch } from 'react-redux';
-import { logoutAsync } from '../features/authSlice';
 
 const SignoutConfirm = () => {
-  const dispatch = useDispatch();
   const onSignout = () => {
-    window.location.href = `${process.env.REACT_APP_API_URL}/auth/logout`;
+    const url = `${process.env.REACT_APP_API_URL}/auth/logout`;
+    window.location.href = url;
   };
   return (
     <Wrap>
