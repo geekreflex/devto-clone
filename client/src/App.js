@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
+import Footer from './components/Footer';
 import Header from './components/Header';
 import { getUserProfileAsync } from './features/userSlice';
 import { ProtectedRoute, PublicRoute } from './helpers/authRoute';
@@ -38,6 +39,7 @@ function App() {
           }
         />
       </Routes>
+      <Footer />
     </div>
   );
 }

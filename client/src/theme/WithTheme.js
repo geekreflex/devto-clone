@@ -2,7 +2,7 @@ import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './themeSchema';
 
 const WithTheme = ({ children }) => {
-  const mode = 'light';
+  const mode = 'dark';
 
   const renderTheme = () => {
     if (mode === 'light') {

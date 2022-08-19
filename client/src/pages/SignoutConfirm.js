@@ -11,14 +11,18 @@ const SignoutConfirm = () => {
     <Wrap>
       <Main>
         <h2>Are you sure you want to sign out?</h2>
-        <ButtonFill onClick={onSignout}>Yes, Sign me out</ButtonFill>
+        <ButtonFill>
+          <button style={{ padding: '15px 20px' }} onClick={onSignout}>
+            Yes, Sign out
+          </button>
+        </ButtonFill>
       </Main>
     </Wrap>
   );
 };
 
 const Wrap = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
 `;
 
@@ -30,7 +34,8 @@ const Main = styled.div`
   flex-direction: column;
 
   h2 {
-    margin-bottom: 30px;
+    font-size: 23px;
+    margin-bottom: 10px;
   }
 `;
 
