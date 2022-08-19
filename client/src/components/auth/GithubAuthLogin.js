@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { IoLogoGithub } from 'react-icons/io5';
 
 const GithubAuthLogin = () => {
   const githubBtnRef = useRef();
@@ -15,6 +16,9 @@ const GithubAuthLogin = () => {
         ref={githubBtnRef}
         onClick={onGithubLogin}
       >
+        <i className="auth-btn-icon">
+          <IoLogoGithub />
+        </i>
         Login with Github
       </button>
     </div>

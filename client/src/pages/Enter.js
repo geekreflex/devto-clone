@@ -1,17 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import GoogleLoginAuth from '../components/auth/GoogleAuthLogin';
 import GithubLoginAuth from '../components/auth/GithubAuthLogin';
 import styled from 'styled-components';
 import { Container } from '../styles/DefaultStyles';
 import { Link, useSearchParams } from 'react-router-dom';
+import AuthForm from '../components/auth/AuthForm';
 
 const Enter = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const state = searchParams.get('state');
 
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
   return (
     <EnterWrap>
       <Container>
@@ -37,6 +35,7 @@ const Enter = () => {
                 <span>Have a password? Continue with your email address</span>
               )}
             </div>
+            <AuthForm loginState={state} />
           </Main>
         </Inner>
       </Container>
@@ -94,7 +93,7 @@ const Wlc = styled.div`
 
   h1 {
     font-size: 30px;
-    font-weight: 600;
+    font-weight: 700;
   }
 `;
 
@@ -107,7 +106,7 @@ const AuthBtns = styled.div`
 
   button {
     width: 100%;
-    padding: 18px 20px;
+    padding: 14px 20px;
     border: none;
     outline: none;
     border-radius: 6px;
@@ -115,6 +114,9 @@ const AuthBtns = styled.div`
     color: #ffffff;
     cursor: pointer;
     font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 

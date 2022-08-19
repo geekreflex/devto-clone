@@ -12,9 +12,9 @@ const NavLinks = () => {
 
   return (
     <NavLinksWrap>
-      <Link to="#">
-        <Button>Create Post</Button>
-      </Link>
+      <Button>
+        <Link to="#">Create Post</Link>
+      </Button>
       <Link to="#" className="notification">
         <div className="notification-total">30</div>
         <NotificationIcon />

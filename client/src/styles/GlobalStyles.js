@@ -20,7 +20,17 @@ a {
   color: ${(props) => props.theme.brandColor}
 }
 
-svg {
+.devto-icon {
   fill: ${(props) => props.theme.textColor1};
 }
+
+.auth-btn-icon {
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  color: #ffffff;
+}
+
 `;

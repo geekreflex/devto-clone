@@ -6,12 +6,12 @@ import { ButtonClear, Button } from '../../styles/DefaultStyles';
 const AuthLinks = () => {
   return (
     <AuthBtnWrap>
-      <Link to="/enter">
-        <ButtonClear>Login</ButtonClear>
-      </Link>
-      <Link to="/enter?state=new-user">
-        <Button>Create account</Button>
-      </Link>
+      <ButtonClear>
+        <Link to="/enter">Login</Link>
+      </ButtonClear>
+      <Button>
+        <Link to="/enter?state=new-user">Create account</Link>
+      </Button>
     </AuthBtnWrap>
   );
 };

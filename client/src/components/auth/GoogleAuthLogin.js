@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
 import axios from 'axios';
+import { IoLogoGoogle } from 'react-icons/io5';
 
 const GoogleAuthLogin = () => {
   useEffect(() => {
@@ -46,6 +47,9 @@ const GoogleAuthLogin = () => {
             onClick={renderProps.onClick}
             disabled={renderProps.disabled}
           >
+            <i className="auth-btn-icon">
+              <IoLogoGoogle />
+            </i>
             Login With Google
           </button>
         )}
