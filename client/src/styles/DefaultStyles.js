@@ -12,6 +12,7 @@ export const Button = styled.div`
   padding: 8px 16px;
   border-radius: 6px;
   color: ${(props) => props.theme.brandColor};
+  cursor: pointer;
 
   :hover {
     text-decoration: underline;
@@ -28,5 +29,13 @@ export const ButtonClear = styled(Button)`
   :hover {
     background-color: ${(props) => props.theme.brandColor}20;
     color: ${(props) => props.theme.brandColor};
+  }
+`;
+
+export const ButtonFill = styled(Button)`
+  background-color: ${(props) => props.theme.brandColor};
+  color: ${(props) => props.theme.brandTextColor};
+  :hover {
+    text-decoration: none;
   }
 `;

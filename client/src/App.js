@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import { getUserProfileAsync } from './features/userSlice';
-import { PublicRoute } from './helpers/authRoute';
+import { ProtectedRoute, PublicRoute } from './helpers/authRoute';
 import Enter from './pages/Enter';
 import Home from './pages/Home';
+import SignoutConfirm from './pages/SignoutConfirm';
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +27,14 @@ function App() {
             <PublicRoute auth={isAuth}>
               <Enter />
             </PublicRoute>
+          }
+        />
+        <Route
+          path="signout_confirm"
+          element={
+            <ProtectedRoute auth={isAuth}>
+              <SignoutConfirm />
+            </ProtectedRoute>
           }
         />
       </Routes>

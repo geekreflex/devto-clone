@@ -181,4 +181,22 @@ const userLoginAuth = expressAsyncHandler(async (req, res) => {
   });
 });
 
-module.exports = { githubAuth, userRegisterAuth, userLoginAuth, googleAuth };
+/**
+ * Logout
+ */
+
+const userLogoutAuth = (req, res) => {
+  return res
+    .clearCookie('user_access_token', {
+      path: '/',
+    })
+    .redirect('http://localhost:3000');
+};
+
+module.exports = {
+  githubAuth,
+  userRegisterAuth,
+  userLoginAuth,
+  googleAuth,
+  userLogoutAuth,
+};

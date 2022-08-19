@@ -63,6 +63,15 @@ export const loginAuthAsync = createAsyncThunk(
   }
 );
 
+export const logoutAsync = createAsyncThunk('auth/logoutAsync', async () => {
+  try {
+    const { data } = await axios.get(`${BASE_URL}/auth/logout`);
+    console.log(data);
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,

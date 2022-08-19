@@ -20,11 +20,13 @@ const NavLinks = () => {
         <NotificationIcon />
       </Link>
       <UserMenu>
-        <button className="avatar" onClick={() => setVisible(!visible)}>
-          <span>
-            <img src={user?.avatar} alt="Profile picture" />
-          </span>
-        </button>
+        <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
+          <button className="avatar" onClick={() => setVisible(!visible)}>
+            <span>
+              <img src={user?.avatar} alt="Profile picture" />
+            </span>
+          </button>
+        </OutsideClickHandler>
         <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
           <Dropdown visible={visible}>
             <ul>
@@ -47,7 +49,7 @@ const NavLinks = () => {
                 <Link to="#">Settings</Link>
               </li>
               <li>
-                <Link to="#">Sign Out</Link>
+                <Link to="signout_confirm">Sign Out</Link>
               </li>
             </ul>
           </Dropdown>
@@ -135,7 +137,7 @@ const UserMenu = styled.div`
 const Dropdown = styled.div`
   position: absolute;
   right: 0;
-  top: 50px;
+  top: 48px;
   background-color: ${(props) => props.theme.primary};
   width: 280px;
   border: 1px solid ${(props) => props.theme.borderColor};
