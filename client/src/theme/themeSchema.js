@@ -6,6 +6,8 @@ export const lightTheme = {
   brandTextColor: '#ffffff',
   textColor1: '#171717',
   textColor2: '#404040',
+  danger: '#b91c1c',
+  shadow: '0 1px 2px rgba(0,0,0,.7)',
 };
 
 export const darkTheme = {
@@ -14,6 +16,8 @@ export const darkTheme = {
   secondary: '#000000',
   brandColor: '#3b49df',
   brandTextColor: '#ffffff',
-  textColor1: '#ffffff',
-  textColor2: '#ffffff',
+  textColor1: '#fafafa',
+  textColor2: '#d4d4d4',
+  danger: '#b91c1c',
+  shadow: '0 1px 2px rgba(0,0,0,.7)',
 };

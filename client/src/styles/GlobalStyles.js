@@ -18,4 +18,8 @@ body {
 a {
   text-decoration: none
 }
+
+svg {
+  fill: ${(props) => props.theme.textColor1};
+}
 `;

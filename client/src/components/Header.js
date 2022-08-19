@@ -3,8 +3,11 @@ import styled from 'styled-components';
 import { Container } from '../styles/DefaultStyles';
 import Logo from './excerpts/Logo';
 import AuthLinks from './auth/AuthLinks';
+import { useSelector } from 'react-redux';
+import NavLinks from './excerpts/NavLinks';
 
 const Header = () => {
+  const { isAuth } = useSelector((state) => state.auth);
   useEffect(() => {}, []);
   return (
     <HeaderWrap>
@@ -14,7 +17,8 @@ const Header = () => {
             <Logo />
           </HeaderLeft>
           <HeaderRight>
-            <AuthLinks />
+            {!isAuth && <AuthLinks />}
+            {isAuth && <NavLinks />}
           </HeaderRight>
         </HeaderInner>
       </Container>
