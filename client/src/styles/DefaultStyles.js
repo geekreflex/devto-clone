@@ -10,7 +10,7 @@ export const Button = styled.div`
   font-size: 16px;
   border: 1px solid ${(props) => props.theme.brandColor};
   padding: 8px 16px;
-  border-radius: 5px;
+  border-radius: 6px;
   color: ${(props) => props.theme.brandColor};
 
   :hover {

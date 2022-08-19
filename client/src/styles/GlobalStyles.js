@@ -11,7 +11,8 @@ export default createGlobalStyle`
 
 body {
   background-color: ${(props) => props.theme.secondary};
-  font-family: 'Poppins'
+  font-family: 'Poppins';
+  color: ${(props) => props.theme.textColor1}
 }
 
 a {
