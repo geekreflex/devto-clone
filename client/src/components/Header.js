@@ -31,6 +31,9 @@ export default Header;
 const HeaderWrap = styled.div`
   width: 100%;
   background-color: ${(props) => props.theme.primary};
+  position: fixed;
+  top: 0;
+  left: 0;
 `;
 
 const HeaderInner = styled.div`

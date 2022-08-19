@@ -8,6 +8,7 @@ export const lightTheme = {
   textColor2: '#404040',
   danger: '#b91c1c',
   shadow: '0 1px 2px rgba(0,0,0,.7)',
+  borderColor: '#3d3d3d',
 };
 
 export const darkTheme = {
@@ -20,4 +21,5 @@ export const darkTheme = {
   textColor2: '#d4d4d4',
   danger: '#b91c1c',
   shadow: '0 1px 2px rgba(0,0,0,.7)',
+  borderColor: '#3d3d3d',
 };
