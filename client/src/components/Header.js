@@ -1,19 +1,23 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import GoogleAuthLogin from './auth/GoogleAuthLogin';
-import GithubAuthLogin from './auth/GithubAuthLogin';
+import { Container } from '../styles/DefaultStyles';
+import Logo from './excerpts/Logo';
+import AuthLinks from './auth/AuthLinks';
 
 const Header = () => {
   useEffect(() => {}, []);
   return (
     <HeaderWrap>
-      <div>
-        <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/logos/resized_logo_UQww2soKuUsjaOGNB38o.png" />
-      </div>
-      <div>
-        <GoogleAuthLogin />
-        <GithubAuthLogin />
-      </div>
+      <Container>
+        <HeaderInner>
+          <HeaderLeft>
+            <Logo />
+          </HeaderLeft>
+          <HeaderRight>
+            <AuthLinks />
+          </HeaderRight>
+        </HeaderInner>
+      </Container>
     </HeaderWrap>
   );
 };
@@ -21,8 +25,17 @@ const Header = () => {
 export default Header;
 
 const HeaderWrap = styled.div`
-  display: flex;
   width: 100%;
-  height: 56px;
   background-color: ${(props) => props.theme.primary};
 `;
+
+const HeaderInner = styled.div`
+  height: 56px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const HeaderLeft = styled.div``;
+const HeaderRight = styled.div``;
