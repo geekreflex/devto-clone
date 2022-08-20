@@ -53,8 +53,11 @@ a {
     align-items: center;
 
     :hover {
-      background-color: ${(props) => props.theme.brandColor}50;
-      color: ${(props) => props.theme.brandColor};
+      background-color: ${(props) => props.theme.bgHover1};
+      color: ${(props) => props.theme.colorHover1};
+      svg {
+      fill: ${(props) => props.theme.colorHover2};
+      }
     }
   }
 

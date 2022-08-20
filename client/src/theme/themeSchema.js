@@ -13,6 +13,9 @@ export const lightTheme = {
   cardShadow: '0 0 0 1px rgba(23, 23, 23, 0.1)',
   footerBg: '#e5e5e5',
   shade1: '#090909',
+  colorHover1: 'rgb(129,140,248)',
+  colorHover2: 'rgb(165,180,252)',
+  bgHover1: 'rgba(79,70,229,0.2)',
 };
 
 export const darkTheme = {
@@ -30,4 +33,7 @@ export const darkTheme = {
   cardShadow: '0 0 0 1px rgba(255, 255, 255, 0.15)',
   footerBg: '#171717',
   shade1: '#090909',
+  colorHover1: 'rgb(129,140,248)',
+  colorHover2: 'rgb(165,180,252)',
+  bgHover1: 'rgba(79,70,229,0.2)',
 };

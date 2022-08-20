@@ -29,22 +29,7 @@ const NewPostHeader = () => {
 const HeaderWrap = styled.div`
   width: 100%;
   .btn {
-    border: none;
     padding: 10px;
-    font-size: 16px;
-    margin-left: 5px;
-    border-radius: 5px;
-    color: ${(props) => props.theme.textColor1};
-    background-color: transparent;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    :hover {
-      background-color: ${(props) => props.theme.brandColor}50;
-      color: ${(props) => props.theme.brandColor};
-    }
   }
 `;
 const Main = styled.div`

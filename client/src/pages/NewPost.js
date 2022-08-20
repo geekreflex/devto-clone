@@ -92,7 +92,10 @@ const NewPost = () => {
                 <h3>{help[focused]?.header}</h3>
                 <ul>
                   {help[focused]?.items.map((item, index) => (
-                    <li key={index}>{item}</li>
+                    <li
+                      key={index}
+                      dangerouslySetInnerHTML={{ __html: item }}
+                    />
                   ))}
                 </ul>
               </section>
@@ -154,7 +157,7 @@ const RightArea = styled.div`
 
     ul li {
       margin-left: 1em;
-      font-size: 14px;
+      font-size: 15px;
       margin-bottom: 5px;
     }
   }

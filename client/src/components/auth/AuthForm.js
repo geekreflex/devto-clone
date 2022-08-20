@@ -92,6 +92,8 @@ const InputWrap = styled.div`
     padding: 10px 15px;
     outline: none;
     font-size: 16px;
+    background-color: transparent;
+    color: ${(props) => props.theme.textColor1};
 
     :focus {
       border-color: ${(props) => props.theme.brandColor};

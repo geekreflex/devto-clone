@@ -23,7 +23,8 @@ export const help = {
     header: 'Editor Basics',
     items: [
       'Use Markdown to write and format posts.',
-      'Embed rich content such as Tweets, YouTube videos, etc. Use the complete URL: &#123;% embed https://... %&#125;. See a list of supported embeds.',
+      'Embed rich content such as Tweets, YouTube videos, etc. Use the complete URL: &#123;% embed https://... %&#125;. <Link to="#">See a list of supported embeds.</Link>',
+      "In addition to images for the post's content, you can also drag and drop a cover image.",
     ],
   },
 };
