@@ -5,7 +5,7 @@ import { Container } from '../styles/DefaultStyles';
 
 const Footer = () => {
   return (
-    <FooterWrap>
+    <FooterWrap className="footer">
       <Container>
         <Main>
           <p className="description">

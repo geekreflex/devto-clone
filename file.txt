@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import NewPostHeader from '../components/excerpts/NewPostHeader';
 import { Container } from '../styles/DefaultStyles';
@@ -16,14 +16,6 @@ const NewPost = () => {
     }
   };
 
-  useEffect(() => {
-    document.body.classList.add('hidden');
-  });
-
-  const onUploadImg = () => {
-    console.log('uploaded');
-  };
-
   return (
     <NewPostWrap>
       <NewPostHeader />
@@ -32,14 +24,9 @@ const NewPost = () => {
           <MainArea>
             <LeftArea>
               <AddCoverImg>
-                <ButtonTooltip
-                  click={onUploadImg}
-                  text="Add a cover image"
-                  pos="bottom"
-                  content={'Use a ratio of 100:42 for best results.'}
-                />
+                <ButtonTooltip />
               </AddCoverImg>
-              <TitleTags>
+              {/* <TitleTags>
                 <textarea
                   onInput={autoGrow}
                   onKeyDown={noNewline}
@@ -47,7 +34,7 @@ const NewPost = () => {
                   placeholder="New Post title here..."
                 />
                 <input id="tags" placeholder="Add up to 4 tags..." />
-              </TitleTags>
+              </TitleTags> */}
             </LeftArea>
             <RightArea></RightArea>
           </MainArea>
@@ -58,12 +45,17 @@ const NewPost = () => {
 };
 
 const NewPostWrap = styled.div`
+  position: fixed;
   width: 100%;
   height: 100vh;
   z-index: 99998;
   top: 0;
   left: 0;
   background-color: ${(props) => props.theme.secondary};
+
+  header {
+    height: 50px;
+  }
 `;
 
 const PostArea = styled.div``;
@@ -78,7 +70,6 @@ const LeftArea = styled.div`
   background-color: ${(props) => props.theme.primary};
   box-shadow: ${(props) => props.theme.cardShadow};
   width: 70%;
-  height: 300px;
   border-radius: 6px;
   padding: 30px 60px;
 `;
@@ -117,10 +108,9 @@ const TitleTags = styled.div`
 `;
 
 const AddCoverImg = styled.div`
-  margin-bottom: 20px;
-  position: relative;
+  /* margin-bottom: 20px;
   button {
-    padding: 8px 14px;
+    padding: 10px 20px;
     border: 2px solid ${(props) => props.theme.borderColor};
     outline: none;
     cursor: pointer;
@@ -128,7 +118,7 @@ const AddCoverImg = styled.div`
     color: ${(props) => props.theme.textColor2};
     font-size: 16px;
     border-radius: 6px;
-  }
+  } */
 `;
 
 export default NewPost;

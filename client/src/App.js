@@ -56,8 +56,6 @@ function App() {
   );
 }
 
-const PageWrap = styled.div`
-  margin-top: 56px;
-`;
+const PageWrap = styled.div``;
 
 export default App;

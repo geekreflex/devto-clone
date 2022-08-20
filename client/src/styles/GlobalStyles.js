@@ -12,7 +12,9 @@ export default createGlobalStyle`
 body {
   background-color: ${(props) => props.theme.secondary};
   font-family: 'Poppins';
-  color: ${(props) => props.theme.textColor1}
+  color: ${(props) => props.theme.textColor1};
+  line-height: 1.7;
+
 }
 
 a {
@@ -31,6 +33,10 @@ a {
   justify-content: center;
   margin-right: 10px;
   color: #ffffff;
+}
+
+.hidden .header, .hidden .footer {
+  display: none;
 }
 
 `;

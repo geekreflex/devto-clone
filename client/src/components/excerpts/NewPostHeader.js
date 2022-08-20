@@ -27,6 +27,7 @@ const NewPostHeader = () => {
 };
 
 const HeaderWrap = styled.div`
+  width: 100%;
   .btn {
     border: none;
     padding: 10px;
@@ -47,7 +48,7 @@ const HeaderWrap = styled.div`
   }
 `;
 const Main = styled.div`
-  height: 50px;
+  height: 56px;
   display: flex;
   align-items: center;
 

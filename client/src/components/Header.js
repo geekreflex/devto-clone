@@ -10,7 +10,7 @@ const Header = () => {
   const { isAuth } = useSelector((state) => state.auth);
   useEffect(() => {}, []);
   return (
-    <HeaderWrap>
+    <HeaderWrap className="header">
       <Container>
         <HeaderInner>
           <HeaderLeft>
