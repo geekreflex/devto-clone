@@ -3,7 +3,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import styled from 'styled-components';
 
-const ButtonTooltip = ({ text, click, pos, content }) => {
+const Tooltip = ({ pos, content, children }) => {
   return (
     <TippyWrap>
       <CustomTippy
@@ -12,7 +12,7 @@ const ButtonTooltip = ({ text, click, pos, content }) => {
         placement={pos}
         arrow={false}
       >
-        <button onClick={click}>{text}</button>
+        {children}
       </CustomTippy>
     </TippyWrap>
   );
@@ -27,4 +27,4 @@ const CustomTippy = styled(Tippy)`
   font-size: 14px !important;
 `;
 
-export default ButtonTooltip;
+export default Tooltip;

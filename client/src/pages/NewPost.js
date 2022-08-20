@@ -1,13 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import NewPostHeader from '../components/excerpts/NewPostHeader';
 import { Container } from '../styles/DefaultStyles';
-import ButtonTooltip from '../components/widgets/ButtonTooltip';
+import Tooltip from '../components/widgets/Tooltip';
 import { autoGrow, noNewline } from '../utils/inputActions';
 import { help } from '../data/help';
+import EditorTool from '../components/widgets/EditorTool';
 
 const NewPost = () => {
   const [focused, setFocused] = useState('');
+  const [title, setTitle] = useState('');
+  const [tag, setTag] = useState('');
+  const [tagList, setTagList] = useState([]);
+  const [content, setContent] = useState('');
+  const [coverImg, setCoverImg] = useState('');
+
+  const contentRef = useRef();
 
   useEffect(() => {
     document.body.classList.add('hidden');
@@ -21,9 +29,13 @@ const NewPost = () => {
     setFocused(e.target.name);
   };
 
-  const onBlur = (e) => {
-    setFocused('');
-  };
+  function insertHtml() {
+    // let html = '\n\n```\n\n```';
+    // let val = content + html;
+    // setContent(val);
+
+    contentRef.current.value = `<a>${contentRef.current.getSelection()}</a>`;
+  }
 
   return (
     <NewPostWrap>
@@ -34,27 +46,29 @@ const NewPost = () => {
             <LeftArea>
               <Pad>
                 <AddCoverImg>
-                  <ButtonTooltip
-                    click={onUploadImg}
-                    text="Add a cover image"
+                  <Tooltip
                     pos="bottom"
                     content={'Use a ratio of 100:42 for best results.'}
-                  />
+                  >
+                    <button>Add a cover image</button>
+                  </Tooltip>
                 </AddCoverImg>
                 <TitleTags>
                   <textarea
                     name="title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                     onFocus={onFocus}
-                    onBlur={onBlur}
                     onInput={autoGrow}
                     onKeyDown={noNewline}
                     id="title"
                     placeholder="New Post title here..."
                   />
                   <input
+                    value={tag}
+                    onChange={(e) => setTag(e.target.value)}
                     name="tags"
                     onFocus={onFocus}
-                    onBlur={onBlur}
                     id="tags"
                     placeholder="Add up to 4 tags..."
                   />
@@ -62,14 +76,16 @@ const NewPost = () => {
               </Pad>
 
               <Tools>
-                <p>tools</p>
+                <EditorTool />
               </Tools>
               <Pad>
                 <TextField>
                   <textarea
+                    ref={contentRef}
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
                     name="content"
                     onFocus={onFocus}
-                    onBlur={onBlur}
                     placeholder="Write your post content here..."
                   />
                 </TextField>
@@ -79,8 +95,8 @@ const NewPost = () => {
               <section className={focused + ' active'}>
                 <h3>{help[focused]?.header}</h3>
                 <ul>
-                  {help[focused]?.items.map((item) => (
-                    <li>{item}</li>
+                  {help[focused]?.items.map((item, index) => (
+                    <li key={index}>{item}</li>
                   ))}
                 </ul>
               </section>
@@ -113,8 +129,10 @@ const MainArea = styled.div`
 const LeftArea = styled.div`
   background-color: ${(props) => props.theme.primary};
   box-shadow: ${(props) => props.theme.cardShadow};
-  width: 70%;
+  width: 68%;
   border-radius: 6px;
+  max-height: 80vh;
+  overflow-y: auto;
 `;
 
 const Pad = styled.div`
@@ -122,7 +140,7 @@ const Pad = styled.div`
 `;
 
 const RightArea = styled.div`
-  width: 28%;
+  width: 30%;
 
   section {
     color: ${(props) => props.theme.textColor2};
@@ -212,7 +230,7 @@ const Tools = styled.div`
   height: 56px;
   display: flex;
   align-items: center;
-  padding: 0 60px;
+  padding: 0 50px;
 `;
 
 const TextField = styled.div`

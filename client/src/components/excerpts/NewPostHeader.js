@@ -54,7 +54,7 @@ const Main = styled.div`
 
   p {
     margin-left: 20px;
-    width: 55%;
+    width: 53%;
   }
 
   .btn-wrap {

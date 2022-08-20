@@ -39,4 +39,23 @@ a {
   display: none;
 }
 
+.btn {
+    border: none;
+    padding: 8px;
+    font-size: 16px;
+    margin-left: 5px;
+    border-radius: 5px;
+    color: ${(props) => props.theme.textColor1};
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    :hover {
+      background-color: ${(props) => props.theme.brandColor}50;
+      color: ${(props) => props.theme.brandColor};
+    }
+  }
+
 `;
