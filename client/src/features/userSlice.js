@@ -20,7 +20,7 @@ export const getUserProfileAsync = createAsyncThunk(
       };
 
       const { data } = await axios.get(`${BASE_URL}/users/profile`, config);
-      console.log(data);
+
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(

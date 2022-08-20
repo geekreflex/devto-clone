@@ -13,7 +13,7 @@ const NavLinks = () => {
   return (
     <NavLinksWrap>
       <Button>
-        <Link to="#">Create Post</Link>
+        <Link to="new">Create Post</Link>
       </Button>
       <Link to="#" className="notification">
         <div className="notification-total">30</div>
@@ -32,8 +32,8 @@ const NavLinks = () => {
             <ul>
               <li id="user-info">
                 <Link to="#">
-                  <span>Jerry Nwosu</span>
-                  <span id="username">@jaynwosu</span>
+                  <span>{user?.name}</span>
+                  <span id="username">@{user?.username}</span>
                 </Link>
               </li>
               <li>
@@ -83,7 +83,7 @@ const NavLinksWrap = styled.div`
     top: -5px;
     right: -5px;
     font-size: 12px;
-    color: ${(props) => props.theme.textColor1};
+    color: #ffffff;
     padding: 5px;
     border-radius: 5px;
     display: flex;
