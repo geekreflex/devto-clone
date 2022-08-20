@@ -1,20 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import NewPostHeader from '../components/excerpts/NewPostHeader';
 import { Container } from '../styles/DefaultStyles';
 import ButtonTooltip from '../components/widgets/ButtonTooltip';
+import { autoGrow, noNewline } from '../utils/inputActions';
+import { help } from '../data/help';
 
 const NewPost = () => {
-  const autoGrow = (e) => {
-    e.target.style.height = '5px';
-    e.target.style.height = e.target.scrollHeight + 'px';
-  };
-
-  const noNewline = (e) => {
-    if (e.keyCode === 13 && !e.shiftKey) {
-      e.preventDefault();
-    }
-  };
+  const [focused, setFocused] = useState('');
 
   useEffect(() => {
     document.body.classList.add('hidden');
@@ -24,6 +17,14 @@ const NewPost = () => {
     console.log('uploaded');
   };
 
+  const onFocus = (e) => {
+    setFocused(e.target.name);
+  };
+
+  const onBlur = (e) => {
+    setFocused('');
+  };
+
   return (
     <NewPostWrap>
       <NewPostHeader />
@@ -31,25 +32,59 @@ const NewPost = () => {
         <Container>
           <MainArea>
             <LeftArea>
-              <AddCoverImg>
-                <ButtonTooltip
-                  click={onUploadImg}
-                  text="Add a cover image"
-                  pos="bottom"
-                  content={'Use a ratio of 100:42 for best results.'}
-                />
-              </AddCoverImg>
-              <TitleTags>
-                <textarea
-                  onInput={autoGrow}
-                  onKeyDown={noNewline}
-                  id="title"
-                  placeholder="New Post title here..."
-                />
-                <input id="tags" placeholder="Add up to 4 tags..." />
-              </TitleTags>
+              <Pad>
+                <AddCoverImg>
+                  <ButtonTooltip
+                    click={onUploadImg}
+                    text="Add a cover image"
+                    pos="bottom"
+                    content={'Use a ratio of 100:42 for best results.'}
+                  />
+                </AddCoverImg>
+                <TitleTags>
+                  <textarea
+                    name="title"
+                    onFocus={onFocus}
+                    onBlur={onBlur}
+                    onInput={autoGrow}
+                    onKeyDown={noNewline}
+                    id="title"
+                    placeholder="New Post title here..."
+                  />
+                  <input
+                    name="tags"
+                    onFocus={onFocus}
+                    onBlur={onBlur}
+                    id="tags"
+                    placeholder="Add up to 4 tags..."
+                  />
+                </TitleTags>
+              </Pad>
+
+              <Tools>
+                <p>tools</p>
+              </Tools>
+              <Pad>
+                <TextField>
+                  <textarea
+                    name="content"
+                    onFocus={onFocus}
+                    onBlur={onBlur}
+                    placeholder="Write your post content here..."
+                  />
+                </TextField>
+              </Pad>
             </LeftArea>
-            <RightArea></RightArea>
+            <RightArea visible={focused}>
+              <section className={focused + ' active'}>
+                <h3>{help[focused]?.header}</h3>
+                <ul>
+                  {help[focused]?.items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </section>
+            </RightArea>
           </MainArea>
         </Container>
       </PostArea>
@@ -72,19 +107,60 @@ const MainArea = styled.div`
   margin-left: 70px;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
 `;
 
 const LeftArea = styled.div`
   background-color: ${(props) => props.theme.primary};
   box-shadow: ${(props) => props.theme.cardShadow};
   width: 70%;
-  height: 300px;
   border-radius: 6px;
+`;
+
+const Pad = styled.div`
   padding: 30px 60px;
 `;
+
 const RightArea = styled.div`
   width: 28%;
-  border: 1px solid #222;
+
+  section {
+    color: ${(props) => props.theme.textColor2};
+    visibility: hidden;
+    opacity: 0;
+    transition: all 200ms;
+    margin-top: 100px;
+
+    ul {
+      display: block;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0px;
+    }
+
+    ul li {
+      margin-left: 1em;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+  }
+
+  section.active {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  section.active.tags {
+    margin-top: 150px;
+  }
+
+  section.active.tags {
+    margin-top: 200px;
+  }
+
+  section.active.content {
+    margin-top: 250px;
+  }
 `;
 
 const TitleTags = styled.div`
@@ -128,6 +204,27 @@ const AddCoverImg = styled.div`
     color: ${(props) => props.theme.textColor2};
     font-size: 16px;
     border-radius: 6px;
+  }
+`;
+
+const Tools = styled.div`
+  background-color: ${(props) => props.theme.shade1};
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 60px;
+`;
+
+const TextField = styled.div`
+  textarea {
+    width: 100%;
+    min-height: 200px;
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 18px;
+    color: ${(props) => props.theme.textColor1};
   }
 `;
 

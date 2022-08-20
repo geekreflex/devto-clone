@@ -13,7 +13,7 @@ body {
   background-color: ${(props) => props.theme.secondary};
   font-family: 'Poppins';
   color: ${(props) => props.theme.textColor1};
-  line-height: 1.7;
+  /* line-height: 1.7; */
 
 }
 

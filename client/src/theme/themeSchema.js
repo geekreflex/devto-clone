@@ -12,6 +12,7 @@ export const lightTheme = {
   headerShadow: '0 1px 1px rgba(0, 0, 0, 0.1)',
   cardShadow: '0 0 0 1px rgba(23, 23, 23, 0.1)',
   footerBg: '#e5e5e5',
+  shade1: '#090909',
 };
 
 export const darkTheme = {
@@ -28,4 +29,5 @@ export const darkTheme = {
   headerShadow: '0 1px 1px rgb(0,0,0)',
   cardShadow: '0 0 0 1px rgba(255, 255, 255, 0.15)',
   footerBg: '#171717',
+  shade1: '#090909',
 };
