@@ -17,10 +17,6 @@ const NewPost = () => {
 
   const contentRef = useRef();
 
-  useEffect(() => {
-    document.body.classList.add('hidden');
-  });
-
   const onUploadImg = () => {
     console.log('uploaded');
   };

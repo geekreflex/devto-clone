@@ -17,6 +17,7 @@ import UnderlineIcon from '../../icons/UnderlineIcon';
 import UnorderedIcon from '../../icons/UnorderedIcon';
 import UploadImgIcon from '../../icons/UploadImgIcon';
 import Tooltip from './Tooltip';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 const EditorTool = () => {
   const [more, setMore] = useState(false);
@@ -81,29 +82,36 @@ const EditorTool = () => {
         </Tooltip>
       </ToolLeft>
       <ToolRight>
-        <button className="btn">
-          <MoreIcon />
-        </button>
-        <MoreOptions>
-          <Tooltip content="Underline CTRL + U" pos="bottom">
-            <button className="btn">
-              <UnderlineIcon />
-            </button>
-          </Tooltip>
-          <Tooltip content="Strikethrough CTRL + SHIFT + X" pos="bottom">
-            <button className="btn">
-              <StrikeThroughIcon />
-            </button>
-          </Tooltip>
-          <Tooltip content="Line divider" pos="bottom">
-            <button className="btn">
-              <LineDividerIcon />
-            </button>
-          </Tooltip>
-          <button className="btn">
-            <HelpIcon />
+        <OutsideClickHandler onOutsideClick={() => setMore(false)}>
+          <button
+            className={more ? 'active btn' : 'btn'}
+            onClick={() => setMore(true)}
+          >
+            <MoreIcon />
           </button>
-        </MoreOptions>
+        </OutsideClickHandler>
+        <OutsideClickHandler onOutsideClick={() => setMore(false)}>
+          <MoreOptions visible={more}>
+            <Tooltip content="Underline CTRL + U" pos="bottom">
+              <button className="btn">
+                <UnderlineIcon />
+              </button>
+            </Tooltip>
+            <Tooltip content="Strikethrough CTRL + SHIFT + X" pos="bottom">
+              <button className="btn">
+                <StrikeThroughIcon />
+              </button>
+            </Tooltip>
+            <Tooltip content="Line divider" pos="bottom">
+              <button className="btn">
+                <LineDividerIcon />
+              </button>
+            </Tooltip>
+            <button className="btn">
+              <HelpIcon />
+            </button>
+          </MoreOptions>
+        </OutsideClickHandler>
       </ToolRight>
     </ToolWrap>
   );
@@ -122,13 +130,18 @@ const ToolRight = styled.div`
   flex: 1;
   justify-content: flex-end;
   position: relative;
+
+  .active {
+    background-color: ${(props) => props.theme.borderColor};
+  }
 `;
 
 const MoreOptions = styled.div`
   position: absolute;
-  display: flex;
+  display: ${(props) => (props.visible ? 'flex' : 'none')};
   background-color: ${(props) => props.theme.primary};
   top: 50px;
+  right: 0;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
   border: 1px solid ${(props) => props.theme.borderColor};
   border-radius: 6px;

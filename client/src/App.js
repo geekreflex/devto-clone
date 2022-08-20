@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -12,6 +12,7 @@ import NewPost from './pages/NewPost';
 import SignoutConfirm from './pages/SignoutConfirm';
 
 function App() {
+  const location = useLocation();
   const dispatch = useDispatch();
   const { isAuth } = useSelector((state) => state.auth);
   useEffect(() => {
@@ -19,6 +20,15 @@ function App() {
       dispatch(getUserProfileAsync());
     }
   }, []);
+
+  useEffect(() => {
+    if (location.pathname === '/new') {
+      document.body.classList.add('hidden');
+    } else {
+      document.body.classList.remove('hidden');
+    }
+  }, [location]);
+
   return (
     <div className="App">
       <Header />
