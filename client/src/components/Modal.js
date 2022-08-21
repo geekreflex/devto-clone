@@ -48,7 +48,7 @@ const ModalMain = styled.div`
 `;
 const ModalHeader = styled.div`
   position: relative;
-  padding: 10px 20px;
+  padding: 10px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -62,7 +62,7 @@ const ModalHeader = styled.div`
 const ModalBody = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 30px;
 `;
 
 export default Modal;

@@ -3,8 +3,15 @@ import styled from 'styled-components';
 import { Cancel, Container } from '../../styles/DefaultStyles';
 import Logo from './Logo';
 import { IoCloseSharp } from 'react-icons/io5';
+import { toggleUnsavedModal } from '../../features/actionSlice';
+import { useDispatch } from 'react-redux';
 
 const NewPostHeader = () => {
+  const dispatch = useDispatch();
+  const onClose = () => {
+    dispatch(toggleUnsavedModal(true));
+  };
+
   return (
     <HeaderWrap>
       <Container>
@@ -18,7 +25,7 @@ const NewPostHeader = () => {
         </Main>
       </Container>
       <Cancel>
-        <button className="btn">
+        <button className="btn" onClick={onClose}>
           <IoCloseSharp />
         </button>
       </Cancel>
@@ -33,6 +40,7 @@ const HeaderWrap = styled.div`
   align-items: center;
   width: 100%;
   height: 56px;
+  padding: 0 20px;
 
   .btn {
     padding: 10px;

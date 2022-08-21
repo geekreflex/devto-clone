@@ -3,10 +3,18 @@ import { ButtonDanger, ButtonDefault } from '../../styles/DefaultStyles';
 import Modal from '../Modal';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { toggleUnsavedModal } from '../../features/actionSlice';
 
 const UnsavedChanges = () => {
+  const dispatch = useDispatch();
+
+  const close = () => {
+    dispatch(toggleUnsavedModal(false));
+  };
+
   return (
-    <Modal title="You have unsaved changes">
+    <Modal title="You have unsaved changes" close={close}>
       <Wrap>
         <p>
           You've made changes to your post. Do you want to navigate to leave
@@ -14,10 +22,12 @@ const UnsavedChanges = () => {
         </p>
         <div className="btn-wrap">
           <ButtonDanger style={{ marginRight: '20px' }}>
-            <Link to="/">Yes, leave the page</Link>
+            <Link onClick={close} to="/">
+              Yes, leave the page
+            </Link>
           </ButtonDanger>
           <ButtonDefault>
-            <button>No, keep editing</button>
+            <button onClick={close}>No, keep editing</button>
           </ButtonDefault>
         </div>
       </Wrap>

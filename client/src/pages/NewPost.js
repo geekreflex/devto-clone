@@ -7,6 +7,7 @@ import { autoGrow, noNewline } from '../utils/inputActions';
 import { help } from '../data/help';
 import EditorTool from '../components/widgets/EditorTool';
 import UnsavedChanges from '../components/widgets/UnsavedChanges';
+import { useSelector } from 'react-redux';
 
 const NewPost = () => {
   const [focused, setFocused] = useState('');
@@ -16,23 +17,13 @@ const NewPost = () => {
   const [content, setContent] = useState('');
   const [coverImg, setCoverImg] = useState('');
 
-  const contentRef = useRef();
+  const { unsavedModal } = useSelector((state) => state.action);
 
-  const onUploadImg = () => {
-    console.log('uploaded');
-  };
+  const contentRef = useRef();
 
   const onFocus = (e) => {
     setFocused(e.target.name);
   };
-
-  function insertHtml() {
-    // let html = '\n\n```\n\n```';
-    // let val = content + html;
-    // setContent(val);
-
-    contentRef.current.value = `<a>${contentRef.current.getSelection()}</a>`;
-  }
 
   return (
     <>
@@ -106,7 +97,7 @@ const NewPost = () => {
           </Container>
         </PostArea>
       </NewPostWrap>
-      <UnsavedChanges />
+      {unsavedModal && <UnsavedChanges />}
     </>
   );
 };
