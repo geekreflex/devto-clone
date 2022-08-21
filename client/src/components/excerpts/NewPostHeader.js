@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Container } from '../../styles/DefaultStyles';
+import { Cancel, Container } from '../../styles/DefaultStyles';
 import Logo from './Logo';
 import { IoCloseSharp } from 'react-icons/io5';
 
@@ -27,13 +27,19 @@ const NewPostHeader = () => {
 };
 
 const HeaderWrap = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
+  height: 56px;
+
   .btn {
     padding: 10px;
   }
 `;
+
 const Main = styled.div`
-  height: 56px;
   display: flex;
   align-items: center;
 
@@ -44,16 +50,6 @@ const Main = styled.div`
 
   .btn-wrap {
     display: flex;
-  }
-`;
-
-const Cancel = styled.div`
-  position: fixed;
-  right: 20px;
-  top: 5px;
-
-  button {
-    font-size: 20px !important;
   }
 `;
 

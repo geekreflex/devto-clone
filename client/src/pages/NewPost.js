@@ -6,6 +6,7 @@ import Tooltip from '../components/widgets/Tooltip';
 import { autoGrow, noNewline } from '../utils/inputActions';
 import { help } from '../data/help';
 import EditorTool from '../components/widgets/EditorTool';
+import UnsavedChanges from '../components/widgets/UnsavedChanges';
 
 const NewPost = () => {
   const [focused, setFocused] = useState('');
@@ -34,76 +35,79 @@ const NewPost = () => {
   }
 
   return (
-    <NewPostWrap>
-      <NewPostHeader />
-      <PostArea>
-        <Container>
-          <MainArea>
-            <LeftArea>
-              <Pad>
-                <AddCoverImg>
-                  <Tooltip
-                    pos="bottom"
-                    content={'Use a ratio of 100:42 for best results.'}
-                  >
-                    <button>Add a cover image</button>
-                  </Tooltip>
-                </AddCoverImg>
-                <TitleTags>
-                  <textarea
-                    name="title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    onFocus={onFocus}
-                    onInput={autoGrow}
-                    onKeyDown={noNewline}
-                    id="title"
-                    placeholder="New Post title here..."
-                  />
-                  <input
-                    value={tag}
-                    onChange={(e) => setTag(e.target.value)}
-                    name="tags"
-                    onFocus={onFocus}
-                    id="tags"
-                    placeholder="Add up to 4 tags..."
-                  />
-                </TitleTags>
-              </Pad>
-
-              <Tools>
-                <EditorTool />
-              </Tools>
-              <Pad>
-                <TextField>
-                  <textarea
-                    ref={contentRef}
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                    name="content"
-                    onFocus={onFocus}
-                    placeholder="Write your post content here..."
-                  />
-                </TextField>
-              </Pad>
-            </LeftArea>
-            <RightArea visible={focused}>
-              <section className={focused + ' active'}>
-                <h3>{help[focused]?.header}</h3>
-                <ul>
-                  {help[focused]?.items.map((item, index) => (
-                    <li
-                      key={index}
-                      dangerouslySetInnerHTML={{ __html: item }}
+    <>
+      <NewPostWrap>
+        <NewPostHeader />
+        <PostArea>
+          <Container>
+            <MainArea>
+              <LeftArea>
+                <Pad>
+                  <AddCoverImg>
+                    <Tooltip
+                      pos="bottom"
+                      content={'Use a ratio of 100:42 for best results.'}
+                    >
+                      <button>Add a cover image</button>
+                    </Tooltip>
+                  </AddCoverImg>
+                  <TitleTags>
+                    <textarea
+                      name="title"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
+                      onFocus={onFocus}
+                      onInput={autoGrow}
+                      onKeyDown={noNewline}
+                      id="title"
+                      placeholder="New Post title here..."
                     />
-                  ))}
-                </ul>
-              </section>
-            </RightArea>
-          </MainArea>
-        </Container>
-      </PostArea>
-    </NewPostWrap>
+                    <input
+                      value={tag}
+                      onChange={(e) => setTag(e.target.value)}
+                      name="tags"
+                      onFocus={onFocus}
+                      id="tags"
+                      placeholder="Add up to 4 tags..."
+                    />
+                  </TitleTags>
+                </Pad>
+
+                <Tools>
+                  <EditorTool />
+                </Tools>
+                <Pad>
+                  <TextField>
+                    <textarea
+                      ref={contentRef}
+                      value={content}
+                      onChange={(e) => setContent(e.target.value)}
+                      name="content"
+                      onFocus={onFocus}
+                      placeholder="Write your post content here..."
+                    />
+                  </TextField>
+                </Pad>
+              </LeftArea>
+              <RightArea visible={focused}>
+                <section className={focused + ' active'}>
+                  <h3>{help[focused]?.header}</h3>
+                  <ul>
+                    {help[focused]?.items.map((item, index) => (
+                      <li
+                        key={index}
+                        dangerouslySetInnerHTML={{ __html: item }}
+                      />
+                    ))}
+                  </ul>
+                </section>
+              </RightArea>
+            </MainArea>
+          </Container>
+        </PostArea>
+      </NewPostWrap>
+      <UnsavedChanges />
+    </>
   );
 };
 
