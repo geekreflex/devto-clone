@@ -11,6 +11,7 @@ const app = express();
 const authRoute = require('./routes/auth.route');
 const userRoute = require('./routes/user.route');
 const postRoute = require('./routes/post.route');
+const { InsertManyTags } = require('./controllers/tag.controller');
 
 app.use(cookieParser());
 app.use(express.json());
@@ -40,6 +41,8 @@ app.use('/api/posts', postRoute);
 
 app.use(notFound);
 app.use(errorHandler);
+
+// InsertManyTags();
 
 const PORT = process.env.PORT || 8400;
 const start = (port) => {

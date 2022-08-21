@@ -5,6 +5,11 @@ const tagSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  alias: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   color: {
     type: String,
     required: true,
