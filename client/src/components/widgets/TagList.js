@@ -1,20 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { truncate } from '../../utils/inputActions';
 
-const TagList = () => {
+const TagList = ({ tagList, setTagList }) => {
   const { tags } = useSelector((state) => state.post);
+  const [filteredTags, setFilteredTags] = useState([]);
+
+  const onTagClick = (tag) => {
+    setTagList([...tagList, tag]);
+  };
+
+  useEffect(() => {
+    let filteredArr = tags?.filter((tag) => !tagList.includes(tag));
+    setFilteredTags(filteredArr);
+  }, [tagList, tags]);
 
   return (
-    <TagListWrap>
+    <TagListWrap hide={tagList.length === 4}>
       <TagHeader>
         <h3>Top Tags</h3>
       </TagHeader>
       <Tags>
-        {tags.map((tag) => {
+        {filteredTags.map((tag) => {
           return (
-            <Tag key={tag.alias}>
+            <Tag key={tag.alias} onClick={() => onTagClick(tag)}>
               <p id="alias">
                 <span style={{ color: tag.color }}>#</span>
                 {tag.alias}
@@ -30,11 +40,13 @@ const TagList = () => {
 
 const TagListWrap = styled.div`
   position: absolute;
-  top: 30px;
+  top: 40px;
   left: 0;
   background-color: ${(props) => props.theme.primary};
   padding: 5px;
   z-index: 999;
+  width: 100%;
+  display: ${(props) => (props.hide ? 'none' : 'block')};
 `;
 const Tags = styled.div``;
 const Tag = styled.div`

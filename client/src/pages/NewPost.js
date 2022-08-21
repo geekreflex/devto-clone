@@ -11,11 +11,13 @@ import { useSelector } from 'react-redux';
 import NewPostFooter from '../components/excerpts/NewPostFooter';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import TagList from '../components/widgets/TagList';
+import SelectedTags from '../components/widgets/SelectedTags';
 
 const NewPost = () => {
   const storeKey = `editor-${window.location.href}`;
   const [data, setData] = useLocalStorage(storeKey, []);
   const [focused, setFocused] = useState('');
+  const [inputFocus, setInputFocus] = useState(false);
   const [title, setTitle] = useState(data?.title || '');
   const [tag, setTag] = useState('');
   const [tagList, setTagList] = useState([]);
@@ -40,6 +42,20 @@ const NewPost = () => {
 
   const onFocus = (e) => {
     setFocused(e.target.name);
+  };
+
+  const onInputFocus = (e) => {
+    setFocused(e.target.name);
+    setInputFocus(true);
+  };
+
+  const onPublish = () => {
+    const payload = {
+      title,
+      tags: tagList.map((tag) => tag._id),
+      content,
+    };
+    console.log('published:', payload);
   };
 
   return (
@@ -70,17 +86,21 @@ const NewPost = () => {
                       id="title"
                       placeholder="New post title here..."
                     />
-                    <div style={{ position: 'relative' }}>
+                    <TagField style={{ position: 'relative' }}>
+                      <SelectedTags tagList={tagList} setTagList={setTagList} />
                       <input
                         value={tag}
                         onChange={(e) => setTag(e.target.value)}
                         name="tags"
-                        onFocus={onFocus}
+                        onFocus={onInputFocus}
+                        onBlur={() => setInputFocus(false)}
                         id="tags"
                         placeholder="Add up to 4 tags..."
                       />
-                      <TagList />
-                    </div>
+                      {focused === 'tags' && (
+                        <TagList tagList={tagList} setTagList={setTagList} />
+                      )}
+                    </TagField>
                   </TitleTags>
                 </Pad>
 
@@ -116,7 +136,7 @@ const NewPost = () => {
             </MainArea>
           </Container>
         </PostArea>
-        <NewPostFooter />
+        <NewPostFooter onPublish={onPublish} />
       </NewPostWrap>
       {unsavedModal && <UnsavedChanges />}
     </>
@@ -253,6 +273,11 @@ const AddCoverImg = styled.div`
     font-size: 16px;
     border-radius: 6px;
   }
+`;
+
+const TagField = styled.div`
+  position: relative;
+  display: flex;
 `;
 
 const Tools = styled.div`

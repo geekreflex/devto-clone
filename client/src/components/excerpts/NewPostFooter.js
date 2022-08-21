@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import HexIcon from '../../icons/HexIcon';
 import { ButtonFill, Container } from '../../styles/DefaultStyles';
 
-const NewPostFooter = () => {
+const NewPostFooter = ({ onPublish }) => {
   return (
     <FooterWrap>
       <Container>
         <FooterMain>
           <ButtonFill style={{ marginRight: '5px' }}>
-            <button>Publish</button>
+            <button onClick={onPublish}>Publish</button>
           </ButtonFill>
           <button className="btn">Save draft</button>
           <button className="btn">
