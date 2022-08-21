@@ -4,6 +4,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import { getTagsAsync } from './features/postSlice';
 import { getUserProfileAsync } from './features/userSlice';
 import { ProtectedRoute, PublicRoute } from './helpers/authRoute';
 import Enter from './pages/Enter';
@@ -18,6 +19,7 @@ function App() {
   useEffect(() => {
     if (isAuth) {
       dispatch(getUserProfileAsync());
+      dispatch(getTagsAsync());
     }
   }, []);
 

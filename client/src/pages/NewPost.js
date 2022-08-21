@@ -10,6 +10,7 @@ import UnsavedChanges from '../components/widgets/UnsavedChanges';
 import { useSelector } from 'react-redux';
 import NewPostFooter from '../components/excerpts/NewPostFooter';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import TagList from '../components/widgets/TagList';
 
 const NewPost = () => {
   const storeKey = `editor-${window.location.href}`;
@@ -69,14 +70,17 @@ const NewPost = () => {
                       id="title"
                       placeholder="New post title here..."
                     />
-                    <input
-                      value={tag}
-                      onChange={(e) => setTag(e.target.value)}
-                      name="tags"
-                      onFocus={onFocus}
-                      id="tags"
-                      placeholder="Add up to 4 tags..."
-                    />
+                    <div style={{ position: 'relative' }}>
+                      <input
+                        value={tag}
+                        onChange={(e) => setTag(e.target.value)}
+                        name="tags"
+                        onFocus={onFocus}
+                        id="tags"
+                        placeholder="Add up to 4 tags..."
+                      />
+                      <TagList />
+                    </div>
                   </TitleTags>
                 </Pad>
 
@@ -209,6 +213,7 @@ const RightArea = styled.div`
 const TitleTags = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
 
   input,
   textarea {

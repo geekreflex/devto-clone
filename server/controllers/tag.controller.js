@@ -3,9 +3,9 @@ const tags = require('../data/tags.json');
 const expressAsyncHandler = require('express-async-handler');
 
 const getTags = expressAsyncHandler(async (req, res) => {
-  tags.find((err, data) => {
+  Tag.find((err, data) => {
     if (err) {
-      console.loog('Error');
+      console.log('Error');
       return;
     }
 

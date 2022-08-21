@@ -11,6 +11,7 @@ const app = express();
 const authRoute = require('./routes/auth.route');
 const userRoute = require('./routes/user.route');
 const postRoute = require('./routes/post.route');
+const tagRoute = require('./routes/tag.route');
 const { InsertManyTags } = require('./controllers/tag.controller');
 
 app.use(cookieParser());
@@ -38,6 +39,7 @@ app.use(
 app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);
 app.use('/api/posts', postRoute);
+app.use('/api/tags', tagRoute);
 
 app.use(notFound);
 app.use(errorHandler);
