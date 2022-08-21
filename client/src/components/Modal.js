@@ -6,7 +6,7 @@ import { Cancel } from '../styles/DefaultStyles';
 const Modal = ({ children, close, title }) => {
   return (
     <ModalWrap>
-      <ModalOverlay />
+      <ModalOverlay onClick={close} />
       <ModalMain>
         <ModalHeader>
           <h2>{title}</h2>

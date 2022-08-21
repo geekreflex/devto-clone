@@ -13,9 +13,9 @@ body {
   background-color: ${(props) => props.theme.secondary};
   font-family: 'Poppins';
   color: ${(props) => props.theme.textColor1};
-  /* line-height: 1.7; */
 
 }
+
 
 a {
   text-decoration: none;
@@ -51,6 +51,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+    line-height: 1.5;
 
     :hover {
       background-color: ${(props) => props.theme.bgHover1};

@@ -8,6 +8,7 @@ import { help } from '../data/help';
 import EditorTool from '../components/widgets/EditorTool';
 import UnsavedChanges from '../components/widgets/UnsavedChanges';
 import { useSelector } from 'react-redux';
+import NewPostFooter from '../components/excerpts/NewPostFooter';
 
 const NewPost = () => {
   const [focused, setFocused] = useState('');
@@ -18,6 +19,14 @@ const NewPost = () => {
   const [coverImg, setCoverImg] = useState('');
 
   const { unsavedModal } = useSelector((state) => state.action);
+
+  useEffect(() => {
+    saveData();
+  }, [title, tag, content, coverImg]);
+
+  const saveData = () => {
+    console.log('test');
+  };
 
   const contentRef = useRef();
 
@@ -51,7 +60,7 @@ const NewPost = () => {
                       onInput={autoGrow}
                       onKeyDown={noNewline}
                       id="title"
-                      placeholder="New Post title here..."
+                      placeholder="New post title here..."
                     />
                     <input
                       value={tag}
@@ -67,7 +76,7 @@ const NewPost = () => {
                 <Tools>
                   <EditorTool />
                 </Tools>
-                <Pad>
+                <Pad className="content-pad">
                   <TextField>
                     <textarea
                       ref={contentRef}
@@ -96,6 +105,7 @@ const NewPost = () => {
             </MainArea>
           </Container>
         </PostArea>
+        <NewPostFooter />
       </NewPostWrap>
       {unsavedModal && <UnsavedChanges />}
     </>
@@ -103,6 +113,8 @@ const NewPost = () => {
 };
 
 const NewPostWrap = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100vh;
   z-index: 99998;
@@ -111,13 +123,17 @@ const NewPostWrap = styled.div`
   background-color: ${(props) => props.theme.secondary};
 `;
 
-const PostArea = styled.div``;
+const PostArea = styled.div`
+  flex: 1;
+  display: flex;
+`;
 
 const MainArea = styled.div`
   margin-left: 70px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  height: 100%;
 `;
 
 const LeftArea = styled.div`
@@ -125,8 +141,15 @@ const LeftArea = styled.div`
   box-shadow: ${(props) => props.theme.cardShadow};
   width: 68%;
   border-radius: 6px;
-  max-height: 80vh;
+  height: 100%;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+
+  .content-pad {
+    flex: 1;
+    display: flex;
+  }
 `;
 
 const Pad = styled.div`
@@ -154,6 +177,7 @@ const RightArea = styled.div`
       margin-left: 1em;
       font-size: 15px;
       margin-bottom: 5px;
+      line-height: 1.2;
     }
   }
 
@@ -228,6 +252,8 @@ const Tools = styled.div`
 `;
 
 const TextField = styled.div`
+  display: flex;
+  flex: 1;
   textarea {
     width: 100%;
     min-height: 200px;
@@ -237,6 +263,7 @@ const TextField = styled.div`
     resize: none;
     font-size: 18px;
     color: ${(props) => props.theme.textColor1};
+    flex: 1;
   }
 `;
 
