@@ -9,13 +9,16 @@ import EditorTool from '../components/widgets/EditorTool';
 import UnsavedChanges from '../components/widgets/UnsavedChanges';
 import { useSelector } from 'react-redux';
 import NewPostFooter from '../components/excerpts/NewPostFooter';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const NewPost = () => {
+  const storeKey = `editor-${window.location.href}`;
+  const [data, setData] = useLocalStorage(storeKey, []);
   const [focused, setFocused] = useState('');
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState(data?.title || '');
   const [tag, setTag] = useState('');
   const [tagList, setTagList] = useState([]);
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState(data?.content || '');
   const [coverImg, setCoverImg] = useState('');
 
   const { unsavedModal } = useSelector((state) => state.action);
@@ -25,7 +28,11 @@ const NewPost = () => {
   }, [title, tag, content, coverImg]);
 
   const saveData = () => {
-    console.log('test');
+    const payload = {
+      title,
+      content,
+    };
+    setData(payload);
   };
 
   const contentRef = useRef();
