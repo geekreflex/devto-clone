@@ -18,6 +18,7 @@ const GoogleAuthLogin = () => {
   }, []);
 
   const responseGoogle = (response) => {
+    console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID);
     const url = `${BASE_URL}/auth/google`;
     let idToken = response.tokenId;
 
