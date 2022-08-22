@@ -3,7 +3,11 @@ const axios = require('axios');
 const generateToken = require('../utils/generateToken');
 const expressAsyncHandler = require('express-async-handler');
 const { OAuth2Client } = require('google-auth-library');
-const { REDIRECT_URL } = require('../utils/redirectUrl');
+const {
+  REDIRECT_URL,
+  TWITTER_CLIENT_SECRET,
+  TWITTER_CLIENT_ID,
+} = require('../utils/constants');
 
 /**
  * Github login
@@ -13,7 +17,7 @@ const githubAuth = expressAsyncHandler(async (req, res) => {
 
   axios({
     method: 'post',
-    url: `https://github.com/login/oauth/access_token?client_id=${process.env.TWITTER_CLIENT_ID}&client_secret=${process.env.TWITTER_CLIENT_SECRET}&code=${requestToken}`,
+    url: `https://github.com/login/oauth/access_token?client_id=${TWITTER_CLIENT_ID}&client_secret=${TWITTER_CLIENT_SECRET}&code=${requestToken}`,
     headers: {
       accept: 'application/json',
     },
