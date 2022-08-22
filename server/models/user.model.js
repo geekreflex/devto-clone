@@ -44,8 +44,6 @@ const userSchema = mongoose.Schema(
     education: {
       type: String,
     },
-    brandColor1: '#000',
-    brandColor2: '#fff',
     password: {
       type: String,
     },
