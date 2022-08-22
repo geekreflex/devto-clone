@@ -31,6 +31,31 @@ export const getTagsAsync = createAsyncThunk(
   }
 );
 
+export const createPostAsync = createAsyncThunk(
+  'createPostAsync/post',
+  async (payload, thunkAPI) => {
+    try {
+      const config = {
+        withCredentials: true,
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const { data } = await axios.post(`${BASE_URL}/posts`, payload, config);
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
 const postSlice = createSlice({
   name: 'post',
   initialState,
@@ -45,6 +70,14 @@ const postSlice = createSlice({
     },
     [getTagsAsync.rejected]: (state, action) => {
       state.status = 'idle';
+    },
+
+    [createPostAsync.pending]: (state) => {
+      state.status = 'loading';
+    },
+    [createPostAsync.fulfilled]: (state, action) => {
+      state.status = 'idle';
+      console.log(action.payload);
     },
   },
 });

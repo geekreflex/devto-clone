@@ -45,5 +45,11 @@ const HeaderInner = styled.div`
   align-items: center;
 `;
 
-const HeaderLeft = styled.div``;
-const HeaderRight = styled.div``;
+const HeaderLeft = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const HeaderRight = styled.div`
+  display: flex;
+  align-items: center;
+`;

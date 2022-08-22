@@ -9,7 +9,7 @@ const AuthLinks = () => {
       <ButtonClear>
         <Link to="/enter">Login</Link>
       </ButtonClear>
-      <Button>
+      <Button style={{ marginLeft: '10px' }}>
         <Link to="/enter?state=new-user">Create account</Link>
       </Button>
     </AuthBtnWrap>
@@ -18,10 +18,7 @@ const AuthLinks = () => {
 
 const AuthBtnWrap = styled.div`
   display: flex;
-
-  a:first-child {
-    margin-right: 8px;
-  }
+  align-items: center;
 `;
 
 export default AuthLinks;

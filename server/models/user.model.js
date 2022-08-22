@@ -20,6 +20,31 @@ const userSchema = mongoose.Schema(
       unique: true,
       required: true,
     },
+    bio: {
+      type: String,
+    },
+    websiteUrl: {
+      type: String,
+    },
+    currentlyLearning: {
+      type: String,
+    },
+    currentlyHacking: {
+      type: String,
+    },
+    skillsLanguage: {
+      type: String,
+    },
+    availableFor: {
+      type: String,
+    },
+    work: {
+      type: String,
+    },
+    education: {
+      type: String,
+    },
+    brandColor: { color1: '#000', color1: '#000' },
     password: {
       type: String,
     },

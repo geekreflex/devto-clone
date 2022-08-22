@@ -4,18 +4,21 @@ const { generateSlug } = require('../utils/generateSlug');
 const User = require('../models/user.model');
 
 const getPosts = expressAsyncHandler(async (req, res) => {
-  Post.find((err, posts) => {
-    if (err) {
-      return res.status(400).json({
-        message: 'Error occured',
-      });
-    }
+  Post.find()
+    .populate('tags')
+    .populate('user', 'username name avatar location bio, email')
+    .exec((err, posts) => {
+      if (err) {
+        return res.status(400).json({
+          message: 'Error occured',
+        });
+      }
 
-    return res.status(200).json({
-      payload: posts,
-      message: 'Post retrieved successfully',
+      return res.status(200).json({
+        payload: posts,
+        message: 'Post retrieved successfully',
+      });
     });
-  });
 });
 
 const createPost = expressAsyncHandler(async (req, res) => {

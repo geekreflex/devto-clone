@@ -7,11 +7,12 @@ import { autoGrow, noNewline } from '../utils/inputActions';
 import { help } from '../data/help';
 import EditorTool from '../components/widgets/EditorTool';
 import UnsavedChanges from '../components/widgets/UnsavedChanges';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import NewPostFooter from '../components/excerpts/NewPostFooter';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import TagList from '../components/widgets/TagList';
 import SelectedTags from '../components/widgets/SelectedTags';
+import { createPostAsync } from '../features/postSlice';
 
 const NewPost = () => {
   const storeKey = `editor-${window.location.href}`;
@@ -25,6 +26,7 @@ const NewPost = () => {
   const [coverImg, setCoverImg] = useState('');
 
   const { unsavedModal } = useSelector((state) => state.action);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     saveData();
@@ -56,7 +58,7 @@ const NewPost = () => {
       tags: tagList.map((tag) => tag._id),
       content,
     };
-    console.log('published:', payload);
+    dispatch(createPostAsync(payload));
   };
 
   return (
