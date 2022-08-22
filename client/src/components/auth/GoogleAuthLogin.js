@@ -3,6 +3,7 @@ import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
 import axios from 'axios';
 import { IoLogoGoogle } from 'react-icons/io5';
+import { BASE_URL } from '../../utils/constants';
 
 const GoogleAuthLogin = () => {
   useEffect(() => {
@@ -17,7 +18,7 @@ const GoogleAuthLogin = () => {
   }, []);
 
   const responseGoogle = (response) => {
-    const url = `${process.env.REACT_APP_API_URL}/auth/google`;
+    const url = `${BASE_URL}/auth/google`;
     let idToken = response.tokenId;
 
     const config = {

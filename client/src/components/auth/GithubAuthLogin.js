@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
 import { IoLogoGithub } from 'react-icons/io5';
+import { BASE_URL } from '../../utils/constants';
 
 const GithubAuthLogin = () => {
   const githubBtnRef = useRef();
 
   const onGithubLogin = () => {
-    const url = `${process.env.REACT_APP_API_URL}/auth/github`;
+    const url = `${BASE_URL}/auth/github`;
     window.location.href = url;
   };
 
