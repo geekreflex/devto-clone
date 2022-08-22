@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ButtonFill } from '../styles/DefaultStyles';
+import { BASE_URL } from '../utils/constants';
 
 const SignoutConfirm = () => {
   const onSignout = () => {
-    const url = `${process.env.REACT_APP_API_URL}/auth/logout`;
+    const url = `${BASE_URL}/auth/logout`;
     window.location.href = url;
   };
   return (
