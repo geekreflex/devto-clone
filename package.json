@@ -2,10 +2,10 @@
   "name": "devto-clone",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node ./server/app",
-    "server": "nodemon ./server/app",
+    "start": "node app.js",
+    "server": "nodemon app.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "cd client && npm install --legacy-peer-deps && npm run build"

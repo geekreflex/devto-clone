@@ -1,18 +1,21 @@
 require('dotenv').config();
-require('./configs/db')();
+require('./server/configs/db')();
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 
-const { notFound, errorHandler } = require('./middlewares/errorMiddleware');
+const {
+  notFound,
+  errorHandler,
+} = require('./server/middlewares/errorMiddleware');
 
 const app = express();
 
-const authRoute = require('./routes/auth.route');
-const userRoute = require('./routes/user.route');
-const postRoute = require('./routes/post.route');
-const tagRoute = require('./routes/tag.route');
+const authRoute = require('./server/routes/auth.route');
+const userRoute = require('./server/routes/user.route');
+const postRoute = require('./server/routes/post.route');
+const tagRoute = require('./server/routes/tag.route');
 
 app.use(cookieParser());
 app.use(express.json());
