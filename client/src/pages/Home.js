@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <HomeWrap>
       <Container>
-        <p>Home page</p>
+        <p>Welcome to Dev</p>
       </Container>
     </HomeWrap>
   );
