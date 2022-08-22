@@ -17,7 +17,7 @@ const SignoutConfirm = () => {
       <Main>
         <h2>Are you sure you want to sign out?</h2>
         <ButtonFill>
-          <button style={{ padding: '15px 20px' }} onClick={onSignout}>
+          <button style={{ padding: '10px 17px' }} onClick={onSignout}>
             Yes, Sign out
           </button>
         </ButtonFill>
