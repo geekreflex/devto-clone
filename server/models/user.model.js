@@ -52,7 +52,7 @@ const userSchema = mongoose.Schema(
     },
     loginType: {
       type: String,
-      enum: ['github', 'twitter', 'email'],
+      enum: ['github', 'google', 'email'],
       required: true,
     },
     admin: {

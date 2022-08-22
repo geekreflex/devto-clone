@@ -23,7 +23,11 @@ const NavLinks = () => {
         <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
           <button className="avatar" onClick={() => setVisible(!visible)}>
             <span>
-              <img src={user?.avatar} alt="Profile picture" />
+              <img
+                src={user?.avatar}
+                referrerPolicy="no-referrer"
+                alt={user?.name}
+              />
             </span>
           </button>
         </OutsideClickHandler>
