@@ -47,6 +47,8 @@ const TagListWrap = styled.div`
   z-index: 999;
   width: 100%;
   display: ${(props) => (props.hide ? 'none' : 'block')};
+  overflow-y: auto;
+  height: 500px;
 `;
 const Tags = styled.div``;
 const Tag = styled.div`

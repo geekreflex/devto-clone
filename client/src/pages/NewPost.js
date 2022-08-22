@@ -20,7 +20,7 @@ const NewPost = () => {
   const [inputFocus, setInputFocus] = useState(false);
   const [title, setTitle] = useState(data?.title || '');
   const [tag, setTag] = useState('');
-  const [tagList, setTagList] = useState([]);
+  const [tagList, setTagList] = useState(data?.tagList || []);
   const [content, setContent] = useState(data?.content || '');
   const [coverImg, setCoverImg] = useState('');
 
@@ -28,12 +28,13 @@ const NewPost = () => {
 
   useEffect(() => {
     saveData();
-  }, [title, tag, content, coverImg]);
+  }, [title, tagList, content, coverImg]);
 
   const saveData = () => {
     const payload = {
       title,
       content,
+      tagList,
     };
     setData(payload);
   };
@@ -191,24 +192,29 @@ const RightArea = styled.div`
   width: 30%;
 
   section {
-    color: ${(props) => props.theme.textColor2};
     visibility: hidden;
     opacity: 0;
     transition: all 200ms;
     margin-top: 100px;
+
+    h3 {
+      font-size: 18px;
+      color: ${(props) => props.theme.textColor1};
+    }
 
     ul {
       display: block;
       margin-block-start: 1em;
       margin-block-end: 1em;
       margin-inline-start: 0px;
+      color: ${(props) => props.theme.textColor2};
     }
 
     ul li {
       margin-left: 1em;
       font-size: 15px;
-      margin-bottom: 5px;
-      line-height: 1.2;
+      margin-bottom: 8px;
+      line-height: 1.5;
     }
   }
 

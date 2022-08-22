@@ -17,9 +17,10 @@ body {
 }
 
 
+
 a {
   text-decoration: none;
-  color: ${(props) => props.theme.brandColor}
+  color: #818cf8;
 }
 
 .devto-icon {
@@ -61,7 +62,5 @@ a {
       }
     }
   }
-
-
 
 `;

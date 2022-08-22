@@ -17,7 +17,31 @@ const getTags = expressAsyncHandler(async (req, res) => {
   });
 });
 
-//
+const createTag = expressAsyncHandler(async (req, res) => {
+  const { name, alias, description, color } = req.body;
+  const newTag = new Tag({
+    name,
+    alias,
+    description,
+    color,
+  });
+  newTag.save((err, tag) => {
+    if (err) {
+      return res.json({ status: 'failed', message: 'Error occured' });
+    }
+
+    return res
+      .status(200)
+      .json({
+        status: 'success',
+        payload: tag,
+        message: 'Successfully created tag',
+      });
+  });
+});
+
+// Help for test
+// Insert many from /data folder
 const InsertManyTags = () => {
   Tag.insertMany(tags, (err, res) => {
     if (err) {
@@ -28,4 +52,4 @@ const InsertManyTags = () => {
   });
 };
 
-module.exports = { InsertManyTags, getTags };
+module.exports = { InsertManyTags, getTags, createTag };
