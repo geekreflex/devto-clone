@@ -4,10 +4,6 @@ import { ButtonFill } from '../styles/DefaultStyles';
 import { BASE_URL } from '../utils/constants';
 
 const SignoutConfirm = () => {
-  useEffect(() => {
-    console.log(BASE_URL);
-  }, [BASE_URL]);
-
   const onSignout = () => {
     const url = `${BASE_URL}/auth/logout`;
     window.location.href = url;
