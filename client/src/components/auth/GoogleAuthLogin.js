@@ -3,13 +3,13 @@ import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
 import axios from 'axios';
 import { IoLogoGoogle } from 'react-icons/io5';
-import { BASE_URL } from '../../utils/constants';
+import { BASE_URL, GOOGLE_CLIENT_ID } from '../../utils/constants';
 
 const GoogleAuthLogin = () => {
   useEffect(() => {
     const init = () => {
       gapi.auth2.getAuthInstance({
-        clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+        clientId: GOOGLE_CLIENT_ID,
         scope: 'email',
       });
     };
@@ -18,7 +18,7 @@ const GoogleAuthLogin = () => {
   }, []);
 
   const responseGoogle = (response) => {
-    console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID);
+    console.log(GOOGLE_CLIENT_ID);
     const url = `${BASE_URL}/auth/google`;
     let idToken = response.tokenId;
 
@@ -40,7 +40,7 @@ const GoogleAuthLogin = () => {
   return (
     <div>
       <GoogleLogin
-        clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
+        clientId={`${GOOGLE_CLIENT_ID}`}
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
         render={(renderProps) => (
