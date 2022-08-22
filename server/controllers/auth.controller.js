@@ -3,6 +3,7 @@ const axios = require('axios');
 const generateToken = require('../utils/generateToken');
 const expressAsyncHandler = require('express-async-handler');
 const { OAuth2Client } = require('google-auth-library');
+const { REDIRECT_URL } = require('../utils/redirectUrl');
 
 /**
  * Github login
@@ -37,7 +38,7 @@ const githubAuth = expressAsyncHandler(async (req, res) => {
         if (user) {
           return res
             .cookie('user_access_token', generateToken(user._id))
-            .redirect('http://localhost:3000');
+            .redirect(REDIRECT_URL);
         }
 
         let password = email + process.env.JWT_SECRET;
@@ -60,7 +61,7 @@ const githubAuth = expressAsyncHandler(async (req, res) => {
 
           res
             .cookie('user_access_token', generateToken(user._id))
-            .redirect('http://localhost:3000');
+            .redirect(REDIRECT_URL);
         });
       });
     });
@@ -190,7 +191,7 @@ const userLogoutAuth = (req, res) => {
     .clearCookie('user_access_token', {
       path: '/',
     })
-    .redirect('http://localhost:3000');
+    .redirect(REDIRECT_URL);
 };
 
 module.exports = {
