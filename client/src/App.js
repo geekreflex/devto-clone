@@ -4,7 +4,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import { getTagsAsync } from './features/postSlice';
+import { getPostsAsync, getTagsAsync } from './features/postSlice';
 import { getUserProfileAsync } from './features/userSlice';
 import { ProtectedRoute, PublicRoute } from './helpers/authRoute';
 import Enter from './pages/Enter';
@@ -19,6 +19,7 @@ function App() {
   useEffect(() => {
     if (isAuth) {
       dispatch(getUserProfileAsync());
+      dispatch(getPostsAsync());
       dispatch(getTagsAsync());
     }
   }, []);
@@ -32,7 +33,7 @@ function App() {
   }, [location]);
 
   return (
-    <div className="App">
+    <div>
       <Header />
       <PageWrap>
         <Routes>
@@ -68,6 +69,8 @@ function App() {
   );
 }
 
-const PageWrap = styled.div``;
+const PageWrap = styled.div`
+  /* margin-top: 80px; */
+`;
 
 export default App;
