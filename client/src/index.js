@@ -1,13 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
+import './styles/style.css';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
+import { getTokenFromStorage } from './features/authSlice';
+import GlobalStyles from './styles/GlobalStyles';
+import WithTheme from './theme/WithTheme';
+import { BrowserRouter as Router } from 'react-router-dom';
 
+store.dispatch(getTokenFromStorage());
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <Router>
+        <WithTheme>
+          <GlobalStyles />
+          <App />
+        </WithTheme>
+      </Router>
+    </Provider>
   </React.StrictMode>
 );
 
