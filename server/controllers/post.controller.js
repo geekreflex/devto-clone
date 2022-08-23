@@ -5,6 +5,7 @@ const User = require('../models/user.model');
 
 const getPosts = expressAsyncHandler(async (req, res) => {
   Post.find()
+    .sort({ createdAt: -1 })
     .populate('tags')
     .populate('author', 'username name avatar location bio, email')
     .exec((err, posts) => {

@@ -19,9 +19,12 @@ function App() {
   useEffect(() => {
     if (isAuth) {
       dispatch(getUserProfileAsync());
-      dispatch(getPostsAsync());
-      dispatch(getTagsAsync());
     }
+  }, []);
+
+  useEffect(() => {
+    dispatch(getPostsAsync());
+    dispatch(getTagsAsync());
   }, []);
 
   useEffect(() => {

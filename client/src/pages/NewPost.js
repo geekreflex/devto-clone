@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import NewPostHeader from '../components/excerpts/NewPostHeader';
 import { Container } from '../styles/DefaultStyles';
-import Tooltip from '../components/widgets/Tooltip';
 import { autoGrow, noNewline } from '../utils/inputActions';
 import { help } from '../data/help';
 import EditorTool from '../components/widgets/EditorTool';
@@ -13,6 +12,7 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 import TagList from '../components/widgets/TagList';
 import SelectedTags from '../components/widgets/SelectedTags';
 import { createPostAsync } from '../features/postSlice';
+import UploadCover from '../components/widgets/UploadCover';
 
 const NewPost = () => {
   const storeKey = `editor-${window.location.href}`;
@@ -23,7 +23,7 @@ const NewPost = () => {
   const [tag, setTag] = useState('');
   const [tagList, setTagList] = useState(data?.tagList || []);
   const [content, setContent] = useState(data?.content || '');
-  const [coverImg, setCoverImg] = useState('');
+  const [coverImg, setCoverImg] = useState(data?.coverImg || '');
 
   const { unsavedModal } = useSelector((state) => state.action);
   const dispatch = useDispatch();
@@ -37,6 +37,7 @@ const NewPost = () => {
       title,
       content,
       tagList,
+      coverImg,
     };
     setData(payload);
   };
@@ -57,8 +58,10 @@ const NewPost = () => {
       title,
       tags: tagList.map((tag) => tag._id),
       content,
+      coverImg,
     };
     dispatch(createPostAsync(payload));
+    // localStorage.removeItem(storeKey)
   };
 
   return (
@@ -71,12 +74,10 @@ const NewPost = () => {
               <LeftArea>
                 <Pad>
                   <AddCoverImg>
-                    <Tooltip
-                      pos="bottom"
-                      content={'Use a ratio of 100:42 for best results.'}
-                    >
-                      <button>Add a cover image</button>
-                    </Tooltip>
+                    <UploadCover
+                      coverImg={coverImg}
+                      setCoverImg={setCoverImg}
+                    />
                   </AddCoverImg>
                   <TitleTags>
                     <textarea
@@ -160,6 +161,7 @@ const NewPostWrap = styled.div`
 const PostArea = styled.div`
   flex: 1;
   display: flex;
+  height: calc(100vh - 90px - 100px);
 `;
 
 const MainArea = styled.div`
@@ -301,7 +303,6 @@ const TextField = styled.div`
   flex: 1;
   textarea {
     width: 100%;
-    min-height: 200px;
     background: transparent;
     border: none;
     outline: none;

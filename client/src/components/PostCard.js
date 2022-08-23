@@ -5,19 +5,21 @@ import HeartIcon from '../icons/HeartIcon';
 import CommentIcon from '../icons/CommentIcon';
 import BookmarkIcon from '../icons/BookmarkIcon';
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, index }) => {
   const onPostClick = () => {
     console.log(post.slug);
   };
 
   return (
     <CardWrap onClick={onPostClick}>
-      <CardImg>
-        <img
-          src="https://source.unsplash.com/random"
-          alt="Some random picture placeholder"
-        />
-      </CardImg>
+      {index === 0 && (
+        <CardImg>
+          <img
+            src={post.coverImg || 'https://source.unsplash.com/random'}
+            alt="Some random picture placeholder"
+          />
+        </CardImg>
+      )}
       <CardBody>
         <UserInfo>
           <div className="avatar">
@@ -29,7 +31,10 @@ const PostCard = ({ post }) => {
           </div>
         </UserInfo>
         <PostInfo>
-          <Link to="#" className="post-title">
+          <Link
+            to="#"
+            className={index === 0 ? 'big-post-title post-title' : 'post-title'}
+          >
             <h1>{post.title}</h1>
           </Link>
           <PostTags>
@@ -76,6 +81,8 @@ const CardWrap = styled.div`
   margin-bottom: 10px;
   border-radius: 6px;
   cursor: pointer;
+  overflow: hidden;
+  box-shadow: ${(props) => props.theme.cardShadow};
 `;
 
 const CardImg = styled.div`
@@ -90,12 +97,9 @@ const CardImg = styled.div`
   }
 `;
 const CardBody = styled.div`
-  padding: 30px 20px;
+  padding: 20px;
   background-color: ${(props) => props.theme.primary};
-  box-shadow: ${(props) => props.theme.cardShadow};
   overflow: hidden;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
 `;
 
 const UserInfo = styled.div`
@@ -124,7 +128,7 @@ const UserInfo = styled.div`
     .author-name {
       font-size: 14px;
       color: ${(props) => props.theme.textColor2};
-      padding: 3px 0px;
+      padding: 3px 2px;
 
       :hover {
         border-radius: 6px;
@@ -149,17 +153,23 @@ const PostInfo = styled.div`
     :hover {
       color: ${(props) => props.theme.brandColor3};
     }
+
+    h1 {
+      font-weight: 600;
+      font-size: 22px;
+    }
   }
 
-  h1 {
-    font-size: 35px;
-    font-weight: 600;
+  .big-post-title {
+    h1 {
+      font-size: 30px !important;
+    }
   }
 `;
 
 const PostTags = styled.div`
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
   a {
     font-size: 13px;

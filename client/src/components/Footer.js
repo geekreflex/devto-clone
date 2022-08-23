@@ -14,7 +14,7 @@ const Footer = () => {
             journey.
           </p>
           <p>
-            Built on <Link to="#">Forem</Link> — the
+            Built on <Link to="#">Forem</Link> — the{' '}
             <Link to="#">open source</Link> software that powers{' '}
             <Link to="#">DEV</Link> and other inclusive communities.
           </p>

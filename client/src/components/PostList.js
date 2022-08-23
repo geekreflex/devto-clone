@@ -17,8 +17,8 @@ const PostList = () => {
         <Link to="#">Top</Link>
       </Nav>
       <PostMain>
-        {posts?.map((post) => (
-          <PostCard key={post._id} post={post} />
+        {posts?.map((post, index) => (
+          <PostCard key={post._id} post={post} index={index} />
         ))}
       </PostMain>
     </PostListWrap>
