@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import LeftSidebar from '../components/LeftSidebar';
 import PostList from '../components/PostList';
 import { Container } from '../styles/DefaultStyles';
 
@@ -8,7 +9,9 @@ const Home = () => {
     <HomeWrap>
       <Container>
         <Layout>
-          <section className="left"></section>
+          <section className="left">
+            <LeftSidebar />
+          </section>
           <section className="center">
             <PostList />
           </section>

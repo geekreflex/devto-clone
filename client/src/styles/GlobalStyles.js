@@ -20,7 +20,6 @@ body {
 
 a {
   text-decoration: none;
-  /* color: #818cf8; */
 }
 
 .devto-icon {

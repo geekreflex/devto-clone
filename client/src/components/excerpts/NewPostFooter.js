@@ -1,15 +1,19 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import HexIcon from '../../icons/HexIcon';
 import { ButtonFill, Container } from '../../styles/DefaultStyles';
 
 const NewPostFooter = ({ onPublish }) => {
+  const { status } = useSelector((state) => state.post);
   return (
     <FooterWrap>
       <Container>
         <FooterMain>
           <ButtonFill style={{ marginRight: '5px' }}>
-            <button onClick={onPublish}>Publish</button>
+            <button onClick={onPublish}>
+              {status === 'loading' ? 'Publishing...' : 'Publish'}
+            </button>
           </ButtonFill>
           <button className="btn">Save draft</button>
           <button className="btn">

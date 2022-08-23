@@ -104,6 +104,11 @@ const postSlice = createSlice({
     [createPostAsync.fulfilled]: (state, action) => {
       state.status = 'idle';
     },
+    [createPostAsync.rejected]: (state, action) => {
+      state.status = 'idle';
+      console.log(action.payload);
+    },
+
     [getPostsAsync.pending]: (state) => {
       state.status = 'loading';
     },

@@ -143,7 +143,7 @@ const Dropdown = styled.div`
   right: 0;
   top: 48px;
   background-color: ${(props) => props.theme.primary};
-  width: 280px;
+  width: 260px;
   border: 1px solid ${(props) => props.theme.borderColor};
   border-radius: 5px;
   padding: 8px;

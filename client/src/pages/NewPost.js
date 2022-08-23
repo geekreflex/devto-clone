@@ -219,6 +219,9 @@ const RightArea = styled.div`
       font-size: 15px;
       margin-bottom: 8px;
       line-height: 1.5;
+      a {
+        color: ${(props) => props.theme.brandColor3};
+      }
     }
   }
 

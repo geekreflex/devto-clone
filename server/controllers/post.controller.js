@@ -36,8 +36,10 @@ const createPost = expressAsyncHandler(async (req, res) => {
 
   newPost.save((err, post) => {
     if (err) {
-      console.log(err);
-      return;
+      return res.status(400).json({
+        status: 'failed',
+        message: 'Error occured',
+      });
     }
 
     return res.status(200).json({
