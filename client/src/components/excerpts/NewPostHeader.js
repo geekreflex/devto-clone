@@ -24,7 +24,7 @@ const NewPostHeader = () => {
           </div>
         </Main>
       </Container>
-      <Cancel>
+      <Cancel style={{ position: 'absolute' }}>
         <button className="btn" onClick={onClose}>
           <IoCloseSharp />
         </button>

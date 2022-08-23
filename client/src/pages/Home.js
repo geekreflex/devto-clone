@@ -1,13 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Container } from '../styles/DefaultStyles';
 
 const Home = () => {
   return (
     <HomeWrap>
-      <Container>
-        <p>Welcome to Dev</p>
-      </Container>
+      <p>Home</p>
     </HomeWrap>
   );
 };
