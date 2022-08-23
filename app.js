@@ -16,6 +16,7 @@ const authRoute = require('./server/routes/auth.route');
 const userRoute = require('./server/routes/user.route');
 const postRoute = require('./server/routes/post.route');
 const tagRoute = require('./server/routes/tag.route');
+const commentRoute = require('./server/routes/comment.route');
 
 app.use(cookieParser());
 app.use(express.json());
@@ -32,6 +33,7 @@ app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);
 app.use('/api/posts', postRoute);
 app.use('/api/tags', tagRoute);
+app.use('/api/comments', commentRoute);
 
 // client handler
 if (process.env.NODE_ENV === 'production') {

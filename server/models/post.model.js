@@ -15,9 +15,9 @@ const postSchema = mongoose.Schema(
     coverImg: {
       type: String,
     },
-    tags: [{ type: mongoose.Types.ObjectId, ref: 'Tag' }],
+    tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
     slug: { type: String, unique: true },
-    user: { type: mongoose.Types.ObjectId, ref: 'User' },
+    author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   },
   { timestamps: true }
 );

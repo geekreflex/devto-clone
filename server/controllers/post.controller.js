@@ -6,7 +6,7 @@ const User = require('../models/user.model');
 const getPosts = expressAsyncHandler(async (req, res) => {
   Post.find()
     .populate('tags')
-    .populate('user', 'username name avatar location bio, email')
+    .populate('author', 'username name avatar location bio, email')
     .exec((err, posts) => {
       if (err) {
         return res.status(400).json({
@@ -30,7 +30,7 @@ const createPost = expressAsyncHandler(async (req, res) => {
     content,
     coverImg,
     tags,
-    user: userId,
+    author: userId,
   });
 
   newPost.save((err, post) => {
@@ -63,7 +63,7 @@ const updatePost = expressAsyncHandler(async (req, res) => {
   console.log(updatedPost);
 
   Post.findOneAndUpdate(
-    { _id: postId, user: userId },
+    { _id: postId, author: userId },
     updatedPost,
     { new: true },
     (err, post) => {
@@ -100,7 +100,7 @@ const deletePost = expressAsyncHandler(async (req, res) => {
 const getOnePost = expressAsyncHandler(async (req, res) => {
   const { username, postSlug } = req.params;
   const user = await User.find({ username });
-  Post.findOne({ user: user[0]._id, slug: postSlug }, (err, post) => {
+  Post.findOne({ author: user[0]._id, slug: postSlug }, (err, post) => {
     if (err) {
       return res.status(400).json({
         status: 'failed',
