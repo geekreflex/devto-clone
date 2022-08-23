@@ -60,13 +60,73 @@ const getPostComments = expressAsyncHandler(async (req, res) => {
     });
 });
 
+const getUserComments = expressAsyncHandler(async (req, res) => {
+  const userId = req.user._id;
+
+  console.log(userId);
+
+  Comment.find({ author: userId }, (err, comments) => {
+    if (err) {
+      return res.status(400).json({
+        status: 'failed',
+        message: `Error occured ${err}`,
+      });
+    }
+
+    return res.status(200).json({
+      status: 'success',
+      payload: comments,
+      message: 'Comments retrieved successfully',
+    });
+  });
+});
+
 const editComment = expressAsyncHandler(async (req, res) => {
   const { commentId } = req.params;
-  console.log(commentId);
+  const { content } = req.body;
+
+  Comment.findByIdAndUpdate(
+    commentId,
+    { content },
+    { new: true },
+    (err, comment) => {
+      if (err) {
+        return res.status(400).json({
+          status: 'failed',
+          message: `Error occured ${err}`,
+        });
+      }
+
+      return res.status(200).json({
+        status: 'success',
+        payload: comment,
+        message: 'Comments updated successfully',
+      });
+    }
+  );
+});
+
+const deleteComment = expressAsyncHandler(async (req, res) => {
+  const { commentId } = req.params;
+  Comment.findOneAndDelete(commentId, (err, _) => {
+    if (err) {
+      return res.status(400).json({
+        status: 'failed',
+        message: `Error occured ${err}`,
+      });
+    }
+
+    return res.status(200).json({
+      status: 'success',
+      message: 'Comment deleted successfully',
+    });
+  });
 });
 
 module.exports = {
   createComment,
   getPostComments,
   editComment,
+  deleteComment,
+  getUserComments,
 };

@@ -6,10 +6,12 @@ const {
   updatePost,
   deletePost,
   getOnePost,
+  getUserPosts,
 } = require('../controllers/post.controller');
 const { protect } = require('../middlewares/auth.middleware');
 const router = express.Router();
 
+router.get('/user', protect, getUserPosts);
 router.get('/', getPosts);
 router.post('/', protect, createPost);
 router.put('/:id', protect, updatePost);

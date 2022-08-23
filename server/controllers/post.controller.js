@@ -116,10 +116,31 @@ const getOnePost = expressAsyncHandler(async (req, res) => {
   }).populate('user');
 });
 
+const getUserPosts = expressAsyncHandler(async (req, res) => {
+  const userId = req.user._id;
+  console.log(userId);
+
+  Post.find({ author: userId }, (err, posts) => {
+    if (err) {
+      return res.status(400).json({
+        status: 'failed',
+        message: 'Error occured',
+      });
+    }
+
+    return res.status(200).json({
+      status: 'success',
+      payload: posts,
+      message: 'Posts retrieved successfully',
+    });
+  });
+});
+
 module.exports = {
   getPosts,
   createPost,
   updatePost,
   deletePost,
   getOnePost,
+  getUserPosts,
 };
