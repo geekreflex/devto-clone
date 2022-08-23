@@ -1,20 +1,16 @@
-<<<<<<< HEAD
-import logo from "./logo.svg";
-import "./App.css";
-=======
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import styled from 'styled-components';
-import Footer from './components/Footer';
-import Header from './components/Header';
-import { getTagsAsync } from './features/postSlice';
-import { getUserProfileAsync } from './features/userSlice';
-import { ProtectedRoute, PublicRoute } from './helpers/authRoute';
-import Enter from './pages/Enter';
-import Home from './pages/Home';
-import NewPost from './pages/NewPost';
-import SignoutConfirm from './pages/SignoutConfirm';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Routes, Route, useLocation } from "react-router-dom";
+import styled from "styled-components";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import { getTagsAsync } from "./features/postSlice";
+import { getUserProfileAsync } from "./features/userSlice";
+import { ProtectedRoute, PublicRoute } from "./helpers/authRoute";
+import Enter from "./pages/Enter";
+import Home from "./pages/Home";
+import NewPost from "./pages/NewPost";
+import SignoutConfirm from "./pages/SignoutConfirm";
 
 function App() {
   const location = useLocation();
@@ -28,10 +24,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (location.pathname === '/new') {
-      document.body.classList.add('hidden');
+    if (location.pathname === "/new") {
+      document.body.classList.add("hidden");
     } else {
-      document.body.classList.remove('hidden');
+      document.body.classList.remove("hidden");
     }
   }, [location]);
 
