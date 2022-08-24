@@ -65,7 +65,11 @@ const EditPost = ({
   );
 };
 
-const EditorPostWrap = styled.div``;
+const EditorPostWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
 const TopSection = styled.div`
   display: flex;
   flex-direction: column;

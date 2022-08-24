@@ -5,8 +5,8 @@ export default createGlobalStyle`
 *::after,
 *::before {
   padding: 0;
-  margin: 0;
   box-sizing: border-box;
+  margin: 0;
 }
 
 body {

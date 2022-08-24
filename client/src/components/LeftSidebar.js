@@ -1,12 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import CompareIcon from '../icons/CompareIcon';
 import ContactIcon from '../icons/ContactIcon';
-import DevtoIcon from '../icons/DevtoIcon';
 import FaqIcon from '../icons/FaqIcon';
-import GuidesIcon from '../icons/GuidesIcon';
-import HeartIcon from '../icons/HeartIcon';
 import HomeIcon from '../icons/HomeIcon';
 import ListIcon from '../icons/ListIcon';
 import LoveIcon from '../icons/LoveIcon';
@@ -15,6 +11,14 @@ import ReadListIcon from '../icons/ReadListIcon';
 import ShopIcon from '../icons/ShopIcon';
 import TagIcon from '../icons/TagIcon';
 import VideoIcon from '../icons/VideoIcon';
+import {
+  DevRainbow,
+  GuidesImg,
+  CompareImg,
+  CocImg,
+  PrivacyImg,
+  TermsImg,
+} from '../utils/images';
 
 const LeftSidebar = () => {
   return (
@@ -76,7 +80,7 @@ const LeftSidebar = () => {
         </Link>
         <Link to="#">
           <span>
-            <DevtoIcon />
+            <img src={DevRainbow} />
           </span>
           About
         </Link>
@@ -88,13 +92,13 @@ const LeftSidebar = () => {
         </Link>
         <Link to="#">
           <span>
-            <GuidesIcon />
+            <img src={GuidesImg} />
           </span>
           Guides
         </Link>
         <Link to="#">
           <span>
-            <CompareIcon />
+            <img src={CompareImg} />
           </span>
           Software comparisons
         </Link>
@@ -104,19 +108,19 @@ const LeftSidebar = () => {
         <h3>Other</h3>
         <Link to="#">
           <span>
-            <HeartIcon />
+            <img src={CocImg} />
           </span>
           Code of Conduct
         </Link>
         <Link to="#">
           <span>
-            <HeartIcon />
+            <img src={PrivacyImg} />
           </span>
           Privacy Policy
         </Link>
         <Link to="#">
           <span>
-            <HeartIcon />
+            <img src={TermsImg} />
           </span>
           Terms of use
         </Link>
@@ -150,6 +154,10 @@ const LeftWrap = styled.div`
     span {
       display: flex;
       margin-right: 10px;
+
+      img {
+        width: 24px;
+      }
     }
 
     :hover {
