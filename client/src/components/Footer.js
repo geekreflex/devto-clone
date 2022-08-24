@@ -47,6 +47,10 @@ const Main = styled.div`
   align-items: center;
   color: ${(props) => props.theme.textColor2};
 
+  a {
+    color: ${(props) => props.theme.brandColor3};
+  }
+
   p {
     font-size: 14px;
   }

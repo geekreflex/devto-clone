@@ -37,7 +37,9 @@ const LeftSidebar = () => {
             <ReadListIcon />
           </span>
           Reading List
-          <span className="total-readlist">{user?.readingList?.length}</span>
+          {user?.readingList.length > 0 && (
+            <span className="total-readlist">{user?.readingList?.length}</span>
+          )}
         </Link>
         <Link to="#">
           <span>
