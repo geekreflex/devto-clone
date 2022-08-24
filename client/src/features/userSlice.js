@@ -32,6 +32,35 @@ export const getUserProfileAsync = createAsyncThunk(
   }
 );
 
+export const addPostToReadingListAsync = createAsyncThunk(
+  'addPostToReadingListAsync/post',
+  async (payload, thunkAPI) => {
+    try {
+      const config = {
+        withCredentials: true,
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const { data } = await axios.post(
+        `${BASE_URL}/users/reading-list`,
+        payload,
+        config
+      );
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -51,6 +80,14 @@ const userSlice = createSlice({
     [getUserProfileAsync.rejected]: (state) => {
       state.status = 'idle';
       state.user = null;
+    },
+
+    [addPostToReadingListAsync.pending]: (state) => {
+      state.status = 'loading';
+    },
+    [addPostToReadingListAsync.fulfilled]: (state, action) => {
+      state.status = 'idle';
+      state.user = action.payload.user;
     },
   },
 });

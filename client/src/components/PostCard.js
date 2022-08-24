@@ -1,18 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import HeartIcon from '../icons/HeartIcon';
 import CommentIcon from '../icons/CommentIcon';
 import BookmarkIcon from '../icons/BookmarkIcon';
 import PostTagList from './widgets/PostTagList';
+import { useDispatch, useSelector } from 'react-redux';
+import { addPostToReadingListAsync } from '../features/userSlice';
+import BookmarkIcon2 from '../icons/BookmarkIcon2';
 
 const PostCard = ({ post, index }) => {
+  const [focus, setFocus] = useState(false);
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const onPostClick = () => {
+    setFocus(false);
     console.log(post.slug);
   };
 
+  const onBookmark = (e) => {
+    e.stopPropagation();
+    if (user.readingList.includes(post._id)) {
+      dispatch(
+        addPostToReadingListAsync({ postId: post._id, action: 'remove' })
+      );
+    } else {
+      dispatch(addPostToReadingListAsync({ postId: post._id, action: 'add' }));
+    }
+  };
+
+  const onLink = (e) => {
+    e.stopPropagation();
+  };
+
   return (
-    <CardWrap onClick={onPostClick}>
+    <CardWrap
+      onClick={onPostClick}
+      focus={focus}
+      onFocus={() => setFocus(true)}
+      onBlur={() => setFocus(false)}
+    >
       {index === 0 && (
         <CardImg>
           <img
@@ -42,14 +69,14 @@ const PostCard = ({ post, index }) => {
           <PostTagList tags={post.tags} />
           <PostDetails>
             <div className="details">
-              <Link to="#">
+              <Link to="#" onClick={onLink}>
                 <span>
                   <HeartIcon />
                 </span>
                 <span>11</span>
                 Reactions
               </Link>
-              <Link to="#">
+              <Link to="#" onClick={onLink}>
                 <span>
                   <CommentIcon />
                 </span>
@@ -59,8 +86,20 @@ const PostCard = ({ post, index }) => {
             </div>
             <div className="details">
               <span className="duration">3 min read</span>
-              <button className="btn">
-                <BookmarkIcon />
+              <button
+                className={
+                  user?.readingList?.includes(post._id)
+                    ? 'bookmarked btn'
+                    : 'btn'
+                }
+                onClick={onBookmark}
+                title="Save to reading list"
+              >
+                {user?.readingList?.includes(post._id) ? (
+                  <BookmarkIcon2 />
+                ) : (
+                  <BookmarkIcon />
+                )}
               </button>
             </div>
           </PostDetails>
@@ -78,7 +117,9 @@ const CardWrap = styled.div`
   border-radius: 6px;
   cursor: pointer;
   overflow: hidden;
-  box-shadow: ${(props) => props.theme.cardShadow};
+  box-shadow: ${(props) => (props.focus ? 'none' : props.theme.cardShadow)};
+  border: 2px solid
+    ${(props) => (props.focus ? props.theme.brandColor3 : props.theme.primary)};
 `;
 
 const CardImg = styled.div`
@@ -167,6 +208,10 @@ const PostDetails = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .bookmarked {
+    background-color: ${(props) => props.theme.borderColor};
+  }
 
   .details {
     display: flex;

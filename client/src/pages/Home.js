@@ -39,7 +39,7 @@ const Layout = styled.div`
   }
 
   section.right {
-    width: 25%;
+    width: 23%;
   }
 `;
 

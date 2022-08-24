@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ContactIcon from '../icons/ContactIcon';
@@ -21,6 +22,7 @@ import {
 } from '../utils/images';
 
 const LeftSidebar = () => {
+  const { user } = useSelector((state) => state.user);
   return (
     <LeftWrap>
       <section className="main-links">
@@ -30,11 +32,12 @@ const LeftSidebar = () => {
           </span>
           Home
         </Link>
-        <Link to="#">
+        <Link to="#" className="readlist">
           <span>
             <ReadListIcon />
           </span>
           Reading List
+          <span className="total-readlist">{user?.readingList?.length}</span>
         </Link>
         <Link to="#">
           <span>
@@ -134,6 +137,19 @@ const LeftWrap = styled.div`
   flex-direction: column;
   width: 100%;
 
+  .readlist {
+    .total-readlist {
+      background-color: ${(props) => props.theme.borderColor};
+      border-radius: 6px;
+      margin-left: 10px;
+      padding: 0 4px;
+      font-size: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
   section {
     width: 100%;
     margin-bottom: 20px;
@@ -148,7 +164,7 @@ const LeftWrap = styled.div`
   a {
     width: 100%;
     display: flex;
-    padding: 8px 16px;
+    padding: 8px 4px;
     color: ${(props) => props.theme.textColor2};
 
     span {
