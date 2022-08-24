@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import HeartIcon from '../icons/HeartIcon';
 import CommentIcon from '../icons/CommentIcon';
 import BookmarkIcon from '../icons/BookmarkIcon';
+import PostTagList from './widgets/PostTagList';
 
 const PostCard = ({ post, index }) => {
   const onPostClick = () => {
@@ -37,13 +38,8 @@ const PostCard = ({ post, index }) => {
           >
             <h1>{post.title}</h1>
           </Link>
-          <PostTags>
-            {post.tags.map((tag) => (
-              <Link key={tag._id} to="#">
-                #{tag.alias}
-              </Link>
-            ))}
-          </PostTags>
+
+          <PostTagList tags={post.tags} />
           <PostDetails>
             <div className="details">
               <Link to="#">
@@ -163,25 +159,6 @@ const PostInfo = styled.div`
   .big-post-title {
     h1 {
       font-size: 30px !important;
-    }
-  }
-`;
-
-const PostTags = styled.div`
-  display: flex;
-  margin-bottom: 10px;
-
-  a {
-    font-size: 13px;
-    color: ${(props) => props.theme.textColor3};
-    padding: 3px 5px;
-    border: 1px solid transparent;
-    transition: all 200ms;
-
-    :hover {
-      border: 1px solid ${(props) => props.theme.borderColor};
-      border-radius: 6px;
-      background-color: ${(props) => props.theme.borderColor}50;
     }
   }
 `;

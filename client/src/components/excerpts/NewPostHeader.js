@@ -5,26 +5,39 @@ import Logo from './Logo';
 import { IoCloseSharp } from 'react-icons/io5';
 import { toggleUnsavedModal } from '../../features/actionSlice';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-const NewPostHeader = () => {
+const NewPostHeader = ({ onMode, storeKey }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onClose = () => {
-    dispatch(toggleUnsavedModal(true));
+    const item = localStorage.getItem(storeKey);
+    if (item) {
+      dispatch(toggleUnsavedModal(true));
+    } else {
+      navigate(-1);
+    }
   };
 
   return (
     <HeaderWrap>
       <Container>
         <Main>
-          <Logo />
-          <p>Create Post</p>
+          <div className="title-logo">
+            <Logo />
+            <p>Create Post</p>
+          </div>
           <div className="btn-wrap">
-            <button className="btn">Edit</button>
-            <button className="btn">Preview</button>
+            <button className="btn" onClick={() => onMode('edit')}>
+              Edit
+            </button>
+            <button className="btn" onClick={() => onMode('preview')}>
+              Preview
+            </button>
           </div>
         </Main>
       </Container>
-      <Cancel style={{ position: 'absolute' }}>
+      <Cancel>
         <button className="btn" onClick={onClose}>
           <IoCloseSharp />
         </button>
@@ -50,10 +63,16 @@ const HeaderWrap = styled.div`
 const Main = styled.div`
   display: flex;
   align-items: center;
+  width: 70%;
+  justify-content: space-between;
 
-  p {
-    margin-left: 20px;
-    width: 53%;
+  .title-logo {
+    display: flex;
+    align-items: center;
+
+    a {
+      margin-right: 20px;
+    }
   }
 
   .btn-wrap {

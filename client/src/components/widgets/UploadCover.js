@@ -64,7 +64,9 @@ const UploadCover = ({ coverImg, setCoverImg }) => {
                 pos="bottom"
                 content={'Use a ratio of 100:42 for best results.'}
               >
-                <button onClick={onImageUpload}>Add a cover image</button>
+                <button className="btn-clear" onClick={onImageUpload}>
+                  Add a cover image
+                </button>
               </Tooltip>
             )}
 
@@ -72,8 +74,12 @@ const UploadCover = ({ coverImg, setCoverImg }) => {
               <ImageItem>
                 <img src={coverImg} alt="Post Cover" />
                 <div className="image-item__btn-wrapper">
-                  <button onClick={onImageUpdate}>Change</button>
-                  <button onClick={onRemove}>Remove</button>
+                  <button className="btn-clear" onClick={onImageUpdate}>
+                    Change
+                  </button>
+                  <button className="btn-danger" onClick={onRemove}>
+                    Remove
+                  </button>
                 </div>
               </ImageItem>
             )}
@@ -84,7 +90,9 @@ const UploadCover = ({ coverImg, setCoverImg }) => {
   );
 };
 
-const UploadCoverWrap = styled.div``;
+const UploadCoverWrap = styled.div`
+  margin-bottom: 20px;
+`;
 const ImageItem = styled.div`
   display: flex;
   align-items: center;

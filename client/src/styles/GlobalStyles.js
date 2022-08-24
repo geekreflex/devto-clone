@@ -62,4 +62,29 @@ a {
     }
   }
 
+  .btn-clear {
+    padding: 8px 14px;
+    border: 2px solid ${(props) => props.theme.borderColor};
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    color: ${(props) => props.theme.textColor2};
+    font-size: 16px;
+    border-radius: 6px;
+  }
+
+  .btn-danger {
+    padding: 8px 14px;
+    border: 2px solid transparent;
+    background-color: transparent;
+    color: ${(props) => props.theme.danger};
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+
+    :hover {
+      background-color: ${(props) => props.theme.borderColor}50;
+    }
+  }
+
 `;
