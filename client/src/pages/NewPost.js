@@ -117,6 +117,7 @@ const Inner = styled.div`
 const ContentArea = styled.div`
   flex: 1;
   background-color: ${(props) => props.theme.primary};
+  box-shadow: ${(props) => props.theme.cardShadow};
   border-radius: 6px;
   overflow-y: auto;
   height: 100%;

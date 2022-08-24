@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const PostTagList = ({ tags }) => {
+const PostTagList = ({ tags, size }) => {
   return (
-    <PostTags>
+    <PostTags size={size}>
       {tags.map((tag) => (
         <Link key={tag._id} to="#">
           #{tag.alias}
@@ -19,7 +19,7 @@ const PostTags = styled.div`
   margin-bottom: 10px;
 
   a {
-    font-size: 13px;
+    font-size: ${(props) => `${props.size}px` || '14px'};
     color: ${(props) => props.theme.textColor3};
     padding: 3px 5px;
     border: 1px solid transparent;
