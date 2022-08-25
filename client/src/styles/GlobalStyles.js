@@ -20,6 +20,7 @@ body {
 
 a {
   text-decoration: none;
+  color: ${(props) => props.theme.brandColor3}
 }
 
 .devto-icon {

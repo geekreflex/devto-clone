@@ -19,10 +19,16 @@ const getUserProfile = expressAsyncHandler(async (req, res) => {
 
 const getPublicProfile = expressAsyncHandler(async (req, res) => {
   const { username } = req.params;
-  User.find({ username }, (err, user) => {
+  User.findOne({ username }, (err, user) => {
     if (err) {
       return res.status(400).json({
         message: 'Error occured',
+      });
+    }
+
+    if (!user) {
+      return res.status(400).json({
+        message: 'User not found',
       });
     }
 

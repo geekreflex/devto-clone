@@ -50,7 +50,7 @@ const NavLinks = () => {
                 <Link to="#">Reading list</Link>
               </li>
               <li>
-                <Link to="#">Settings</Link>
+                <Link to="settings">Settings</Link>
               </li>
               <li>
                 <Link to="signout_confirm">Sign Out</Link>

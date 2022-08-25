@@ -11,8 +11,11 @@ import { ProtectedRoute, PublicRoute } from './helpers/authRoute';
 import Enter from './pages/Enter';
 import Home from './pages/Home';
 import NewPost from './pages/NewPost';
-import Profile from './pages/Profile';
+import Settings from './pages/Settings';
 import SignoutConfirm from './pages/SignoutConfirm';
+import DynamicProfile from './pages/DynamicProfile';
+import Customization from './pages/Customization';
+import Profile from './pages/Profile';
 
 function App() {
   const location = useLocation();
@@ -43,7 +46,6 @@ function App() {
       <PageWrap>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/:username" element={<Profile />} />
           <Route
             path="enter"
             element={
@@ -68,6 +70,19 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="settings"
+            element={
+              <ProtectedRoute auth={isAuth}>
+                <Settings />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Profile />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="customization" index element={<Customization />} />
+          </Route>
+          <Route path="/:username" element={<DynamicProfile />} />
           <Route path="*" element={'Not found'} />
         </Routes>
       </PageWrap>

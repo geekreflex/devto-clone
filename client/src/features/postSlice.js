@@ -20,7 +20,6 @@ export const getTagsAsync = createAsyncThunk(
 
       const { data } = await axios.get(`${BASE_URL}/tags`, config);
 
-      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -106,7 +105,6 @@ const postSlice = createSlice({
     },
     [createPostAsync.rejected]: (state, action) => {
       state.status = 'idle';
-      console.log(action.payload);
     },
 
     [getPostsAsync.pending]: (state) => {
