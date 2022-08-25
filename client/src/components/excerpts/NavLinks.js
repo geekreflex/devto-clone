@@ -147,7 +147,7 @@ const Dropdown = styled.div`
   border: 1px solid ${(props) => props.theme.borderColor};
   border-radius: 5px;
   padding: 8px;
-  box-shadow: ${(props) => props.theme.shadow};
+  box-shadow: ${(props) => props.theme.shadow1};
   display: ${(props) => (props.visible ? 'block' : 'none')};
 
   ul,
@@ -162,7 +162,7 @@ const Dropdown = styled.div`
     color: ${(props) => props.theme.textColor2};
 
     :hover {
-      background-color: ${(props) => props.theme.brandColor};
+      background-color: ${(props) => props.theme.brandColor}50;
       border-radius: 5px;
       text-decoration: underline;
     }
