@@ -13,12 +13,13 @@ import axios from 'axios';
 
 const Profile = () => {
   const { username } = useParams();
+  const me = useSelector((state) => state.user.user);
   const [user, setUser] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     getUserProfile();
-  }, []);
+  }, [username]);
 
   const getUserProfile = async () => {
     const { data } = await axios.get(`${BASE_URL}/users/${username}`);
@@ -36,12 +37,20 @@ const Profile = () => {
               <img src={user?.avatar} />
             </div>
             <div className="card-top">
-              <ButtonFill>
-                <button>Follow</button>
-              </ButtonFill>
-              <button className="btn more-btn">
-                <IoEllipsisHorizontalSharp />
-              </button>
+              {me?.username === user?.username ? (
+                <ButtonFill>
+                  <button>Edit profile</button>
+                </ButtonFill>
+              ) : (
+                <>
+                  <ButtonFill>
+                    <button>Follow</button>
+                  </ButtonFill>
+                  <button className="btn more-btn">
+                    <IoEllipsisHorizontalSharp />
+                  </button>
+                </>
+              )}
             </div>
             <div className="card-user-data">
               <h2>{user?.name}</h2>

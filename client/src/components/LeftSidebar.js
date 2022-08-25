@@ -20,117 +20,144 @@ import {
   PrivacyImg,
   TermsImg,
 } from '../utils/images';
+import { ButtonClear, Button } from '../styles/DefaultStyles';
 
 const LeftSidebar = () => {
   const { user } = useSelector((state) => state.user);
+  const { isAuth } = useSelector((state) => state.auth);
   return (
-    <LeftWrap>
-      <section className="main-links">
-        <Link to="#">
-          <span>
-            <HomeIcon />
-          </span>
-          Home
-        </Link>
-        <Link to="#" className="readlist">
-          <span>
-            <ReadListIcon />
-          </span>
-          Reading List
-          {user?.readingList.length > 0 && (
-            <span className="total-readlist">{user?.readingList?.length}</span>
-          )}
-        </Link>
-        <Link to="#">
-          <span>
-            <ListIcon />
-          </span>
-          Listings
-        </Link>
-        <Link to="#">
-          <span>
-            <PodcastIcon />
-          </span>
-          Podcasts
-        </Link>
-        <Link to="#">
-          <span>
-            <VideoIcon />
-          </span>
-          Videos
-        </Link>
-        <Link to="#">
-          <span>
-            <TagIcon />
-          </span>
-          Tags
-        </Link>
-        <Link to="#">
-          <span>
-            <FaqIcon />
-          </span>
-          FAQ
-        </Link>
-        <Link to="#">
-          <span>
-            <ShopIcon />
-          </span>
-          Forem Shop
-        </Link>
-        <Link to="#">
-          <span>
-            <LoveIcon />
-          </span>
-          Sponsors
-        </Link>
-        <Link to="#">
-          <span>
-            <img src={DevRainbow} />
-          </span>
-          About
-        </Link>
-        <Link to="#">
-          <span>
-            <ContactIcon />
-          </span>
-          Contact
-        </Link>
-        <Link to="#">
-          <span>
-            <img src={GuidesImg} />
-          </span>
-          Guides
-        </Link>
-        <Link to="#">
-          <span>
-            <img src={CompareImg} />
-          </span>
-          Software comparisons
-        </Link>
-      </section>
+    <>
+      <LeftWrap>
+        {!isAuth && (
+          <div className="auth__about">
+            <h3>
+              <Link to="/">DEV Community</Link> is a community of 898,804
+              amazing developers
+            </h3>
+            <p>
+              We're a place where coders share, stay up-to-date and grow their
+              careers.
+            </p>
+            <div className="btn-wrap">
+              <Button>
+                <Link to="enter?state=new-user">Create account</Link>
+              </Button>
+              <ButtonClear>
+                <Link to="enter">Log in</Link>
+              </ButtonClear>
+            </div>
+          </div>
+        )}
 
-      <section>
-        <h3>Other</h3>
-        <Link to="#">
-          <span>
-            <img src={CocImg} />
-          </span>
-          Code of Conduct
-        </Link>
-        <Link to="#">
-          <span>
-            <img src={PrivacyImg} />
-          </span>
-          Privacy Policy
-        </Link>
-        <Link to="#">
-          <span>
-            <img src={TermsImg} />
-          </span>
-          Terms of use
-        </Link>
-      </section>
-    </LeftWrap>
+        <section className="main-links">
+          <Link to="#">
+            <span>
+              <HomeIcon />
+            </span>
+            Home
+          </Link>
+          <Link to="#" className="readlist">
+            <span>
+              <ReadListIcon />
+            </span>
+            Reading List
+            {user?.readingList.length > 0 && (
+              <span className="total-readlist">
+                {user?.readingList?.length}
+              </span>
+            )}
+          </Link>
+          <Link to="#">
+            <span>
+              <ListIcon />
+            </span>
+            Listings
+          </Link>
+          <Link to="#">
+            <span>
+              <PodcastIcon />
+            </span>
+            Podcasts
+          </Link>
+          <Link to="#">
+            <span>
+              <VideoIcon />
+            </span>
+            Videos
+          </Link>
+          <Link to="#">
+            <span>
+              <TagIcon />
+            </span>
+            Tags
+          </Link>
+          <Link to="#">
+            <span>
+              <FaqIcon />
+            </span>
+            FAQ
+          </Link>
+          <Link to="#">
+            <span>
+              <ShopIcon />
+            </span>
+            Forem Shop
+          </Link>
+          <Link to="#">
+            <span>
+              <LoveIcon />
+            </span>
+            Sponsors
+          </Link>
+          <Link to="#">
+            <span>
+              <img src={DevRainbow} />
+            </span>
+            About
+          </Link>
+          <Link to="#">
+            <span>
+              <ContactIcon />
+            </span>
+            Contact
+          </Link>
+          <Link to="#">
+            <span>
+              <img src={GuidesImg} />
+            </span>
+            Guides
+          </Link>
+          <Link to="#">
+            <span>
+              <img src={CompareImg} />
+            </span>
+            Software comparisons
+          </Link>
+        </section>
+
+        <section>
+          <h3>Other</h3>
+          <Link to="#">
+            <span>
+              <img src={CocImg} />
+            </span>
+            Code of Conduct
+          </Link>
+          <Link to="#">
+            <span>
+              <img src={PrivacyImg} />
+            </span>
+            Privacy Policy
+          </Link>
+          <Link to="#">
+            <span>
+              <img src={TermsImg} />
+            </span>
+            Terms of use
+          </Link>
+        </section>
+      </LeftWrap>
+    </>
   );
 };
 
@@ -152,6 +179,38 @@ const LeftWrap = styled.div`
     }
   }
 
+  .auth__about {
+    background-color: #fafafa;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: ${(props) => props.theme.cardShadow};
+
+    h3 {
+      margin-bottom: 20px;
+      line-height: 1.4;
+      color: ${(props) => props.theme.textColor2};
+
+      a {
+        color: ${(props) => props.theme.brandColor};
+      }
+    }
+
+    p {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .btn-wrap {
+      display: flex;
+      flex-direction: column;
+
+      a {
+        display: block;
+        margin-bottom: 5px;
+      }
+    }
+  }
+
   section {
     width: 100%;
     margin-bottom: 20px;
@@ -161,27 +220,28 @@ const LeftWrap = styled.div`
       font-size: 18px;
       font-weight: 600;
     }
-  }
 
-  a {
-    width: 100%;
-    display: flex;
-    padding: 8px 4px;
-    color: ${(props) => props.theme.textColor2};
-
-    span {
+    a {
+      width: 100%;
       display: flex;
-      margin-right: 10px;
+      padding: 8px 4px;
+      color: ${(props) => props.theme.textColor2};
 
-      img {
-        width: 24px;
+      span {
+        display: flex;
+        margin-right: 10px;
+
+        img {
+          width: 24px;
+        }
       }
-    }
 
-    :hover {
-      background-color: ${(props) => props.theme.brandColor}30;
-      border-radius: 5px;
-      text-decoration: underline;
+      :hover {
+        background-color: ${(props) => props.theme.brandColor}30;
+        color: ${(props) => props.theme.brandColor3};
+        border-radius: 5px;
+        text-decoration: underline;
+      }
     }
   }
 `;

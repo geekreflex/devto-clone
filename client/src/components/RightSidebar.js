@@ -17,6 +17,7 @@ const RightWrap = styled.div`
     margin-bottom: 20px;
     padding: 20px;
     border-radius: 6px;
+    box-shadow: ${(props) => props.theme.cardShadow};
   }
 `;
 

@@ -16,7 +16,7 @@ const NavLinks = () => {
         <Link to="new">Create Post</Link>
       </Button>
       <Link to="#" className="notification">
-        <div className="notification-total">30</div>
+        <div className="notification-total">3</div>
         <NotificationIcon />
       </Link>
       <UserMenu>
@@ -83,16 +83,16 @@ const NavLinksWrap = styled.div`
 
   .notification-total {
     position: absolute;
-    background-color: ${(props) => props.theme.danger};
+    background-color: ${(props) => props.theme.dangerLight};
     top: -5px;
-    right: -5px;
+    right: 0px;
     font-size: 12px;
     color: #ffffff;
-    padding: 5px;
-    border-radius: 5px;
+    padding: 4px;
+    border-radius: 8px;
     display: flex;
-    box-shadow: ${(props) => props.theme.shadow1};
     line-height: 1.1;
+    border: 2px solid ${(props) => props.theme.primary};
   }
 `;
 
