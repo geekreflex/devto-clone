@@ -7,6 +7,7 @@ const {
   deletePost,
   getOnePost,
   getUserPosts,
+  addPostToReadingList,
 } = require('../controllers/post.controller');
 const { protect } = require('../middlewares/auth.middleware');
 const router = express.Router();

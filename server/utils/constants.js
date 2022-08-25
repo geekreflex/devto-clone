@@ -1,7 +1,5 @@
 const REDIRECT_URL =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:3000'
-    : 'https://clone-devto.herokuapp.com';
+  process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : '/';
 
 const TWITTER_CLIENT_ID =
   process.env.NODE_ENV === 'development'
