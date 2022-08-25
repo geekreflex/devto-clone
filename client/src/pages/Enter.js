@@ -43,9 +43,7 @@ const Enter = () => {
   );
 };
 
-const EnterWrap = styled.div`
-  margin-top: 80px;
-`;
+const EnterWrap = styled.div``;
 
 const Inner = styled.div`
   display: flex;

@@ -117,9 +117,10 @@ const CardWrap = styled.div`
   border-radius: 6px;
   cursor: pointer;
   overflow: hidden;
-  box-shadow: ${(props) => (props.focus ? 'none' : props.theme.cardShadow)};
-  border: 2px solid
-    ${(props) => (props.focus ? props.theme.brandColor3 : props.theme.primary)};
+  box-shadow: ${(props) =>
+    props.focus
+      ? `0 0 0 2px ${props.theme.brandColor3}`
+      : props.theme.cardShadow};
 `;
 
 const CardImg = styled.div`

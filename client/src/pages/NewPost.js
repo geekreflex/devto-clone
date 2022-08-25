@@ -56,8 +56,8 @@ const NewPost = () => {
 
   return (
     <>
+      <NewPostHeader onMode={onMode} storeKey={storeKey} />
       <NewPostWrap>
-        <NewPostHeader onMode={onMode} storeKey={storeKey} />
         <Container>
           <Main>
             <Inner>
@@ -105,7 +105,7 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 50px;
-  height: calc(100vh - 56px);
+  height: calc(100vh - 76px);
 `;
 
 const Inner = styled.div`

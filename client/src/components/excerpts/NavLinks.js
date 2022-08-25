@@ -35,7 +35,7 @@ const NavLinks = () => {
           <Dropdown visible={visible}>
             <ul>
               <li id="user-info">
-                <Link to="#">
+                <Link to={`/${user?.username}`}>
                   <span>{user?.name}</span>
                   <span id="username">@{user?.username}</span>
                 </Link>

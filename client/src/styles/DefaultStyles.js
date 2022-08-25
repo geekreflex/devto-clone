@@ -11,7 +11,6 @@ export const Button = styled.div`
   button,
   a {
     font-size: 16px;
-    border: 1px solid ${(props) => props.theme.brandColor3};
     padding: 8px 16px;
     border-radius: 6px;
     color: ${(props) => props.theme.brandColor3};
@@ -20,6 +19,7 @@ export const Button = styled.div`
     width: 100%;
     line-height: 1.5;
     transition: all 300ms;
+    border: 1px solid ${(props) => props.theme.brandColor3};
 
     :hover {
       text-decoration: underline;
@@ -49,9 +49,11 @@ export const ButtonFill = styled(Button)`
   a {
     background-color: ${(props) => props.theme.brandColor};
     color: ${(props) => props.theme.brandTextColor};
+    border: none;
+
     :hover {
       text-decoration: none;
-      background-color: ${(props) => props.theme.brandColor3};
+      background-color: ${(props) => props.theme.brandColor1};
     }
   }
 `;

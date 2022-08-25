@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import LeftSidebar from '../components/LeftSidebar';
 import PostList from '../components/PostList';
+import RightSidebar from '../components/RightSidebar';
 import { Container } from '../styles/DefaultStyles';
 
 const Home = () => {
@@ -15,16 +16,16 @@ const Home = () => {
           <section className="center">
             <PostList />
           </section>
-          <section className="right"></section>
+          <section className="right">
+            <RightSidebar />
+          </section>
         </Layout>
       </Container>
     </HomeWrap>
   );
 };
 
-const HomeWrap = styled.div`
-  margin-top: 80px;
-`;
+const HomeWrap = styled.div``;
 
 const Layout = styled.div`
   display: flex;

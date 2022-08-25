@@ -3,7 +3,7 @@ import React from 'react';
 const BookmarkIcon2 = () => {
   return (
     <svg
-      class="devto-icon"
+      className="devto-icon"
       aria-hidden="true"
       focusable="false"
       width="24"

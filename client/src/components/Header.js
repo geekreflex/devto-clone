@@ -35,6 +35,7 @@ const HeaderWrap = styled.div`
   top: 0;
   left: 0;
   box-shadow: ${(props) => props.theme.headerShadow};
+  z-index: 99;
 `;
 
 const HeaderInner = styled.div`

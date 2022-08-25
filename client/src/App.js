@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, generatePath } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -10,6 +10,7 @@ import { ProtectedRoute, PublicRoute } from './helpers/authRoute';
 import Enter from './pages/Enter';
 import Home from './pages/Home';
 import NewPost from './pages/NewPost';
+import Profile from './pages/Profile';
 import SignoutConfirm from './pages/SignoutConfirm';
 
 function App() {
@@ -42,6 +43,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
+            path="/:username"
+            element={
+              <ProtectedRoute auth={isAuth}>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="enter"
             element={
               <PublicRoute auth={isAuth}>
@@ -65,6 +74,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="*" element={'Not found'} />
         </Routes>
       </PageWrap>
       <Footer />
@@ -73,7 +83,8 @@ function App() {
 }
 
 const PageWrap = styled.div`
-  /* margin-top: 80px; */
+  margin-top: 56px;
+  padding-top: 20px;
 `;
 
 export default App;
