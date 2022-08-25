@@ -7,7 +7,8 @@ const PostTagList = ({ tags, size }) => {
     <PostTags size={size}>
       {tags.map((tag) => (
         <Link key={tag._id} to="#">
-          #{tag.alias}
+          <span style={{ color: tag.color, opacity: 0.5 }}>#</span>
+          {tag.alias}
         </Link>
       ))}
     </PostTags>
@@ -19,7 +20,7 @@ const PostTags = styled.div`
   margin-bottom: 10px;
 
   a {
-    font-size: ${(props) => `${props.size}px` || '14px'};
+    font-size: 13px;
     color: ${(props) => props.theme.textColor3};
     padding: 3px 5px;
     border: 1px solid transparent;

@@ -179,7 +179,7 @@ const LeftWrap = styled.div`
     }
 
     :hover {
-      background-color: ${(props) => props.theme.brandColor}50;
+      background-color: ${(props) => props.theme.brandColor}30;
       border-radius: 5px;
       text-decoration: underline;
     }

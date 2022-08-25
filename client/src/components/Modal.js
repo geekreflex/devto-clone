@@ -31,6 +31,7 @@ const ModalWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
 `;
 
 const ModalOverlay = styled.div`
@@ -43,8 +44,9 @@ const ModalMain = styled.div`
   position: relative;
   background-color: ${(props) => props.theme.primary};
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
+  border-radius: 15px;
   border: 1px solid ${(props) => props.theme.borderColor};
+  overflow: hidden;
 `;
 const ModalHeader = styled.div`
   position: relative;

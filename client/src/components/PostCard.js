@@ -8,10 +8,14 @@ import PostTagList from './widgets/PostTagList';
 import { useDispatch, useSelector } from 'react-redux';
 import { addPostToReadingListAsync } from '../features/userSlice';
 import BookmarkIcon2 from '../icons/BookmarkIcon2';
+import AuthorPreview from './widgets/AuthorPreview';
+import { toggleLoginConModal } from '../features/actionSlice';
 
 const PostCard = ({ post, index }) => {
   const [focus, setFocus] = useState(false);
+  const [preview, setPreview] = useState('');
   const { user } = useSelector((state) => state.user);
+  const { isAuth } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const onPostClick = () => {
     setFocus(false);
@@ -20,7 +24,14 @@ const PostCard = ({ post, index }) => {
 
   const onBookmark = (e) => {
     e.stopPropagation();
-    if (user.readingList.includes(post._id)) {
+
+    if (!isAuth) {
+      console.log('You not logged in');
+      dispatch(toggleLoginConModal(true));
+      return;
+    }
+
+    if (user?.readingList.includes(post._id)) {
       dispatch(
         addPostToReadingListAsync({ postId: post._id, action: 'remove' })
       );
@@ -50,11 +61,18 @@ const PostCard = ({ post, index }) => {
       )}
       <CardBody>
         <UserInfo>
-          <div className="avatar">
+          <Link to={`/${post.author.username}`} className="avatar">
             <img src={post.author.avatar} alt={post.author.name} />
-          </div>
+          </Link>
           <div className="author-time">
-            <span className="author-name">{post.author.name}</span>
+            <span
+              className="author-name"
+              onMouseEnter={() => setPreview(true)}
+              onMouseLeave={() => setPreview(false)}
+            >
+              {post.author.name}
+              {preview && <AuthorPreview author={post?.author} />}
+            </span>
             <span className="date-time">Aug 22 (16 hours ago)</span>
           </div>
         </UserInfo>
@@ -116,7 +134,6 @@ const CardWrap = styled.div`
   margin-bottom: 10px;
   border-radius: 6px;
   cursor: pointer;
-  overflow: hidden;
   box-shadow: ${(props) =>
     props.focus
       ? `0 0 0 2px ${props.theme.brandColor3}`
@@ -137,7 +154,7 @@ const CardImg = styled.div`
 const CardBody = styled.div`
   padding: 20px;
   background-color: ${(props) => props.theme.primary};
-  overflow: hidden;
+  border-radius: 6px;
 `;
 
 const UserInfo = styled.div`
@@ -162,6 +179,7 @@ const UserInfo = styled.div`
     margin-left: 10px;
     align-items: flex-start;
     justify-content: flex-start;
+    position: relative;
 
     .author-name {
       font-size: 14px;

@@ -45,7 +45,7 @@ a {
     font-size: 16px;
     margin-left: 5px;
     border-radius: 5px;
-    color: ${(props) => props.theme.textColor1};
+    color: ${(props) => props.theme.textColor2};
     background-color: transparent;
     cursor: pointer;
     display: flex;

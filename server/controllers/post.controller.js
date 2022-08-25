@@ -7,7 +7,7 @@ const getPosts = expressAsyncHandler(async (req, res) => {
   Post.find()
     .sort({ createdAt: -1 })
     .populate('tags')
-    .populate('author', 'username name avatar location bio, email')
+    .populate('author', 'username name avatar location bio email brandColor1')
     .exec((err, posts) => {
       if (err) {
         return res.status(400).json({

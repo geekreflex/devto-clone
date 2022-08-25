@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import { getPostsAsync, getTagsAsync } from './features/postSlice';
 import { getUserProfileAsync } from './features/userSlice';
+import GlobalComp from './GlobalComp';
 import { ProtectedRoute, PublicRoute } from './helpers/authRoute';
 import Enter from './pages/Enter';
 import Home from './pages/Home';
@@ -42,14 +43,7 @@ function App() {
       <PageWrap>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/:username"
-            element={
-              <ProtectedRoute auth={isAuth}>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/:username" element={<Profile />} />
           <Route
             path="enter"
             element={
@@ -77,6 +71,7 @@ function App() {
           <Route path="*" element={'Not found'} />
         </Routes>
       </PageWrap>
+      <GlobalComp />
       <Footer />
     </div>
   );

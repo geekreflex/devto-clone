@@ -17,6 +17,24 @@ const getUserProfile = expressAsyncHandler(async (req, res) => {
   });
 });
 
+const getPublicProfile = expressAsyncHandler(async (req, res) => {
+  const { username } = req.params;
+  User.find({ username }, (err, user) => {
+    if (err) {
+      return res.status(400).json({
+        message: 'Error occured',
+      });
+    }
+
+    res.status(200).json({
+      message: 'successfully retreived user data',
+      user,
+    });
+  }).select(
+    'name username avatar email createdAt bio location website brandColor1 work'
+  );
+});
+
 const checkUsername = expressAsyncHandler(async (req, res) => {
   const { username } = req.body;
 
@@ -82,4 +100,5 @@ module.exports = {
   getUserProfile,
   checkUsername,
   addPostToReadingList,
+  getPublicProfile,
 };

@@ -1,27 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoEllipsisHorizontalSharp, IoLogoGithub } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { ButtonFill, Container } from '../styles/DefaultStyles';
-import { TiLocation } from 'react-icons/ti';
 import CakeIcon from '../icons/CakeIcon';
 import moment from 'moment';
 import ExternalLinkIcon from '../icons/ExternalLinkIcon';
 import LocationIcon from '../icons/LocationIcon';
+import { BASE_URL } from '../utils/constants';
+import axios from 'axios';
 
 const Profile = () => {
   const { username } = useParams();
-  const { user } = useSelector((state) => state.user);
+  const [user, setUser] = useState([]);
 
-  const getUserProfile = () => {};
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    getUserProfile();
+  }, []);
+
+  const getUserProfile = async () => {
+    const { data } = await axios.get(`${BASE_URL}/users/${username}`);
+    console.log(data);
+    setUser(data.user[0]);
+  };
 
   return (
-    <ProfileWrap>
+    <ProfileWrap color={user?.brandColor1}>
       <div className="backdrop"></div>
       <Container>
         <Inner>
-          <Main>
+          <Main color={user?.brandColor1}>
             <div className="img-wrap">
               <img src={user?.avatar} />
             </div>
@@ -40,12 +50,14 @@ const Profile = () => {
                 https://www.reddit.com/r/wooooosh
               </p>
               <div className="card-info">
-                <div className="card-info__item">
-                  <span>
-                    <LocationIcon />
-                  </span>
-                  {user?.location}
-                </div>
+                {user?.location && (
+                  <div className="card-info__item">
+                    <span>
+                      <LocationIcon />
+                    </span>
+                    {user?.location}
+                  </div>
+                )}
                 <div className="card-info__item">
                   <span>
                     <CakeIcon />
@@ -90,7 +102,7 @@ const ProfileWrap = styled.div`
     width: 100%;
     height: 180px;
     top: 0;
-    background-color: navy;
+    background-color: ${(props) => props.color};
     z-index: -1;
   }
 `;
@@ -114,7 +126,7 @@ const Main = styled.div`
     height: 130px;
     transform: translateX(-50%);
     border-radius: 50%;
-    background-color: navy;
+    background-color: ${(props) => props.color};
     display: flex;
     justify-content: center;
     align-items: center;
