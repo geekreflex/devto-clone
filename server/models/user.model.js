@@ -66,6 +66,7 @@ const userSchema = mongoose.Schema(
     },
     brandColor2: {
       type: String,
+      default: '#ffffff',
       required: true,
     },
     mode: {
