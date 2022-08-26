@@ -9,6 +9,7 @@ const {
   TWITTER_CLIENT_ID,
 } = require('../utils/constants');
 const { generateUsername } = require('../utils/generateUsername');
+const { generateColor } = require('../utils/generateColor');
 
 /**
  * Github login
@@ -55,6 +56,7 @@ const githubAuth = expressAsyncHandler(async (req, res) => {
           password,
           loginType: 'github',
           username: generateUsername(name),
+          brandColor1: generateColor(),
         });
 
         newUser.save((err, user) => {
@@ -109,6 +111,7 @@ const googleAuth = expressAsyncHandler(async (req, res) => {
             avatar: picture,
             loginType: 'google',
             username: generateUsername(name),
+            brandColor1: generateColor(),
           });
 
           newUser.save((err, user) => {
