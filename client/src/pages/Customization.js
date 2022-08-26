@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BoxWrap, ButtonFill } from '../styles/DefaultStyles';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { updateProfileAsync } from '../features/userSlice';
 
 const Customization = () => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const [themeMode, setThemeMode] = useState();
 
@@ -23,7 +25,7 @@ const Customization = () => {
     const payload = {
       mode: themeMode,
     };
-    console.log(payload);
+    dispatch(updateProfileAsync(payload));
   };
 
   return (
@@ -112,6 +114,7 @@ const Theme = styled.label`
     .theme-prev {
       width: 100%;
       height: 80px;
+      border-radius: 8px;
       border: 1px solid ${(props) => props.theme.borderColor};
     }
   }

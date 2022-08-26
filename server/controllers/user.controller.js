@@ -4,8 +4,6 @@ const expressAsyncHandler = require('express-async-handler');
 const updateUserProfile = expressAsyncHandler(async (req, res) => {
   const userId = req.user.id;
 
-  console.log(req.body);
-
   User.findOneAndUpdate(
     { user: userId },
     req.body,

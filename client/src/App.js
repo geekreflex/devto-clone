@@ -16,6 +16,8 @@ import SignoutConfirm from './pages/SignoutConfirm';
 import DynamicProfile from './pages/DynamicProfile';
 import Customization from './pages/Customization';
 import Profile from './pages/Profile';
+import Search from './pages/Search';
+import Post from './pages/Post';
 
 function App() {
   const location = useLocation();
@@ -82,7 +84,9 @@ function App() {
             <Route path="profile" element={<Profile />} />
             <Route path="customization" index element={<Customization />} />
           </Route>
-          <Route path="/:username" element={<DynamicProfile />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/:username/:postSlug" element={<Post />} />
+          <Route path="/:username" element={<DynamicProfile />}></Route>
           <Route path="*" element={'Not found'} />
         </Routes>
       </PageWrap>

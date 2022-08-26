@@ -102,6 +102,8 @@ const postSlice = createSlice({
     },
     [createPostAsync.fulfilled]: (state, action) => {
       state.status = 'idle';
+      let post = action.payload.payload;
+      window.location.href = `/${post.author.username}/${post.slug}`;
     },
     [createPostAsync.rejected]: (state, action) => {
       state.status = 'idle';

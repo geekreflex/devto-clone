@@ -10,6 +10,7 @@ import { addPostToReadingListAsync } from '../features/userSlice';
 import BookmarkIcon2 from '../icons/BookmarkIcon2';
 import AuthorPreview from './widgets/AuthorPreview';
 import { toggleLoginConModal } from '../features/actionSlice';
+import moment from 'moment';
 
 const PostCard = ({ post, index }) => {
   const [focus, setFocus] = useState(false);
@@ -73,12 +74,15 @@ const PostCard = ({ post, index }) => {
               {post.author.name}
               {preview && <AuthorPreview author={post?.author} />}
             </span>
-            <span className="date-time">Aug 22 (16 hours ago)</span>
+            <span className="date-time">
+              {moment(post?.createdAt).format('MMM D')} (
+              {moment(post?.createdAt).fromNow()})
+            </span>
           </div>
         </UserInfo>
         <PostInfo>
           <Link
-            to="#"
+            to={`/${post.author.username}/${post.slug}`}
             className={index === 0 ? 'big-post-title post-title' : 'post-title'}
           >
             <h1>{post.title}</h1>

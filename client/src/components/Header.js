@@ -5,6 +5,7 @@ import Logo from './excerpts/Logo';
 import AuthLinks from './auth/AuthLinks';
 import { useSelector } from 'react-redux';
 import NavLinks from './excerpts/NavLinks';
+import SearchInput from './SearchInput';
 
 const Header = () => {
   const { isAuth } = useSelector((state) => state.auth);
@@ -15,6 +16,7 @@ const Header = () => {
         <HeaderInner>
           <HeaderLeft>
             <Logo />
+            <SearchInput />
           </HeaderLeft>
           <HeaderRight>
             {!isAuth && <AuthLinks />}

@@ -50,8 +50,7 @@ const NewPost = () => {
       coverImg,
     };
     console.log(payload);
-    // dispatch(createPostAsync(payload));
-    // localStorage.removeItem(storeKey)
+    dispatch(createPostAsync(payload));
   };
 
   return (

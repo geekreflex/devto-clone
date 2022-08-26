@@ -107,6 +107,7 @@ const userSlice = createSlice({
     [getUserProfileAsync.fulfilled]: (state, action) => {
       state.status = 'idle';
       state.user = action.payload.user;
+      localStorage.setItem('auth-user', JSON.stringify(action.payload.user));
     },
     [getUserProfileAsync.rejected]: (state) => {
       state.status = 'idle';
@@ -118,6 +119,7 @@ const userSlice = createSlice({
     [addPostToReadingListAsync.fulfilled]: (state, action) => {
       state.status = 'idle';
       state.user = action.payload.user;
+      localStorage.setItem('auth-user', JSON.stringify(action.payload.user));
     },
 
     [updateProfileAsync.pending]: (state) => {
@@ -126,6 +128,7 @@ const userSlice = createSlice({
     [updateProfileAsync.fulfilled]: (state, action) => {
       state.status = 'idle';
       state.user = action.payload.user;
+      localStorage.setItem('auth-user', JSON.stringify(action.payload.user));
     },
   },
 });

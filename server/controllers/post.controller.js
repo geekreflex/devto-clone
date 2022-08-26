@@ -26,7 +26,7 @@ const createPost = expressAsyncHandler(async (req, res) => {
   const userId = req.user._id;
   const { title, content, coverImg, tags } = req.body;
 
-  const newPost = new Post({
+  let newPost = await Post.create({
     title,
     content,
     coverImg,
@@ -34,19 +34,11 @@ const createPost = expressAsyncHandler(async (req, res) => {
     author: userId,
   });
 
-  newPost.save((err, post) => {
-    if (err) {
-      return res.status(400).json({
-        status: 'failed',
-        message: 'Error occured',
-      });
-    }
-
-    return res.status(200).json({
-      status: 'success',
-      message: 'Post created successfully',
-      payload: post,
-    });
+  newPost = await newPost.populate('author');
+  return res.status(200).json({
+    status: 'success',
+    message: 'Post created successfully',
+    payload: newPost,
   });
 });
 
@@ -62,8 +54,6 @@ const updatePost = expressAsyncHandler(async (req, res) => {
     tags,
     slug: generateSlug(title),
   };
-
-  console.log(updatedPost);
 
   Post.findOneAndUpdate(
     { _id: postId, author: userId },
