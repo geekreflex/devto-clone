@@ -33,7 +33,6 @@ const githubAuth = expressAsyncHandler(async (req, res) => {
     }).then((response) => {
       const { email, name, avatar_url, location, html_url, bio } =
         response.data;
-      console.log(response);
 
       User.findOne({ email }).exec((err, user) => {
         if (err) {
@@ -97,7 +96,6 @@ const googleAuth = expressAsyncHandler(async (req, res) => {
   client
     .verifyIdToken({ idToken, audience: process.env.GOOGLE_CLIENT_ID })
     .then((response) => {
-      console.log(response);
       const { email_verified, name, email, picture } = response.payload;
       if (email_verified) {
         User.findOne({ email }).exec((err, user) => {

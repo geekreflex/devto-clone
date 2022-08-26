@@ -5,7 +5,7 @@ const updateUserProfile = expressAsyncHandler(async (req, res) => {
   const userId = req.user.id;
 
   User.findOneAndUpdate(
-    { user: userId },
+    { _id: userId },
     req.body,
     { new: true },
     (err, user) => {

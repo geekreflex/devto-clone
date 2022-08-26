@@ -21,8 +21,8 @@ const Tooltip = ({ pos, content, children }) => {
 const TippyWrap = styled.div``;
 
 const CustomTippy = styled(Tippy)`
-  background: ${(props) => props.theme.textColor1} !important;
-  color: #222 !important;
+  background: ${(props) => props.theme.textColor2} !important;
+  color: ${(props) => props.theme.secondary} !important;
   padding: 3px !important;
   font-size: 14px !important;
 `;

@@ -18,7 +18,7 @@ export const lightTheme = {
   headerShadow: '0 1px 1px rgba(0, 0, 0, 0.1)',
   cardShadow: '0 0 0 1px rgba(23, 23, 23, 0.1)',
   footerBg: '#e5e5e5',
-  shade1: '#090909',
+  shade1: '#fafafa',
   shade2: '#575757',
   colorHover1: '#090909',
   colorHover2: '#090909',

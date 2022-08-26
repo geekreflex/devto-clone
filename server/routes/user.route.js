@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get('/profile', protect, getUserProfile);
 router.get('/:username', getPublicProfile);
-router.post('/check-username', checkUsername);
+router.post('/check-username', protect, checkUsername);
 router.post('/reading-list', protect, addPostToReadingList);
 router.put('/update', protect, updateUserProfile);
 

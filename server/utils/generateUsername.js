@@ -1,9 +1,8 @@
 const { nanoid } = require('nanoid');
-let id = nanoid(3);
 
 const generateUsername = (name) => {
   let firstName = name.split(' ')[0];
-  return `${firstName}_${id}`.toLowerCase();
+  return `${firstName}_${nanoid(3)}`.toLowerCase();
 };
 
 module.exports = { generateUsername };
