@@ -31,7 +31,9 @@ const githubAuth = expressAsyncHandler(async (req, res) => {
         Authorization: `token ${response.data.access_token}`,
       },
     }).then((response) => {
-      const { email, name, avatar_url, location } = response.data;
+      const { email, name, avatar_url, location, html_url, bio } =
+        response.data;
+      console.log(response);
 
       User.findOne({ email }).exec((err, user) => {
         if (err) {
@@ -42,12 +44,15 @@ const githubAuth = expressAsyncHandler(async (req, res) => {
         }
 
         if (user) {
+          user.githubUrl = html_url;
+          user.save();
           return res
             .cookie('user_access_token', generateToken(user._id))
             .redirect(REDIRECT_URL);
         }
 
         let password = email + process.env.JWT_SECRET;
+
         const newUser = new User({
           name,
           email,
@@ -57,6 +62,8 @@ const githubAuth = expressAsyncHandler(async (req, res) => {
           loginType: 'github',
           username: generateUsername(name),
           brandColor1: generateColor(),
+          bio,
+          githubUrl: html_url,
         });
 
         newUser.save((err, user) => {

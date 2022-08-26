@@ -103,7 +103,6 @@ const userSlice = createSlice({
      */
     [getUserProfileAsync.pending]: (state) => {
       state.status = 'loading';
-      state.user = null;
     },
     [getUserProfileAsync.fulfilled]: (state, action) => {
       state.status = 'idle';
@@ -111,13 +110,20 @@ const userSlice = createSlice({
     },
     [getUserProfileAsync.rejected]: (state) => {
       state.status = 'idle';
-      state.user = null;
     },
 
     [addPostToReadingListAsync.pending]: (state) => {
       state.status = 'loading';
     },
     [addPostToReadingListAsync.fulfilled]: (state, action) => {
+      state.status = 'idle';
+      state.user = action.payload.user;
+    },
+
+    [updateProfileAsync.pending]: (state) => {
+      state.status = 'loading';
+    },
+    [updateProfileAsync.fulfilled]: (state, action) => {
       state.status = 'idle';
       state.user = action.payload.user;
     },

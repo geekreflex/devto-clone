@@ -184,6 +184,7 @@ const LeftWrap = styled.div`
     padding: 20px;
     border-radius: 6px;
     box-shadow: ${(props) => props.theme.cardShadow};
+    margin-bottom: 20px;
 
     h3 {
       margin-bottom: 20px;

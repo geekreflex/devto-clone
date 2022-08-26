@@ -61,7 +61,7 @@ const getPublicProfile = expressAsyncHandler(async (req, res) => {
       user,
     });
   }).select(
-    'name username avatar email createdAt bio location website brandColor1 work'
+    'name username avatar email createdAt bio location website brandColor1 work education githubUrl'
   );
 });
 

@@ -73,6 +73,7 @@ const userSchema = mongoose.Schema(
       required: true,
       default: 'light',
     },
+    githubUrl: { type: String },
     sawOnboarding: { type: Boolean, default: false },
     readingList: [{ type: mongoose.Types.ObjectId, ref: 'Post' }],
     followedTags: [{ type: mongoose.Types.ObjectId, ref: 'Tag' }],

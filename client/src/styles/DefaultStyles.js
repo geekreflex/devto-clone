@@ -124,6 +124,7 @@ export const InputWrap = styled.div`
     font-size: 16px;
     background-color: ${(props) => props.theme.secondary};
     color: ${(props) => props.theme.textColor1};
+    font-family: 'Poppins';
 
     :focus {
       border-color: ${(props) => props.theme.brandColor3};
@@ -139,5 +140,24 @@ export const InputWrap = styled.div`
   textarea {
     height: 65px;
     resize: vertical;
+  }
+`;
+
+export const BoxWrap = styled.div`
+  section {
+    background-color: ${(props) => props.theme.primary};
+    box-shadow: ${(props) => props.theme.cardShadow};
+    padding: 20px 30px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .coding label {
+      margin-bottom: 10px;
+    }
   }
 `;

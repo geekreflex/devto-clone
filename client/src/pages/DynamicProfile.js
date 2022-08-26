@@ -65,10 +65,7 @@ const DynamicProfile = () => {
             </div>
             <div className="card-user-data">
               <h2>{user?.name}</h2>
-              <p>
-                Professional programmer by day, wannabe blogger by night.
-                https://www.reddit.com/r/wooooosh
-              </p>
+              <p>{user.bio || '404 bio not found'}</p>
               <div className="card-info">
                 {user?.location && (
                   <div className="card-info__item">
@@ -84,31 +81,46 @@ const DynamicProfile = () => {
                   </span>
                   Joined on {moment(user?.createdAt).format('MMMM D, YYYY')}
                 </div>
-                <Link to="#" className="card-info__item">
-                  <span>
-                    <ExternalLinkIcon />
-                  </span>
-                  https://website.com
-                </Link>
-                <Link
-                  to="#"
-                  className="card-info__item"
-                  style={{ fontSize: '24px' }}
-                >
-                  <IoLogoGithub />
-                </Link>
+                {user?.website && (
+                  <a
+                    href={user?.website}
+                    target="_blank"
+                    className="card-info__item"
+                  >
+                    <span>
+                      <ExternalLinkIcon />
+                    </span>
+                    {user?.website}
+                  </a>
+                )}
+                {user?.githubUrl && (
+                  <a
+                    href={user?.githubUrl}
+                    target="_blank"
+                    className="card-info__item"
+                    style={{ fontSize: '24px' }}
+                  >
+                    <IoLogoGithub />
+                  </a>
+                )}
               </div>
             </div>
-            <div className="card-more">
-              <div>
-                <p>Education</p>
-                Software
+            {(user?.education || user?.work) && (
+              <div className="card-more">
+                {user?.education && (
+                  <div>
+                    <p>Education</p>
+                    {user?.education}
+                  </div>
+                )}
+                {user?.work && (
+                  <div>
+                    <p>Work</p>
+                    {user?.work}
+                  </div>
+                )}
               </div>
-              <div>
-                <p>Work</p>
-                FANNG
-              </div>
-            </div>
+            )}
           </Main>
         </Inner>
       </Container>
