@@ -14,7 +14,7 @@ const WithTheme = ({ children }) => {
       return darkTheme;
     }
 
-    return darkTheme;
+    return lightTheme;
   };
 
   return <ThemeProvider theme={renderTheme()}>{children}</ThemeProvider>;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { IoEllipsisHorizontalSharp, IoLogoGithub } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { ButtonFill, Container } from '../styles/DefaultStyles';
 import CakeIcon from '../icons/CakeIcon';
@@ -12,6 +12,7 @@ import { BASE_URL } from '../utils/constants';
 import axios from 'axios';
 
 const DynamicProfile = () => {
+  const navigate = useNavigate();
   const { username } = useParams();
   const me = useSelector((state) => state.user.user);
   const [user, setUser] = useState([]);
@@ -47,7 +48,9 @@ const DynamicProfile = () => {
             <div className="card-top">
               {me?.username === user?.username ? (
                 <ButtonFill>
-                  <button>Edit profile</button>
+                  <button onClick={() => navigate('/settings')}>
+                    Edit profile
+                  </button>
                 </ButtonFill>
               ) : (
                 <>
@@ -150,7 +153,7 @@ const Main = styled.div`
     margin-top: -60px;
 
     img {
-      width: 85%;
+      width: 88%;
       border-radius: 50%;
     }
   }

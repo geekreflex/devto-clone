@@ -61,6 +61,38 @@ export const addPostToReadingListAsync = createAsyncThunk(
   }
 );
 
+export const updateProfileAsync = createAsyncThunk(
+  'updateProfileAsync/post',
+  async (payload, thunkAPI) => {
+    try {
+      const config = {
+        withCredentials: true,
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const { data } = await axios.put(
+        `${BASE_URL}/users/update`,
+        payload,
+        config
+      );
+
+      console.log(data);
+
+      return data;
+    } catch (error) {
+      console.log(error.response.data.message);
+      return thunkAPI.rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState,

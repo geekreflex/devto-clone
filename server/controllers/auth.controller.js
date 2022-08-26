@@ -8,6 +8,7 @@ const {
   TWITTER_CLIENT_SECRET,
   TWITTER_CLIENT_ID,
 } = require('../utils/constants');
+const { generateUsername } = require('../utils/generateUsername');
 
 /**
  * Github login
@@ -53,7 +54,7 @@ const githubAuth = expressAsyncHandler(async (req, res) => {
           location,
           password,
           loginType: 'github',
-          username: email,
+          username: generateUsername(name),
         });
 
         newUser.save((err, user) => {
@@ -107,7 +108,7 @@ const googleAuth = expressAsyncHandler(async (req, res) => {
             password,
             avatar: picture,
             loginType: 'google',
-            username: email,
+            username: generateUsername(name),
           });
 
           newUser.save((err, user) => {

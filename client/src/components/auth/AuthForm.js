@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ButtonFill } from '../../styles/DefaultStyles';
+import { ButtonFill, InputWrap, InputGroup } from '../../styles/DefaultStyles';
 
 const AuthForm = ({ loginState }) => {
   const [name, setName] = useState('');
@@ -67,40 +67,6 @@ const AuthForm = ({ loginState }) => {
   );
 };
 
-const InputGroup = styled.div`
-  margin-bottom: 20px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-const InputWrap = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  margin-bottom: 10px;
-
-  label {
-    margin-bottom: 10px;
-  }
-
-  input {
-    width: 100%;
-    height: 42px;
-    border-radius: 8px;
-    border: 1px solid ${(props) => props.theme.borderColor};
-    padding: 10px 15px;
-    outline: none;
-    font-size: 16px;
-    background-color: transparent;
-    color: ${(props) => props.theme.textColor1};
-
-    :focus {
-      border-color: ${(props) => props.theme.brandColor};
-      box-shadow: 0 0 0 1px ${(props) => props.theme.brandColor};
-    }
-  }
-`;
 const FormWrap = styled.form`
   width: 100%;
 `;

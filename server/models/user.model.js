@@ -23,16 +23,16 @@ const userSchema = mongoose.Schema(
     bio: {
       type: String,
     },
-    websiteUrl: {
+    website: {
       type: String,
     },
-    currentlyLearning: {
+    learning: {
       type: String,
     },
-    currentlyHacking: {
+    hacking: {
       type: String,
     },
-    skillsLanguage: {
+    skills: {
       type: String,
     },
     availableFor: {
@@ -59,6 +59,7 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    sawOnboarding: { type: Boolean, default: false },
     readingList: [{ type: mongoose.Types.ObjectId, ref: 'Post' }],
     followedTags: [{ type: mongoose.Types.ObjectId, ref: 'Tag' }],
     followers: [{ type: mongoose.Types.ObjectId, ref: 'User' }],

@@ -1,6 +1,30 @@
 const User = require('../models/user.model');
 const expressAsyncHandler = require('express-async-handler');
 
+const updateUserProfile = expressAsyncHandler(async (req, res) => {
+  const userId = req.user.id;
+
+  console.log(req.body);
+
+  User.findOneAndUpdate(
+    { user: userId },
+    req.body,
+    { new: true },
+    (err, user) => {
+      if (err) {
+        console.log(err);
+        return res.status(400).json({ message: 'Error occured', err });
+      }
+
+      return res.status(200).json({
+        status: 'success',
+        user,
+        message: 'Profile updated successfully',
+      });
+    }
+  );
+});
+
 const getUserProfile = expressAsyncHandler(async (req, res) => {
   const userId = req.user.id;
   User.findById(userId, (err, user) => {
@@ -59,7 +83,7 @@ const checkUsername = expressAsyncHandler(async (req, res) => {
 
 const addPostToReadingList = expressAsyncHandler(async (req, res) => {
   const { postId, action } = req.body;
-  const userId = req.user._id;
+  const userId = req.user.id;
 
   if (action === 'remove') {
     User.findOneAndUpdate(
@@ -107,4 +131,5 @@ module.exports = {
   checkUsername,
   addPostToReadingList,
   getPublicProfile,
+  updateUserProfile,
 };

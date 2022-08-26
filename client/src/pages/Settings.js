@@ -102,6 +102,7 @@ const Inner = styled.div`
 const Main = styled.div`
   h1 {
     font-weight: 600;
+    margin-bottom: 20px;
   }
 `;
 

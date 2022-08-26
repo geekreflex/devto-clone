@@ -96,3 +96,48 @@ export const Cancel = styled.div`
     font-size: 20px !important;
   }
 `;
+
+export const InputGroup = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+export const InputWrap = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  label {
+    margin-bottom: 5px;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    height: 42px;
+    border-radius: 8px;
+    border: 1px solid ${(props) => props.theme.borderColor};
+    padding: 10px 15px;
+    outline: none;
+    font-size: 16px;
+    background-color: ${(props) => props.theme.secondary};
+    color: ${(props) => props.theme.textColor1};
+
+    :focus {
+      border-color: ${(props) => props.theme.brandColor3};
+      box-shadow: 0 0 0 1px ${(props) => props.theme.brandColor3};
+    }
+  }
+
+  p {
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  textarea {
+    height: 65px;
+    resize: vertical;
+  }
+`;
