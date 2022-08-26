@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const { generateColor } = require('../utils/generateColor');
 
 const userSchema = mongoose.Schema(
   {
@@ -59,6 +60,19 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    brandColor1: {
+      type: String,
+      required: true,
+    },
+    brandColor2: {
+      type: String,
+      required: true,
+    },
+    mode: {
+      type: String,
+      required: true,
+      default: 'light',
+    },
     sawOnboarding: { type: Boolean, default: false },
     readingList: [{ type: mongoose.Types.ObjectId, ref: 'Post' }],
     followedTags: [{ type: mongoose.Types.ObjectId, ref: 'Tag' }],
@@ -76,6 +90,8 @@ userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     next();
   }
+
+  this.brandColor1 = generateColor();
 
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);

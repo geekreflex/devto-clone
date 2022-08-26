@@ -3,7 +3,7 @@ let id = nanoid(3);
 
 const generateUsername = (name) => {
   let firstName = name.split(' ')[0];
-  return `${firstName}_${id}`;
+  return `${firstName}_${id}`.toLowerCase();
 };
 
 module.exports = { generateUsername };
