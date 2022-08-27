@@ -13,7 +13,7 @@ export const lightTheme = {
   danger: '#b91c1c',
   dangerLight: '#dc2626',
   shadow: '0 1px 2px rgba(0,0,0,.7)',
-  shadow1: '0 8px 16px rgba(0,0,0,.4)',
+  shadow1: '0 4px 8px rgba(0,0,0,.1)',
   borderColor: '#d6d6d7',
   headerShadow: '0 1px 1px rgba(0, 0, 0, 0.1)',
   cardShadow: '0 0 0 1px rgba(23, 23, 23, 0.1)',
@@ -23,6 +23,7 @@ export const lightTheme = {
   colorHover1: '#090909',
   colorHover2: '#090909',
   bgHover1: 'rgba(59,73,223,0.2)',
+  inputBg: '#ffffff',
 };
 
 export const darkTheme = {
@@ -50,4 +51,5 @@ export const darkTheme = {
   colorHover1: 'rgb(129,140,248)',
   colorHover2: 'rgb(165,180,252)',
   bgHover1: 'rgba(79,70,229,0.2)',
+  inputBg: '#000000',
 };

@@ -3,22 +3,22 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import styled from 'styled-components';
 
-const Tooltip = ({ pos, content, children }) => {
+const Tooltip = ({ pos, content, children, trigger }) => {
   return (
-    <TippyWrap>
-      <CustomTippy
-        className="tippy-wrap"
-        content={content}
-        placement={pos}
-        arrow={false}
-      >
-        {children}
-      </CustomTippy>
-    </TippyWrap>
+    <CustomTippy
+      className="tippy-wrap"
+      content={content}
+      placement={pos}
+      arrow={false}
+      trigger={trigger || 'mouseenter'}
+      animation={'scale'}
+      // delay={300}
+      duration={300}
+    >
+      {children}
+    </CustomTippy>
   );
 };
-
-const TippyWrap = styled.div``;
 
 const CustomTippy = styled(Tippy)`
   background: ${(props) => props.theme.textColor2} !important;

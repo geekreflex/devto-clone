@@ -108,6 +108,7 @@ export const InputWrap = styled.div`
   width: 100%;
   flex-direction: column;
   margin-bottom: 20px;
+  position: relative;
 
   label {
     margin-bottom: 5px;
@@ -122,7 +123,7 @@ export const InputWrap = styled.div`
     padding: 10px 15px;
     outline: none;
     font-size: 16px;
-    background-color: ${(props) => props.theme.secondary};
+    background-color: ${(props) => props.theme.inputBg};
     color: ${(props) => props.theme.textColor1};
     font-family: 'Poppins';
 

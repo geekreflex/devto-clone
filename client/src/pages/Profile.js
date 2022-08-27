@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import MaxValue from '../components/excerpts/MaxValue';
+import ColorPicker from '../components/widgets/ColorPicker';
 import { updateProfileAsync } from '../features/userSlice';
 import {
   BoxWrap,
@@ -13,18 +14,20 @@ import {
 const Profile = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  const [name, setName] = useState(user?.name || '');
-  const [email, setEmail] = useState(user?.email || '');
-  const [username, setUsername] = useState(user?.username || '');
-  const [website, setWebsite] = useState(user?.website || '');
-  const [location, setLocation] = useState(user?.location || '');
-  const [bio, setBio] = useState(user?.bio || '');
-  const [learning, setLearning] = useState(user?.learning || '');
-  const [skills, setSkills] = useState(user?.skills || '');
-  const [hacking, setHacking] = useState(user?.hacking || '');
-  const [availableFor, setAvailableFor] = useState(user?.availableFor || '');
-  const [work, setWork] = useState(user?.work || '');
-  const [education, setEducation] = useState(user?.education || '');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [website, setWebsite] = useState('');
+  const [location, setLocation] = useState('');
+  const [bio, setBio] = useState('');
+  const [learning, setLearning] = useState('');
+  const [skills, setSkills] = useState('');
+  const [hacking, setHacking] = useState('');
+  const [availableFor, setAvailableFor] = useState('');
+  const [work, setWork] = useState('');
+  const [education, setEducation] = useState('');
+  const [brandColor1, setBrandColor1] = useState('');
+  const [brandColor2, setBrandColor2] = useState('');
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -41,6 +44,8 @@ const Profile = () => {
       availableFor,
       work,
       education,
+      brandColor1,
+      brandColor2,
     };
     console.log(payload);
     dispatch(updateProfileAsync(payload));
@@ -60,6 +65,8 @@ const Profile = () => {
       setAvailableFor(user.availableFor || '');
       setWork(user.work || '');
       setEducation(user.education || '');
+      setBrandColor1(user.brandColor1 || '');
+      setBrandColor2(user.brandColor2 || '');
     }
   }, [user]);
 
@@ -214,6 +221,33 @@ const Profile = () => {
               </InputWrap>
             </InputGroup>
           </section>
+          <section>
+            <h2>Branding</h2>
+            <BrandColorWrap>
+              <InputGroup>
+                <InputWrap>
+                  <label>Brand color 1</label>
+                  <p>Used for backgrounds, borders etc.</p>
+                  <input
+                    type="text"
+                    value={brandColor1}
+                    onChange={(e) => setBrandColor1(e.target.value)}
+                  />
+                  <ColorPicker color={brandColor1} setColor={setBrandColor1} />
+                </InputWrap>
+                <InputWrap>
+                  <label>Brand color 2</label>
+                  <p>Used for texts (usually put on Brand color 1).</p>
+                  <input
+                    type="text"
+                    value={brandColor2}
+                    onChange={(e) => setBrandColor2(e.target.value)}
+                  />
+                  <ColorPicker color={brandColor2} setColor={setBrandColor2} />
+                </InputWrap>
+              </InputGroup>
+            </BrandColorWrap>
+          </section>
           <section className="submit">
             <ButtonFill>
               <button type="submit">Save Profile Information</button>
@@ -228,6 +262,14 @@ const Profile = () => {
 const ProfileWrap = styled.div`
   .coding label {
     margin-bottom: 10px;
+  }
+`;
+
+const BrandColorWrap = styled.div`
+  width: 50%;
+
+  input {
+    padding-left: 45px;
   }
 `;
 

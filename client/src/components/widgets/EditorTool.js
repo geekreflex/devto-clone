@@ -146,7 +146,7 @@ const MoreOptions = styled.div`
   background-color: ${(props) => props.theme.primary};
   top: 50px;
   right: 0;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+  box-shadow: ${(props) => props.theme.shadow1};
   border: 1px solid ${(props) => props.theme.borderColor};
   border-radius: 6px;
   padding: 8px;
