@@ -5,6 +5,8 @@ import BookmarkIconLg from '../../icons/BookmarkIconLg';
 import HeartIconLg from '../../icons/HeartIconLg';
 import MoreIcon2 from '../../icons/MoreIcon2';
 import Tooltip from '../widgets/Tooltip';
+import { Link } from 'react-router-dom';
+import CopyIcon from '../../icons/CopyIcon';
 
 const Reactions = () => {
   return (
@@ -33,12 +35,28 @@ const Reactions = () => {
           <span className="reaction-total">3</span>
         </div>
       </Tooltip>
-      <div className="reaction">
-        <div className="reaction more-option">
-          <span className="reaction-icon">
-            <MoreIcon2 />
-          </span>
+      <div className="option-wrap">
+        <div className="reaction">
+          <div className="reaction more-option">
+            <span className="reaction-icon">
+              <MoreIcon2 />
+            </span>
+          </div>
         </div>
+        <MoreOption>
+          <div className="copy-link">
+            <span>Copy link</span>
+            <span>
+              <CopyIcon />
+            </span>
+          </div>
+          <Link to="#">Share to Twitter</Link>
+          <Link to="#">Share to LinkedIn</Link>
+          <Link to="#">Share to Reddit</Link>
+          <Link to="#">Share to Hacker News</Link>
+          <Link to="#">Share to Facebook</Link>
+          <Link to="#">Report Abuse</Link>
+        </MoreOption>
       </div>
     </ReactionWrap>
   );
@@ -50,6 +68,10 @@ const ReactionWrap = styled.div`
   align-items: flex-end;
   margin-bottom: 20px;
   position: fixed;
+
+  .option-wrap {
+    position: relative;
+  }
 
   .like:hover {
     .reaction-icon {
@@ -101,6 +123,50 @@ const ReactionWrap = styled.div`
 
     .reaction-total {
       font-size: 14px;
+    }
+  }
+`;
+
+const MoreOption = styled.div`
+  background-color: ${(props) => props.theme.primary};
+  box-shadow: ${(props) => props.theme.cardShadow};
+  padding: 10px;
+  min-width: 250px;
+  position: absolute;
+  left: 0;
+  top: 50px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+
+  .copy-link {
+    margin-bottom: 10px;
+    color: ${(props) => props.theme.textColor1};
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+    cursor: pointer;
+
+    :hover {
+      color: ${(props) => props.theme.brandColor3};
+    }
+
+    span {
+      font-weight: 600;
+      font-size: 18px;
+    }
+  }
+
+  a {
+    color: ${(props) => props.theme.textColor2};
+    padding: 8px;
+    display: block;
+    border-radius: 6px;
+
+    :hover {
+      background-color: ${(props) => props.theme.brandColor}50;
+      color: ${(props) => props.theme.brandColor3};
     }
   }
 `;
