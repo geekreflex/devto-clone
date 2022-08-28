@@ -76,7 +76,7 @@ const Post = () => {
             </PostContent>
           </PostMain>
           <PostRight>
-            <PostAuthorCard>
+            <PostAuthorCard className="fixed">
               <div
                 className="backdrop"
                 style={{ backgroundColor: post?.author.brandColor1 }}
@@ -212,12 +212,12 @@ const PostContent = styled.div`
 `;
 
 const PostAuthorCard = styled.div`
-  position: fixed;
   width: 350px;
   background-color: ${(props) => props.theme.primary};
   box-shadow: ${(props) => props.theme.cardShadow};
   border-radius: 8px;
   overflow: hidden;
+  bottom: 0;
 
   .backdrop {
     height: 40px;

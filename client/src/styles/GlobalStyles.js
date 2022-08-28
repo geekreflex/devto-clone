@@ -88,4 +88,16 @@ a {
     }
   }
 
+  .fixed {
+    position: fixed;
+    transition: all 300ms;
+    margin-bottom: 50px;
+  }
+
+  .sticky .fixed {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 0px;
+  }
+
 `;

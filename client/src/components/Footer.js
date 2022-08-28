@@ -1,11 +1,24 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import useOnScreen from '../hooks/useOnScreen';
 import ForemLogo from '../icons/ForemLogo';
 import { Container } from '../styles/DefaultStyles';
 
 const Footer = () => {
+  const footerRef = useRef();
+  const isVisible = useOnScreen(footerRef);
+
+  useEffect(() => {
+    if (isVisible) {
+      document.body.classList.add('sticky');
+    } else {
+      document.body.classList.remove('sticky');
+    }
+  }, [isVisible]);
+
   return (
-    <FooterWrap className="footer">
+    <FooterWrap className="footer" ref={footerRef}>
       <Container>
         <Main>
           <p className="description">
