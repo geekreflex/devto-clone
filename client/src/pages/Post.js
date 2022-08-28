@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Reactions from '../components/excerpts/Reactions';
-import { Container } from '../styles/DefaultStyles';
+import { ButtonFill, Container } from '../styles/DefaultStyles';
 import { BASE_URL } from '../utils/constants';
 import moment from 'moment';
 import PostTagList from '../components/widgets/PostTagList';
@@ -75,7 +75,49 @@ const Post = () => {
               </section>
             </PostContent>
           </PostMain>
-          <PostRight></PostRight>
+          <PostRight>
+            <PostAuthorCard>
+              <div
+                className="backdrop"
+                style={{ backgroundColor: post?.author.brandColor1 }}
+              ></div>
+              <div className="author-main-info">
+                <div className="author-info_top">
+                  <Link className="avatar" to={`/${post?.author?.username}`}>
+                    <img src={post?.author?.avatar} alt={post?.author?.name} />
+                  </Link>
+                  <Link
+                    to={`/${post?.author?.username}`}
+                    className="author-name"
+                  >
+                    {post?.author?.name}
+                  </Link>
+                </div>
+                <div className="author-info_bottom">
+                  <ButtonFill>
+                    <button>Follow</button>
+                  </ButtonFill>
+                  <p className="author-bio">{post?.author?.bio}</p>
+                  <div>
+                    <p>Email</p>
+                    <a href={`mailto:${post?.author?.email}`}>
+                      {post?.author?.email}
+                    </a>
+                  </div>
+                  {post?.author?.work && (
+                    <div>
+                      <p>Work</p>
+                      {post?.author?.work}
+                    </div>
+                  )}
+                  <div>
+                    <p>Joined</p>
+                    {moment(post?.author?.createdAt).format('MMMM D, YYYY')}
+                  </div>
+                </div>
+              </div>
+            </PostAuthorCard>
+          </PostRight>
         </PostLayout>
       </Container>
     </PostWrap>
@@ -102,6 +144,7 @@ const PostReaction = styled.div`
 `;
 const PostRight = styled.div`
   width: 350px;
+  position: relative;
 `;
 const PostImg = styled.div`
   width: 100%;
@@ -166,6 +209,73 @@ const PostContent = styled.div`
       all: revert;
     }
   } */
+`;
+
+const PostAuthorCard = styled.div`
+  position: fixed;
+  width: 350px;
+  background-color: ${(props) => props.theme.primary};
+  box-shadow: ${(props) => props.theme.cardShadow};
+  border-radius: 8px;
+  overflow: hidden;
+
+  .backdrop {
+    height: 40px;
+    width: 100%;
+  }
+
+  .author-main-info {
+    padding: 5px 15px 15px 15px;
+
+    .author-info_top {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+
+      .author-name {
+        font-weight: 600;
+        margin-left: 10px;
+        font-size: 18px;
+        color: ${(props) => props.theme.textColor1};
+      }
+
+      .avatar {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        border-radius: 50%;
+        margin-top: -25px;
+
+        img {
+          width: 100%;
+          border-radius: 50%;
+        }
+      }
+    }
+
+    .author-info_bottom {
+      .author-bio {
+        margin-bottom: 20px;
+      }
+      div {
+        margin-bottom: 15px;
+        line-height: 1.2;
+        color: ${(props) => props.theme.textColor2};
+
+        p {
+          font-size: 12px;
+          font-weight: 600;
+          color: ${(props) => props.theme.textColor3};
+          margin-bottom: 5px;
+          text-transform: uppercase;
+        }
+
+        a {
+          color: ${(props) => props.theme.brandColor3};
+        }
+      }
+    }
+  }
 `;
 
 export default Post;

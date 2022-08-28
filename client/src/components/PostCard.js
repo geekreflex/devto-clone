@@ -6,7 +6,7 @@ import CommentIcon from '../icons/CommentIcon';
 import BookmarkIcon from '../icons/BookmarkIcon';
 import PostTagList from './widgets/PostTagList';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPostToReadingListAsync } from '../features/userSlice';
+import { addToBookmarkAsync, removeBookmarkAsync } from '../features/userSlice';
 import BookmarkIcon2 from '../icons/BookmarkIcon2';
 import AuthorPreview from './widgets/AuthorPreview';
 import { toggleLoginConModal } from '../features/actionSlice';
@@ -18,31 +18,32 @@ const PostCard = ({ post, index }) => {
   const { user } = useSelector((state) => state.user);
   const { isAuth } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
   const onPostClick = () => {
     setFocus(false);
-    console.log(post.slug);
   };
 
   const onBookmark = (e) => {
     e.stopPropagation();
-
     if (!isAuth) {
-      console.log('You not logged in');
       dispatch(toggleLoginConModal(true));
       return;
     }
 
-    if (user?.readingList.includes(post._id)) {
-      dispatch(
-        addPostToReadingListAsync({ postId: post._id, action: 'remove' })
-      );
+    if (checkBookmark()) {
+      console.log('remove');
+      dispatch(removeBookmarkAsync({ postId: post._id }));
     } else {
-      dispatch(addPostToReadingListAsync({ postId: post._id, action: 'add' }));
+      dispatch(addToBookmarkAsync({ postId: post._id }));
     }
   };
 
   const onLink = (e) => {
     e.stopPropagation();
+  };
+
+  const checkBookmark = () => {
+    return user?.readingList.some((rd) => rd.post === post._id);
   };
 
   return (
@@ -106,19 +107,11 @@ const PostCard = ({ post, index }) => {
             <div className="details">
               <span className="duration">3 min read</span>
               <button
-                className={
-                  user?.readingList?.includes(post._id)
-                    ? 'bookmarked btn'
-                    : 'btn'
-                }
+                className={checkBookmark() ? 'bookmarked btn' : 'btn'}
                 onClick={onBookmark}
                 title="Save to reading list"
               >
-                {user?.readingList?.includes(post._id) ? (
-                  <BookmarkIcon2 />
-                ) : (
-                  <BookmarkIcon />
-                )}
+                {checkBookmark() ? <BookmarkIcon2 /> : <BookmarkIcon />}
               </button>
             </div>
           </PostDetails>

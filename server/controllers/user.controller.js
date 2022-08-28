@@ -1,5 +1,7 @@
 const User = require('../models/user.model');
 const expressAsyncHandler = require('express-async-handler');
+const Bookmark = require('../models/bookmark.model');
+const Post = require('../models/post.model');
 
 const updateUserProfile = expressAsyncHandler(async (req, res) => {
   const userId = req.user.id;
@@ -36,7 +38,7 @@ const getUserProfile = expressAsyncHandler(async (req, res) => {
       message: 'successfully retreived user data',
       user,
     });
-  });
+  }).populate('readingList');
 });
 
 const getPublicProfile = expressAsyncHandler(async (req, res) => {
@@ -79,55 +81,73 @@ const checkUsername = expressAsyncHandler(async (req, res) => {
   console.log(username);
 });
 
-const addPostToReadingList = expressAsyncHandler(async (req, res) => {
-  const { postId, action } = req.body;
+const addToBookmark = expressAsyncHandler(async (req, res) => {
+  const { postId } = req.body;
   const userId = req.user.id;
 
-  if (action === 'remove') {
-    User.findOneAndUpdate(
-      { _id: userId },
-      { $pull: { readingList: postId } },
-      { new: true },
-      (err, user) => {
-        if (err) {
-          console.log(err);
-          return;
-        }
+  const bookmark = new Bookmark({
+    post: postId,
+    user: userId,
+  });
 
-        return res.status(200).json({
-          status: 'success',
-          user,
-          message: 'Remove from reading ling',
-        });
+  await bookmark.save();
+  const user = await User.findById(userId);
+  const post = await Post.findById(postId);
+
+  user.readingList.push(bookmark);
+  post.savedList.push(bookmark);
+  await post.save();
+
+  user
+    .save()
+    .populate('readingList')
+    .exec(function (err, user) {
+      if (err) {
+        console.log(err);
+        return;
       }
-    );
-  }
 
-  if (action === 'add') {
-    User.findOneAndUpdate(
-      { _id: userId },
-      { $push: { readingList: postId } },
-      { new: true },
-      (err, user) => {
-        if (err) {
-          console.log(err);
-          return;
-        }
+      return res.status(200).json({
+        status: 'success',
+        user,
+        message: 'Added to reading list',
+      });
+    });
+});
 
-        return res.status(200).json({
-          status: 'success',
-          user,
-          message: 'Add to reading ling',
-        });
-      }
-    );
-  }
+const removeFromBookmark = expressAsyncHandler(async (req, res) => {
+  const { postId } = req.body;
+  const userId = req.user.id;
+
+  console.log('remove');
+
+  const bookmark = Bookmark.findOne({ post: postId });
+
+  const user = await User.findById(userId);
+  const post = await Post.findById(postId);
+  user.readingList.pull(bookmark);
+  post.savedList.savedList(bookmark);
+  user.save();
+  post.save();
+
+  Bookmark.findOneAndDelete({ post: postId }, (err, doc) => {
+    if (err) {
+      console.log(err);
+    }
+
+    return res.status(200).json({
+      status: 'success',
+      user,
+      message: 'Removed from reading list',
+    });
+  }).populate('readingList');
 });
 
 module.exports = {
   getUserProfile,
   checkUsername,
-  addPostToReadingList,
+  addToBookmark,
   getPublicProfile,
+  removeFromBookmark,
   updateUserProfile,
 };

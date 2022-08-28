@@ -32,8 +32,8 @@ export const getUserProfileAsync = createAsyncThunk(
   }
 );
 
-export const addPostToReadingListAsync = createAsyncThunk(
-  'addPostToReadingListAsync/post',
+export const addToBookmarkAsync = createAsyncThunk(
+  'addToBookmarkAsync/post',
   async (payload, thunkAPI) => {
     try {
       const config = {
@@ -45,7 +45,36 @@ export const addPostToReadingListAsync = createAsyncThunk(
       };
 
       const { data } = await axios.post(
-        `${BASE_URL}/users/reading-list`,
+        `${BASE_URL}/users/add-bookmark`,
+        payload,
+        config
+      );
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
+export const removeBookmarkAsync = createAsyncThunk(
+  'removeBookmarkAsync/post',
+  async (payload, thunkAPI) => {
+    try {
+      const config = {
+        withCredentials: true,
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const { data } = await axios.post(
+        `${BASE_URL}/users/remove-bookmark`,
         payload,
         config
       );
@@ -113,10 +142,10 @@ const userSlice = createSlice({
       state.status = 'idle';
     },
 
-    [addPostToReadingListAsync.pending]: (state) => {
+    [addToBookmarkAsync.pending]: (state) => {
       state.status = 'loading';
     },
-    [addPostToReadingListAsync.fulfilled]: (state, action) => {
+    [addToBookmarkAsync.fulfilled]: (state, action) => {
       state.status = 'idle';
       state.user = action.payload.user;
       localStorage.setItem('auth-user', JSON.stringify(action.payload.user));
