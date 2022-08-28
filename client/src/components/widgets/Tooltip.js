@@ -3,16 +3,14 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import styled from 'styled-components';
 
-const Tooltip = ({ pos, content, children, trigger }) => {
+const Tooltip = ({ pos, content, children }) => {
   return (
     <CustomTippy
       className="tippy-wrap"
       content={content}
       placement={pos}
       arrow={false}
-      trigger={trigger || 'mouseenter'}
       animation={'scale'}
-      // delay={300}
       duration={300}
     >
       {children}

@@ -7,7 +7,10 @@ const getPosts = expressAsyncHandler(async (req, res) => {
   Post.find()
     .sort({ createdAt: -1 })
     .populate('tags')
-    .populate('author', 'username name avatar location bio email brandColor1')
+    .populate(
+      'author',
+      'username name avatar location bio email work brandColor1'
+    )
     .exec((err, posts) => {
       if (err) {
         return res.status(400).json({
@@ -92,12 +95,14 @@ const deletePost = expressAsyncHandler(async (req, res) => {
 
 const getOnePost = expressAsyncHandler(async (req, res) => {
   const { username, postSlug } = req.params;
-  const user = await User.find({ username });
-  Post.findOne({ author: user[0]._id, slug: postSlug }, (err, post) => {
+  const user = await User.findOne({ username });
+
+  Post.findOne({ author: user.id, slug: postSlug }, (err, post) => {
     if (err) {
       return res.status(400).json({
         status: 'failed',
         message: 'Error occured',
+        err,
       });
     }
 
@@ -106,12 +111,16 @@ const getOnePost = expressAsyncHandler(async (req, res) => {
       payload: post,
       message: 'Post retrieved successfully',
     });
-  }).populate('user');
+  })
+    .populate('tags')
+    .populate(
+      'author',
+      'username name avatar location bio email work brandColor1'
+    );
 });
 
 const getUserPosts = expressAsyncHandler(async (req, res) => {
   const userId = req.user._id;
-  console.log(userId);
 
   Post.find({ author: userId }, (err, posts) => {
     if (err) {

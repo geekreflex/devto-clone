@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const PostTagList = ({ tags, size }) => {
   return (
     <PostTags size={size}>
-      {tags.map((tag) => (
+      {tags?.map((tag) => (
         <Link key={tag._id} to="#">
           <span style={{ color: tag.color, opacity: 0.5 }}>#</span>
           {tag.alias}

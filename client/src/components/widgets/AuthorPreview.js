@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -17,15 +18,21 @@ const AuthorPreview = ({ author }) => {
         <ButtonFill>
           <button style={{ padding: '6px 10px' }}>Follow</button>
         </ButtonFill>
-        <p className="bio">Front-end web developer</p>
+        <p className="bio">{author?.bio}</p>
         <div className="prev-deets">
           <div>
             <p>Email</p>
-            <a href={`mailto:${author.email}`}>{author.email}</a>
+            <a href={`mailto:${author.email}`}>{author?.email}</a>
           </div>
+          {author?.work && (
+            <div>
+              <p>Work</p>
+              {author?.work}
+            </div>
+          )}
           <div>
-            <p>Work</p>
-            Web developer at Company name
+            <p>Joined</p>
+            {moment(author?.createdAt).format('MMMM D, YYYY')}
           </div>
         </div>
       </Main>
@@ -98,12 +105,14 @@ const Main = styled.div`
     div {
       margin-bottom: 15px;
       line-height: 1.2;
+      color: ${(props) => props.theme.textColor1};
 
       p {
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 600;
         color: ${(props) => props.theme.textColor2};
         margin-bottom: 5px;
+        text-transform: uppercase;
       }
 
       a {
