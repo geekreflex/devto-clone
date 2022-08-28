@@ -1,27 +1,20 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { marked } from 'marked';
-import DOMPurify from 'dompurify';
-import { useEffect } from 'react';
+import Markdown from './widgets/Markdown';
 import PostTagList from './widgets/PostTagList';
 
 const PreviewPost = ({ coverImg, title, tagList, content }) => {
-  const markOutputRef = useRef();
-
-  useEffect(() => {
-    let newContent = DOMPurify.sanitize(marked.parse(content));
-    markOutputRef.current.innerHTML = newContent;
-  }, [content]);
-
   return (
     <PreviewWrap>
-      <CoverImg>
-        <img src={coverImg} alt={title} />
-      </CoverImg>
+      {coverImg && (
+        <CoverImg>
+          <img src={coverImg} alt={title} />
+        </CoverImg>
+      )}
       <PreviewBody>
         <h1>{title}</h1>
         <PostTagList size="16" tags={tagList} />
-        <div className="content" ref={markOutputRef} />
+        <Markdown content={content} />
       </PreviewBody>
     </PreviewWrap>
   );

@@ -52,12 +52,9 @@ const PostCard = ({ post, index }) => {
       onFocus={() => setFocus(true)}
       onBlur={() => setFocus(false)}
     >
-      {index === 0 && (
+      {post.coverImg && index === 0 && (
         <CardImg>
-          <img
-            src={post.coverImg || 'https://source.unsplash.com/random'}
-            alt="Some random picture placeholder"
-          />
+          <img src={post.coverImg} alt="Some random picture placeholder" />
         </CardImg>
       )}
       <CardBody>

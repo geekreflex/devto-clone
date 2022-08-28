@@ -8,6 +8,7 @@ import { Container } from '../styles/DefaultStyles';
 import { BASE_URL } from '../utils/constants';
 import moment from 'moment';
 import PostTagList from '../components/widgets/PostTagList';
+import Markdown from '../components/widgets/Markdown';
 
 const Post = () => {
   const { username, postSlug } = useParams();
@@ -48,9 +49,11 @@ const Post = () => {
             <Reactions />
           </PostReaction>
           <PostMain>
-            <PostImg>
-              <img src={post?.coverImg} />
-            </PostImg>
+            {post?.coverImg && (
+              <PostImg>
+                <img src={post?.coverImg} />
+              </PostImg>
+            )}
             <PostContent>
               <section className="info-sect">
                 <Link to={`/${post?.author?.username}`} className="avatar">
@@ -63,9 +66,12 @@ const Post = () => {
                   <p>Posted on {moment(post?.createdAt).format('MMM, D')}</p>
                 </div>
               </section>
-              <section className="main-sect">
+              <section className="title-tags">
                 <h1>{post?.title}</h1>
                 <PostTagList tags={post?.tags} />
+              </section>
+              <section className="main-content">
+                <Markdown content={post?.content} />
               </section>
             </PostContent>
           </PostMain>
@@ -146,13 +152,21 @@ const PostContent = styled.div`
     }
   }
 
-  .main-sect {
+  .title-tags {
+    margin-bottom: 30px;
     h1 {
       font-size: 50px;
       font-weight: 600;
       line-height: 1.3;
     }
   }
+
+  /* .main-content {
+    margin: initial;
+    * {
+      all: revert;
+    }
+  } */
 `;
 
 export default Post;
