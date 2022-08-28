@@ -75,6 +75,8 @@ const NavLinksWrap = styled.div`
     align-items: center;
     border-radius: 5px;
     position: relative;
+    color: ${(props) => props.theme.textColor2};
+
     :hover {
       background-color: ${(props) => props.theme.brandColor}50;
       color: ${(props) => props.theme.textColor1};

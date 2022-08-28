@@ -97,12 +97,11 @@ const PostMain = styled.div`
   box-shadow: ${(props) => props.theme.cardShadow};
 `;
 const PostReaction = styled.div`
-  border: 1px solid green;
   width: 70px;
+  padding-top: 30px;
 `;
 const PostRight = styled.div`
   width: 350px;
-  border: 1px solid brown;
 `;
 const PostImg = styled.div`
   width: 100%;
@@ -147,7 +146,7 @@ const PostContent = styled.div`
 
     p {
       line-height: 1;
-      font-size: 14px;
+      font-size: 12px;
       color: ${(props) => props.theme.textColor3};
     }
   }

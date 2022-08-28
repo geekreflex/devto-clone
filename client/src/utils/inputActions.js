@@ -1,6 +1,6 @@
 export const autoGrow = (e) => {
-  e.target.style.height = '5px';
-  e.target.style.height = e.target.scrollHeight + 'px';
+  e.target.style.minHeight = '5px';
+  e.target.style.minHeight = e.target.scrollHeight + 'px';
 };
 
 export const noNewline = (e) => {

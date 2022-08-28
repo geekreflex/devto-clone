@@ -24,7 +24,7 @@ a {
 }
 
 .devto-icon {
-  fill: ${(props) => props.theme.textColor1};
+  fill: currentColor;
 }
 
 .auth-btn-icon {

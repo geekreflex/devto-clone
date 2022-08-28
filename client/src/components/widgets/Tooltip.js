@@ -10,8 +10,6 @@ const Tooltip = ({ pos, content, children }) => {
       content={content}
       placement={pos}
       arrow={false}
-      animation={'scale'}
-      duration={300}
     >
       {children}
     </CustomTippy>

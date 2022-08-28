@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { autoGrow, noNewline } from '../utils/inputActions';
 import EditorTool from './widgets/EditorTool';
@@ -20,6 +20,21 @@ const EditPost = ({
   onFocus,
   focused,
 }) => {
+  const titleRef = useRef();
+  const contentRef = useRef();
+
+  useEffect(() => {
+    if (titleRef.current && contentRef.current) {
+      grow(titleRef.current);
+      grow(contentRef.current);
+    }
+  }, [titleRef, contentRef]);
+
+  const grow = (elem) => {
+    elem.style.minHeight = '5px';
+    elem.style.minHeight = elem.scrollHeight + 'px';
+  };
+
   return (
     <EditorPostWrap>
       <TopSection>
@@ -34,6 +49,7 @@ const EditPost = ({
             onKeyDown={noNewline}
             id="title"
             placeholder="New post title here..."
+            ref={titleRef}
           />
         </TitleField>
         <TagField style={{ position: 'relative' }}>
@@ -59,6 +75,9 @@ const EditPost = ({
           name="content"
           onFocus={onFocus}
           placeholder="Write your post content here..."
+          onInput={autoGrow}
+          spellCheck={false}
+          ref={contentRef}
         />
       </ContentField>
     </EditorPostWrap>
@@ -69,6 +88,7 @@ const EditorPostWrap = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow-y: auto;
 `;
 const TopSection = styled.div`
   display: flex;
@@ -103,9 +123,9 @@ const TagField = styled.div`
   display: flex;
 `;
 const ContentField = styled.div`
-  display: flex;
   flex: 1;
   padding: 20px 50px;
+  display: flex;
 
   textarea {
     width: 100%;
@@ -115,7 +135,9 @@ const ContentField = styled.div`
     resize: none;
     font-size: 18px;
     color: ${(props) => props.theme.textColor1};
-    flex: 1;
+    white-space: pre-wrap;
+    overflow: hidden;
+    height: auto;
   }
 `;
 
