@@ -9,6 +9,7 @@ import { BASE_URL } from '../utils/constants';
 import moment from 'moment';
 import PostTagList from '../components/widgets/PostTagList';
 import Markdown from '../components/widgets/Markdown';
+import CommentSection from '../components/CommentSection';
 
 const Post = () => {
   const { username, postSlug } = useParams();
@@ -74,6 +75,7 @@ const Post = () => {
                 <Markdown content={post?.content} />
               </section>
             </PostContent>
+            <CommentSection />
           </PostMain>
           <PostRight>
             <PostAuthorCard className="fixed">

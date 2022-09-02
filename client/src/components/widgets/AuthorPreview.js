@@ -10,7 +10,11 @@ const AuthorPreview = ({ author }) => {
       <div className="backdrop"></div>
       <Main>
         <Link to={`/${author.username}`} className="prev-avatar">
-          <img src={author.avatar} alt={author.name} />
+          <img
+            src={author.avatar}
+            referrerPolicy="no-referrer"
+            alt={author.name}
+          />
         </Link>
         <Link to={`/${author.username}`} className="prev-name">
           <h3>{author.name}</h3>

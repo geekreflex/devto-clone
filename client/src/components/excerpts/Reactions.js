@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import UnicornIcon from '../../icons/UnicornIcon';
 import BookmarkIconLg from '../../icons/BookmarkIconLg';
@@ -7,8 +7,10 @@ import MoreIcon2 from '../../icons/MoreIcon2';
 import Tooltip from '../widgets/Tooltip';
 import { Link } from 'react-router-dom';
 import CopyIcon from '../../icons/CopyIcon';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 const Reactions = () => {
+  const [visible, setVisible] = useState(false);
   return (
     <ReactionWrap>
       <Tooltip content="Like" pos="bottom">
@@ -36,27 +38,33 @@ const Reactions = () => {
         </div>
       </Tooltip>
       <div className="option-wrap">
-        <div className="reaction">
-          <div className="reaction more-option">
-            <span className="reaction-icon">
-              <MoreIcon2 />
-            </span>
+        <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
+          <div className="reaction" onClick={() => setVisible(!visible)}>
+            <div className="reaction more-option">
+              <span className="reaction-icon">
+                <MoreIcon2 />
+              </span>
+            </div>
           </div>
-        </div>
-        <MoreOption>
-          <div className="copy-link">
-            <span>Copy link</span>
-            <span>
-              <CopyIcon />
-            </span>
-          </div>
-          <Link to="#">Share to Twitter</Link>
-          <Link to="#">Share to LinkedIn</Link>
-          <Link to="#">Share to Reddit</Link>
-          <Link to="#">Share to Hacker News</Link>
-          <Link to="#">Share to Facebook</Link>
-          <Link to="#">Report Abuse</Link>
-        </MoreOption>
+        </OutsideClickHandler>
+        {visible && (
+          <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
+            <MoreOption>
+              <div className="copy-link">
+                <span>Copy link</span>
+                <span>
+                  <CopyIcon />
+                </span>
+              </div>
+              <Link to="#">Share to Twitter</Link>
+              <Link to="#">Share to LinkedIn</Link>
+              <Link to="#">Share to Reddit</Link>
+              <Link to="#">Share to Hacker News</Link>
+              <Link to="#">Share to Facebook</Link>
+              <Link to="#">Report Abuse</Link>
+            </MoreOption>
+          </OutsideClickHandler>
+        )}
       </div>
     </ReactionWrap>
   );
@@ -138,6 +146,7 @@ const MoreOption = styled.div`
   border-radius: 8px;
   display: flex;
   flex-direction: column;
+  z-index: 99998;
 
   .copy-link {
     margin-bottom: 10px;
