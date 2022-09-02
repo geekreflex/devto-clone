@@ -51,6 +51,10 @@ const NewPost = () => {
     };
     console.log(payload);
     dispatch(createPostAsync(payload));
+    // I need to look for a way to remove
+    // the data from storage after successfully
+    // posting.
+    localStorage.removeItem(storeKey);
   };
 
   return (

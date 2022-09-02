@@ -205,12 +205,12 @@ const PostContent = styled.div`
     }
   }
 
-  /* .main-content {
+  .main-content {
     margin: initial;
     * {
       all: revert;
     }
-  } */
+  }
 `;
 
 const PostAuthorCard = styled.div`
