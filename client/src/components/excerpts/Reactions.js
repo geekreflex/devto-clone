@@ -46,9 +46,7 @@ const Reactions = () => {
               </span>
             </div>
           </div>
-        </OutsideClickHandler>
-        {visible && (
-          <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
+          {visible && (
             <MoreOption>
               <div className="copy-link">
                 <span>Copy link</span>
@@ -63,8 +61,8 @@ const Reactions = () => {
               <Link to="#">Share to Facebook</Link>
               <Link to="#">Report Abuse</Link>
             </MoreOption>
-          </OutsideClickHandler>
-        )}
+          )}
+        </OutsideClickHandler>
       </div>
     </ReactionWrap>
   );
@@ -141,20 +139,19 @@ const MoreOption = styled.div`
   padding: 10px;
   min-width: 250px;
   position: absolute;
-  left: 0;
-  top: 50px;
+  left: 60px;
+  top: 0px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   z-index: 99998;
 
   .copy-link {
-    margin-bottom: 10px;
     color: ${(props) => props.theme.textColor1};
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 8px;
+    padding: 8px;
     cursor: pointer;
 
     :hover {

@@ -30,8 +30,6 @@ const NavLinks = () => {
               />
             </span>
           </button>
-        </OutsideClickHandler>
-        <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
           <Dropdown visible={visible}>
             <ul>
               <li id="user-info">
