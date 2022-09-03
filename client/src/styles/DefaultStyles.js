@@ -88,6 +88,21 @@ export const ButtonDefault = styled(Button)`
   }
 `;
 
+export const ButtonGrey = styled(Button)`
+  button,
+  a {
+    background-color: ${(props) => props.theme.primary};
+    border: 2px solid ${(props) => props.theme.borderColor};
+    color: ${(props) => props.theme.textColor2};
+
+    :hover {
+      background-color: ${(props) => props.theme.primary};
+      color: ${(props) => props.theme.textColor2};
+      text-decoration: none;
+    }
+  }
+`;
+
 export const Cancel = styled.div`
   right: 20px;
   top: 5px;
@@ -139,7 +154,7 @@ export const InputWrap = styled.div`
   }
 
   textarea {
-    height: 65px;
+    min-height: 65px;
     resize: vertical;
   }
 `;

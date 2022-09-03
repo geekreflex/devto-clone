@@ -122,9 +122,7 @@ const ToolWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 56px;
-  background-color: ${(props) => props.theme.shade1};
-  padding: 0 50px;
+  background-color: transparent;
 `;
 const ToolLeft = styled.div`
   display: flex;

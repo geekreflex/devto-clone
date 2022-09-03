@@ -74,6 +74,7 @@ const ReactionWrap = styled.div`
   align-items: flex-end;
   margin-bottom: 20px;
   position: fixed;
+  z-index: 99998;
 
   .option-wrap {
     position: relative;

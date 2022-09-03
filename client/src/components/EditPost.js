@@ -67,7 +67,9 @@ const EditPost = ({
           )}
         </TagField>
       </TopSection>
-      <EditorTool />
+      <EditToolWrap>
+        <EditorTool />
+      </EditToolWrap>
       <ContentField>
         <textarea
           value={content}
@@ -139,6 +141,14 @@ const ContentField = styled.div`
     overflow: hidden;
     height: auto;
   }
+`;
+
+export const EditToolWrap = styled.div`
+  padding: 0 40px;
+  background-color: ${(props) => props.theme.shade1};
+  height: 56px;
+  display: flex;
+  align-items: center;
 `;
 
 export default EditPost;

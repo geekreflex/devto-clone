@@ -75,7 +75,7 @@ const Post = () => {
                 <Markdown content={post?.content} />
               </section>
             </PostContent>
-            <CommentSection />
+            <CommentSection post={post} />
           </PostMain>
           <PostRight>
             <PostAuthorCard className="fixed">
@@ -219,7 +219,6 @@ const PostAuthorCard = styled.div`
   box-shadow: ${(props) => props.theme.cardShadow};
   border-radius: 8px;
   overflow: hidden;
-  bottom: 0;
 
   .backdrop {
     height: 40px;

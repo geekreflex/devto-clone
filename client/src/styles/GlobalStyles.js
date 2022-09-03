@@ -95,9 +95,13 @@ a {
   }
 
   .sticky .fixed {
-    position: absolute;
-    bottom: 0;
+    /* position: absolute; */
     margin-bottom: 0px;
+  }
+
+  .disabled {
+    opacity: .5;
+    cursor: grab;
   }
 
 `;
