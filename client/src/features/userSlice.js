@@ -108,11 +108,8 @@ export const updateProfileAsync = createAsyncThunk(
         config
       );
 
-      console.log(data);
-
       return data;
     } catch (error) {
-      console.log(error.response.data.message);
       return thunkAPI.rejectWithValue(
         error.response && error.response.data.message
           ? error.response.data.message

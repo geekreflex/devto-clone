@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   ButtonDefault,
@@ -6,20 +7,42 @@ import {
   ButtonGrey,
   InputWrap,
 } from '../styles/DefaultStyles';
+import { BASE_URL } from '../utils/constants';
 import CommentCard from './CommentCard';
 import Avatar from './excerpts/Avatar';
 import EditorTool from './widgets/EditorTool';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCommentsAsync, postCommentAsync } from '../features/commentSlice';
 
 const CommentSection = ({ post }) => {
   const [comment, setComment] = useState('');
+  const { comments } = useSelector((state) => state.comment);
   const [focus, setFocus] = useState(false);
   const [focusBorder, setFocusBorder] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (post?._id) {
+      dispatch(getCommentsAsync({ postId: post._id }));
+    }
+  }, [post]);
+
+  const onComment = async (e) => {
+    e.preventDefault();
+    const payload = {
+      content: comment,
+      postId: post._id,
+    };
+
+    dispatch(postCommentAsync(payload));
+    setComment('');
+  };
   return (
     <Wrapper>
       <TopSect>
         <h2>
           Discussion
-          <span>(10)</span>
+          <span>({comments?.length})</span>
         </h2>
         <ButtonGrey>
           <button>Subscribe</button>
@@ -44,16 +67,28 @@ const CommentSection = ({ post }) => {
           {focus && (
             <ButtonWrap>
               <ButtonFill>
-                <button className={comment ? '' : 'disabled'}>Submit</button>
+                <button
+                  onClick={onComment}
+                  type="button"
+                  className={comment ? '' : 'disabled'}
+                >
+                  Submit
+                </button>
               </ButtonFill>
               <ButtonDefault>
-                <button className={comment ? '' : 'disabled'}>Preview</button>
+                <button type="button" className={comment ? '' : 'disabled'}>
+                  Preview
+                </button>
               </ButtonDefault>
             </ButtonWrap>
           )}
         </InputSect>
       </CommentField>
-      <CommentCard />
+      <CommentList>
+        {comments?.map((comment) => (
+          <CommentCard key={comment._id} comment={comment} />
+        ))}
+      </CommentList>
     </Wrapper>
   );
 };
@@ -78,6 +113,7 @@ const CommentField = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 20px;
+  margin-bottom: 30px;
 `;
 
 const InputSect = styled.div`
@@ -91,15 +127,22 @@ const InputWrapCustom = styled(InputWrap)`
   border-radius: 6px;
   box-shadow: ${(props) =>
     props.focusBorder ? `0 0 0 2px ${props.theme.brandColor3}` : ''};
+  overflow: ${(props) => (props.focus ? '' : 'hidden')};
 
   textarea {
     height: ${(props) => (props.focus ? '100px' : '')};
     border: none;
     border-radius: 0;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
     border-bottom: ${(props) =>
       props.focus ? `1px solid ${props.theme.borderColor}` : ''};
+    box-shadow: none !important;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+
+    :focus {
+      border-color: ${(props) => props.theme.borderColor};
+      box-shadow: none;
+    }
   }
 `;
 
@@ -107,5 +150,7 @@ const ButtonWrap = styled.div`
   display: flex;
   gap: 10px;
 `;
+
+const CommentList = styled.div``;
 
 export default CommentSection;

@@ -23,7 +23,7 @@ const createComment = expressAsyncHandler(async (req, res) => {
     post: postId,
   });
 
-  newComment.save((err, post) => {
+  newComment.save((err, comment) => {
     if (err) {
       return res.status(400).json({
         status: 'failed',
@@ -33,7 +33,7 @@ const createComment = expressAsyncHandler(async (req, res) => {
 
     return res.status(200).json({
       status: 'success',
-      payload: post,
+      payload: comment,
       message: 'Comment posted successfully',
     });
   });
@@ -41,7 +41,6 @@ const createComment = expressAsyncHandler(async (req, res) => {
 
 const getPostComments = expressAsyncHandler(async (req, res) => {
   const { postId } = req.params;
-  console.log(postId);
   Comment.find({ post: postId })
     .populate('author post')
     .exec((err, comments) => {

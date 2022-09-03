@@ -136,7 +136,8 @@ const ReactionWrap = styled.div`
 
 const MoreOption = styled.div`
   background-color: ${(props) => props.theme.primary};
-  box-shadow: ${(props) => props.theme.cardShadow};
+  box-shadow: ${(props) => props.theme.shadow1};
+  border: 1px solid ${(props) => props.theme.borderColor};
   padding: 10px;
   min-width: 250px;
   position: absolute;

@@ -34,12 +34,8 @@ const Post = () => {
         config
       );
 
-      console.log(data);
-
       setPost(data.payload);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (
@@ -147,6 +143,11 @@ const PostReaction = styled.div`
 const PostRight = styled.div`
   width: 350px;
   position: relative;
+
+  @media (max-width: 1020px) {
+    display: none;
+    border: 1px solid red;
+  }
 `;
 const PostImg = styled.div`
   width: 100%;
