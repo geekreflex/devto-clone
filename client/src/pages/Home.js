@@ -8,7 +8,7 @@ import { Container } from '../styles/DefaultStyles';
 const Home = () => {
   return (
     <HomeWrap>
-      <Container2>
+      <Container>
         <Layout>
           <section className="left">
             <LeftSidebar />
@@ -20,7 +20,7 @@ const Home = () => {
             <RightSidebar />
           </section>
         </Layout>
-      </Container2>
+      </Container>
     </HomeWrap>
   );
 };
@@ -55,10 +55,6 @@ const Layout = styled.div`
       display: none;
     }
   }
-`;
-
-const Container2 = styled(Container)`
-  padding: 0;
 `;
 
 export default Home;

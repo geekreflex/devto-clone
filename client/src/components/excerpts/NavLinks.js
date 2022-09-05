@@ -191,6 +191,13 @@ const Dropdown = styled.div`
     padding-top: 8px;
     margin-top: 8px;
   }
+
+  @media (max-width: 600px) {
+    width: 98%;
+    left: 1%;
+    position: fixed;
+    top: 60px;
+  }
 `;
 
 export default NavLinks;

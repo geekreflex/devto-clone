@@ -99,6 +99,14 @@ function App() {
 const PageWrap = styled.div`
   margin-top: 56px;
   padding-top: 20px;
+
+  @media (max-width: 768px) {
+    padding-top: 10px;
+  }
+
+  @media (max-width: 500px) {
+    padding-top: 0;
+  }
 `;
 
 export default App;

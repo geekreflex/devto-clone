@@ -5,6 +5,10 @@ export const Container = styled.div`
   padding: 0 20px;
   margin: 0 auto;
   flex: 1;
+
+  @media (max-width: 768px) {
+    padding: 0;
+  }
 `;
 
 export const Button = styled.div`

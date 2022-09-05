@@ -135,10 +135,24 @@ const PostMain = styled.div`
   border-radius: 8px;
   overflow: hidden;
   box-shadow: ${(props) => props.theme.cardShadow};
+
+  @media (max-width: 768px) {
+    border-radius: 0;
+  }
 `;
 const PostReaction = styled.div`
   width: 70px;
   padding-top: 30px;
+
+  @media (max-width: 768px) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    padding: 0;
+    margin: 0;
+  }
 `;
 const PostRight = styled.div`
   width: 350px;
@@ -210,6 +224,15 @@ const PostContent = styled.div`
     margin: initial;
     * {
       all: revert;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px;
+    .title-tags {
+      h1 {
+        font-size: 30px;
+      }
     }
   }
 `;

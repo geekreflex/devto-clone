@@ -40,7 +40,7 @@ const Reactions = () => {
       <div className="option-wrap">
         <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
           <div className="reaction" onClick={() => setVisible(!visible)}>
-            <div className="reaction more-option">
+            <div className="reaction-icon more-option">
               <span className="reaction-icon">
                 <MoreIcon2 />
               </span>
@@ -132,6 +132,33 @@ const ReactionWrap = styled.div`
       font-size: 14px;
     }
   }
+
+  @media (max-width: 768px) {
+    position: relative;
+    background-color: ${(props) => props.theme.secondary};
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: space-around;
+    height: 56px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+
+    .reaction {
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+
+    .reaction-icon {
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0 !important;
+      margin-right: 5px;
+    }
+  }
 `;
 
 const MoreOption = styled.div`
@@ -139,7 +166,7 @@ const MoreOption = styled.div`
   box-shadow: ${(props) => props.theme.shadow1};
   border: 1px solid ${(props) => props.theme.borderColor};
   padding: 10px;
-  min-width: 250px;
+  width: 250px;
   position: absolute;
   left: 60px;
   top: 0px;
@@ -176,6 +203,20 @@ const MoreOption = styled.div`
       background-color: ${(props) => props.theme.brandColor}50;
       color: ${(props) => props.theme.brandColor3};
     }
+  }
+
+  @media (max-width: 768px) {
+    position: fixed;
+    display: block;
+    bottom: 60px;
+    right: 20px;
+    left: unset;
+    top: unset;
+  }
+
+  @media (max-width: 600px) {
+    width: 98%;
+    right: 1%;
   }
 `;
 
