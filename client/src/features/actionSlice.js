@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   unsavedModal: false,
   loginConModal: false,
+  sidenav: false,
 };
 
 const actionSlice = createSlice({
@@ -15,8 +16,12 @@ const actionSlice = createSlice({
     toggleLoginConModal(state, action) {
       state.loginConModal = action.payload;
     },
+    toggleSidenav(state, action) {
+      state.sidenav = action.payload;
+    },
   },
 });
 
 export default actionSlice.reducer;
-export const { toggleUnsavedModal, toggleLoginConModal } = actionSlice.actions;
+export const { toggleUnsavedModal, toggleLoginConModal, toggleSidenav } =
+  actionSlice.actions;

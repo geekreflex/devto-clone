@@ -22,7 +22,7 @@ import {
 } from '../utils/images';
 import { ButtonClear, Button } from '../styles/DefaultStyles';
 
-const LeftSidebar = () => {
+const LeftSidebar = ({ close }) => {
   const { user } = useSelector((state) => state.user);
   const { isAuth } = useSelector((state) => state.auth);
   return (
@@ -50,13 +50,13 @@ const LeftSidebar = () => {
         )}
 
         <section className="main-links">
-          <Link to="#">
+          <Link to="#" onClick={close}>
             <span>
               <HomeIcon />
             </span>
             Home
           </Link>
-          <Link to="#" className="readlist">
+          <Link to="#" className="readlist" onClick={close}>
             <span>
               <ReadListIcon />
             </span>
@@ -67,67 +67,67 @@ const LeftSidebar = () => {
               </span>
             )}
           </Link>
-          <Link to="#">
+          <Link to="#" onClick={close}>
             <span>
               <ListIcon />
             </span>
             Listings
           </Link>
-          <Link to="#">
+          <Link to="#" onClick={close}>
             <span>
               <PodcastIcon />
             </span>
             Podcasts
           </Link>
-          <Link to="#">
+          <Link to="#" onClick={close}>
             <span>
               <VideoIcon />
             </span>
             Videos
           </Link>
-          <Link to="#">
+          <Link to="#" onClick={close}>
             <span>
               <TagIcon />
             </span>
             Tags
           </Link>
-          <Link to="#">
+          <Link to="#" onClick={close}>
             <span>
               <FaqIcon />
             </span>
             FAQ
           </Link>
-          <Link to="#">
+          <Link to="#" onClick={close}>
             <span>
               <ShopIcon />
             </span>
             Forem Shop
           </Link>
-          <Link to="#">
+          <Link to="#" onClick={close}>
             <span>
               <LoveIcon />
             </span>
             Sponsors
           </Link>
-          <Link to="#">
+          <Link to="#" onClick={close}>
             <span>
               <img src={DevRainbow} />
             </span>
             About
           </Link>
-          <Link to="#">
+          <Link to="#" onClick={close}>
             <span>
               <ContactIcon />
             </span>
             Contact
           </Link>
-          <Link to="#">
+          <Link to="#" onClick={close}>
             <span>
               <img src={GuidesImg} />
             </span>
             Guides
           </Link>
-          <Link to="#">
+          <Link to="#" onClick={close}>
             <span>
               <img src={CompareImg} />
             </span>
@@ -137,19 +137,19 @@ const LeftSidebar = () => {
 
         <section>
           <h3>Other</h3>
-          <Link to="#">
+          <Link to="#" onClick={close}>
             <span>
               <img src={CocImg} />
             </span>
             Code of Conduct
           </Link>
-          <Link to="#">
+          <Link to="#" onClick={close}>
             <span>
               <img src={PrivacyImg} />
             </span>
             Privacy Policy
           </Link>
-          <Link to="#">
+          <Link to="#" onClick={close}>
             <span>
               <img src={TermsImg} />
             </span>

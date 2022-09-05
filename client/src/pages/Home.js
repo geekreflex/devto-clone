@@ -1,27 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
 import LeftSidebar from '../components/LeftSidebar';
+import MainSidebar from '../components/MainSidebar';
 import PostList from '../components/PostList';
 import RightSidebar from '../components/RightSidebar';
 import { Container } from '../styles/DefaultStyles';
 
 const Home = () => {
   return (
-    <HomeWrap>
-      <Container>
-        <Layout>
-          <section className="left">
-            <LeftSidebar />
-          </section>
-          <section className="center">
-            <PostList />
-          </section>
-          <section className="right">
-            <RightSidebar />
-          </section>
-        </Layout>
-      </Container>
-    </HomeWrap>
+    <>
+      <HomeWrap>
+        <Container>
+          <Layout>
+            <section className="left">
+              <LeftSidebar />
+            </section>
+            <section className="center">
+              <PostList />
+            </section>
+            <section className="right">
+              <RightSidebar />
+            </section>
+          </Layout>
+        </Container>
+      </HomeWrap>
+      <MainSidebar />
+    </>
   );
 };
 

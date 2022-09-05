@@ -3,22 +3,28 @@ import styled from 'styled-components';
 import { Container } from '../styles/DefaultStyles';
 import Logo from './excerpts/Logo';
 import AuthLinks from './auth/AuthLinks';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import NavLinks from './excerpts/NavLinks';
 import SearchInput from './SearchInput';
 import HamburgerIcon from '../icons/HamburgerIcon';
 import SearchIcon from '../icons/SearchIcon';
+import { toggleSidenav } from '../features/actionSlice';
 
 const Header = () => {
+  const dispatch = useDispatch();
   const { isAuth } = useSelector((state) => state.auth);
   useEffect(() => {}, []);
+
+  const onSidenav = () => {
+    dispatch(toggleSidenav(true));
+  };
   return (
     <HeaderWrap className="header">
       <Container>
         <HeaderInner>
           <HeaderLeft>
             <Menu>
-              <button className="btn">
+              <button onClick={onSidenav} className="btn">
                 <HamburgerIcon />
               </button>
             </Menu>
