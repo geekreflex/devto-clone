@@ -32,7 +32,7 @@ const Layout = styled.div`
   gap: 15px;
 
   section.left {
-    width: 20%;
+    width: 250px;
   }
 
   section.center {
@@ -40,7 +40,19 @@ const Layout = styled.div`
   }
 
   section.right {
-    width: 23%;
+    width: 25%;
+  }
+
+  @media (max-width: 900px) {
+    section.right {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    section.left {
+      display: none;
+    }
   }
 `;
 

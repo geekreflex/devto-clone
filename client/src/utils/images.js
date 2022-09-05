@@ -5,3 +5,4 @@ export { default as CocImg } from '../assets/images/cocImg.svg';
 export { default as PrivacyImg } from '../assets/images/privacyImg.svg';
 export { default as TermsImg } from '../assets/images/termsImg.svg';
 export { default as DevDarkLogo } from '../assets/images/dev-black.png';
+export { default as DevSurveyImg } from '../assets/images/dev1.png';

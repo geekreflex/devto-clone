@@ -50,6 +50,10 @@ const SearchWrap = styled.div`
       box-shadow: 0 0 0 1px ${(props) => props.theme.brandColor3};
     }
   }
+
+  @media (max-width: 786px) {
+    display: none;
+  }
 `;
 
 export default SearchInput;

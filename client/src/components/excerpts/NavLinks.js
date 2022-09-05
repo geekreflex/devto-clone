@@ -12,9 +12,11 @@ const NavLinks = () => {
 
   return (
     <NavLinksWrap>
-      <Button>
-        <Link to="new">Create Post</Link>
-      </Button>
+      <span className="create-new-btn">
+        <Button>
+          <Link to="new">Create Post</Link>
+        </Button>
+      </span>
       <Link to="#" className="notification">
         <div className="notification-total">3</div>
         <NotificationIcon />
@@ -93,6 +95,12 @@ const NavLinksWrap = styled.div`
     display: flex;
     line-height: 1.1;
     border: 2px solid ${(props) => props.theme.primary};
+  }
+
+  @media (max-width: 768px) {
+    .create-new-btn {
+      display: none;
+    }
   }
 `;
 
