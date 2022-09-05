@@ -6,6 +6,8 @@ import AuthLinks from './auth/AuthLinks';
 import { useSelector } from 'react-redux';
 import NavLinks from './excerpts/NavLinks';
 import SearchInput from './SearchInput';
+import HamburgerIcon from '../icons/HamburgerIcon';
+import SearchIcon from '../icons/SearchIcon';
 
 const Header = () => {
   const { isAuth } = useSelector((state) => state.auth);
@@ -15,10 +17,20 @@ const Header = () => {
       <Container>
         <HeaderInner>
           <HeaderLeft>
+            <Menu>
+              <button className="btn">
+                <HamburgerIcon />
+              </button>
+            </Menu>
             <Logo />
             <SearchInput />
           </HeaderLeft>
           <HeaderRight>
+            <Search>
+              <button className="btn">
+                <SearchIcon />
+              </button>
+            </Search>
             {!isAuth && <AuthLinks />}
             {isAuth && <NavLinks />}
           </HeaderRight>
@@ -55,4 +67,21 @@ const HeaderLeft = styled.div`
 const HeaderRight = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const Menu = styled.div`
+  margin-right: 10px;
+  display: none;
+
+  @media (max-width: 786px) {
+    display: block;
+  }
+`;
+
+const Search = styled.div`
+  display: none;
+
+  @media (max-width: 786px) {
+    display: block;
+  }
 `;

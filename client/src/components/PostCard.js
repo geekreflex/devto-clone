@@ -98,14 +98,14 @@ const PostCard = ({ post, index }) => {
                   <HeartIcon />
                 </span>
                 <span>11</span>
-                Reactions
+                <span>Reactions</span>
               </Link>
               <Link to="#" onClick={onLink}>
                 <span>
                   <CommentIcon />
                 </span>
                 <span>2</span>
-                Comments
+                <span>Comments</span>
               </Link>
             </div>
             <div className="details">
@@ -136,6 +136,10 @@ const CardWrap = styled.div`
     props.focus
       ? `0 0 0 2px ${props.theme.brandColor3}`
       : props.theme.cardShadow};
+
+  @media (max-width: 768px) {
+    border-radius: 0;
+  }
 `;
 
 const CardImg = styled.div`
@@ -148,11 +152,19 @@ const CardImg = styled.div`
   img {
     width: 100%;
   }
+
+  @media (max-width: 768px) {
+    border-radius: 0;
+  }
 `;
 const CardBody = styled.div`
   padding: 20px;
   background-color: ${(props) => props.theme.primary};
   border-radius: 6px;
+
+  @media (max-width: 768px) {
+    border-radius: 0;
+  }
 `;
 
 const UserInfo = styled.div`
@@ -202,6 +214,10 @@ const PostInfo = styled.div`
   flex-direction: column;
   padding-left: 40px;
 
+  @media (max-width: 768px) {
+    padding-left: 0;
+  }
+
   .post-title {
     color: ${(props) => props.theme.textColor1};
     :hover {
@@ -239,6 +255,12 @@ const PostDetails = styled.div`
       font-size: 12px;
       margin-right: 10px;
       color: ${(props) => props.theme.textColor2};
+    }
+
+    @media (max-width: 768px) {
+      span:last-child {
+        display: none;
+      }
     }
 
     a {

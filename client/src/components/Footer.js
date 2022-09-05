@@ -44,12 +44,11 @@ const Footer = () => {
   );
 };
 const FooterWrap = styled.div`
-  height: 250px;
   margin-top: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 50px;
+  padding: 50px 0;
   background-color: ${(props) => props.theme.footerBg};
 `;
 
@@ -59,6 +58,7 @@ const Main = styled.div`
   justify-content: center;
   align-items: center;
   color: ${(props) => props.theme.textColor2};
+  text-align: center;
 
   a {
     color: ${(props) => props.theme.brandColor3};
