@@ -31,6 +31,10 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   gap: 20px;
+
+  @media (max-width: 600px) {
+    gap: 10px;
+  }
 `;
 const Card = styled.div`
   box-shadow: ${(props) => props.theme.cardShadow};
@@ -60,6 +64,15 @@ const Card = styled.div`
       background-color: ${(props) => props.theme.borderColor}50;
       color: ${(props) => props.theme.textColor2} !important;
       fill: currentColor;
+    }
+  }
+
+  @media (max-width: 600px) {
+    margin-bottom: 10px;
+    padding: 10px;
+
+    .comment_name {
+      margin-right: 10px;
     }
   }
 `;

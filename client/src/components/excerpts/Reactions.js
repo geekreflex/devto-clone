@@ -9,8 +9,11 @@ import { Link } from 'react-router-dom';
 import CopyIcon from '../../icons/CopyIcon';
 import OutsideClickHandler from 'react-outside-click-handler';
 
-const Reactions = () => {
+const Reactions = ({ post }) => {
   const [visible, setVisible] = useState(false);
+  let twitterUrl = encodeURIComponent(
+    `"${post?.title}" by @${post?.author?.username} #DEVCommunity #DEVCommunityClone https://clone-devto.herokuapp.com/${post.author.username}/${post.slug}`
+  );
   return (
     <ReactionWrap>
       <Tooltip content="Like" pos="bottom">
@@ -54,7 +57,13 @@ const Reactions = () => {
                   <CopyIcon />
                 </span>
               </div>
-              <Link to="#">Share to Twitter</Link>
+              <a
+                target="_blank"
+                rel="noopener"
+                href={`https://twitter.com/intent/tweet?text=${twitterUrl}`}
+              >
+                Share to Twitter
+              </a>
               <Link to="#">Share to LinkedIn</Link>
               <Link to="#">Share to Reddit</Link>
               <Link to="#">Share to Hacker News</Link>

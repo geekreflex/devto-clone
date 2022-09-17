@@ -73,6 +73,14 @@ function App() {
             }
           />
           <Route
+            path="/:username/:postSlug/edit"
+            element={
+              <ProtectedRoute auth={isAuth}>
+                <NewPost />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="settings"
             element={
               <ProtectedRoute auth={isAuth}>

@@ -44,9 +44,11 @@ const CommentSection = ({ post }) => {
           Discussion
           <span>({comments?.length})</span>
         </h2>
-        <ButtonGrey>
-          <button>Subscribe</button>
-        </ButtonGrey>
+        <div className="btn-wrap">
+          <ButtonGrey>
+            <button>Subscribe</button>
+          </ButtonGrey>
+        </div>
       </TopSect>
       <CommentField>
         <Avatar img={post?.author?.avatar} size={40} />
@@ -96,13 +98,22 @@ const CommentSection = ({ post }) => {
 const Wrapper = styled.div`
   padding: 50px;
   border-top: 1px solid ${(props) => props.theme.borderColor};
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const TopSect = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
+  gap: 10px;
   h2 {
+    width: 30%;
+    display: flex;
+    flex-wrap: wrap;
     span {
       margin-left: 10px;
     }
@@ -114,6 +125,11 @@ const CommentField = styled.div`
   justify-content: space-between;
   gap: 20px;
   margin-bottom: 30px;
+
+  @media (max-width: 768px) {
+    gap: 10px;
+    margin-bottom: 10px;
+  }
 `;
 
 const InputSect = styled.div`

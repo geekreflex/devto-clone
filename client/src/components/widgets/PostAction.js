@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const PostAction = () => {
+const PostAction = ({ post }) => {
   return (
     <ActionWrap>
-      <Link to="#">Edit</Link>
+      <Link to={`/${post?.author?.username}/${post.slug}/edit`}>Edit</Link>
       <Link to="#">Manage</Link>
       <Link to="#">Stats</Link>
     </ActionWrap>
@@ -13,9 +13,6 @@ const PostAction = () => {
 };
 
 const ActionWrap = styled.div`
-  position: absolute;
-  right: 30px;
-  top: 30px;
   background-color: rgba(245, 158, 11, 0.2);
   border: 1px solid rgba(245, 158, 11, 0.2);
   padding: 8px;
@@ -31,6 +28,11 @@ const ActionWrap = styled.div`
     :hover {
       background-color: rgba(255, 255, 255, 0.05);
     }
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
+    margin-bottom: 20px;
   }
 `;
 

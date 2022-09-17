@@ -10,63 +10,50 @@ import moment from 'moment';
 import PostTagList from '../components/widgets/PostTagList';
 import Markdown from '../components/widgets/Markdown';
 import CommentSection from '../components/CommentSection';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PostAction from '../components/widgets/PostAction';
+import { getOnePostAsync } from '../features/postSlice';
 
 const Post = () => {
   const { username, postSlug } = useParams();
-  const [post, setPost] = useState(null);
+  const dispatch = useDispatch();
   const me = useSelector((state) => state.user.user);
+  const post = useSelector((state) => state.post.post);
 
   useEffect(() => {
-    getPost();
+    dispatch(getOnePostAsync({ username, postSlug }));
   }, [username, postSlug]);
-
-  const getPost = async () => {
-    try {
-      const config = {
-        withCredentials: true,
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-
-      const { data } = await axios.get(
-        `${BASE_URL}/posts/${username}/${postSlug}`,
-        config
-      );
-
-      setPost(data.payload);
-    } catch (error) {}
-  };
 
   return (
     <PostWrap>
       <Container>
         <PostLayout>
           <PostReaction>
-            <Reactions />
+            <Reactions post={post} />
           </PostReaction>
           <PostMain>
-            {me?.username === post?.author?.username && <PostAction />}
             {post?.coverImg && (
               <PostImg>
                 <img src={post?.coverImg} />
               </PostImg>
             )}
             <PostContent>
-              <section className="info-sect">
-                <Link to={`/${post?.author?.username}`} className="avatar">
-                  <img src={post?.author?.avatar} />
-                </Link>
-                <div className="details">
-                  <Link to={`/${post?.author?.username}`}>
-                    {post?.author?.name}
+              <PostUserAction>
+                <section className="info-sect">
+                  <Link to={`/${post?.author?.username}`} className="avatar">
+                    <img src={post?.author?.avatar} />
                   </Link>
-                  <p>Posted on {moment(post?.createdAt).format('MMM, D')}</p>
-                </div>
-              </section>
+                  <div className="details">
+                    <Link to={`/${post?.author?.username}`}>
+                      {post?.author?.name}
+                    </Link>
+                    <p>Posted on {moment(post?.createdAt).format('MMM, D')}</p>
+                  </div>
+                </section>
+                {me?.username === post?.author?.username && (
+                  <PostAction post={post} />
+                )}
+              </PostUserAction>
               <section className="title-tags">
                 <h1>{post?.title}</h1>
                 <PostTagList tags={post?.tags} />
@@ -131,6 +118,60 @@ const Post = () => {
 };
 
 const PostWrap = styled.div``;
+
+const PostUserAction = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+
+  .info-sect {
+    display: flex;
+    align-items: center;
+
+    .details {
+      a {
+        color: ${(props) => props.theme.textColor1};
+        font-weight: 600;
+
+        :hover {
+          color: ${(props) => props.theme.brandColor3};
+        }
+      }
+    }
+
+    .avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      margin-right: 10px;
+
+      img {
+        width: 100%;
+        border-radius: 50%;
+      }
+    }
+
+    p {
+      line-height: 1;
+      font-size: 12px;
+      color: ${(props) => props.theme.textColor3};
+    }
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .info-sect {
+      order: 2;
+    }
+
+    :last-child {
+      order: 1;
+    }
+  }
+`;
 const PostLayout = styled.div`
   display: flex;
   gap: 15px;
@@ -185,40 +226,6 @@ const PostImg = styled.div`
 
 const PostContent = styled.div`
   padding: 30px 50px;
-  .info-sect {
-    display: flex;
-    align-items: center;
-    margin-bottom: 30px;
-
-    .details {
-      a {
-        color: ${(props) => props.theme.textColor1};
-        font-weight: 600;
-
-        :hover {
-          color: ${(props) => props.theme.brandColor3};
-        }
-      }
-    }
-
-    .avatar {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      margin-right: 10px;
-
-      img {
-        width: 100%;
-        border-radius: 50%;
-      }
-    }
-
-    p {
-      line-height: 1;
-      font-size: 12px;
-      color: ${(props) => props.theme.textColor3};
-    }
-  }
 
   .title-tags {
     margin-bottom: 30px;

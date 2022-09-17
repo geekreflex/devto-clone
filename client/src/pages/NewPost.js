@@ -10,9 +10,12 @@ import NewPostFooter from '../components/excerpts/NewPostFooter';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPostAsync } from '../features/postSlice';
 import UnsavedChanges from '../components/widgets/UnsavedChanges';
+import { useLocation } from 'react-router-dom';
 
 const NewPost = () => {
+  const location = useLocation();
   const [mode, setMode] = useState('edit');
+  const [pageMode, setPageMode] = useState('new-post');
   const [focused, setFocused] = useState('');
   const storeKey = `editor-${window.location.href}`;
   const [data, setData] = useLocalStorage(storeKey, []);
@@ -23,6 +26,7 @@ const NewPost = () => {
   const [coverImg, setCoverImg] = useState(data?.coverImg || '');
   const { unsavedModal } = useSelector((state) => state.action);
   const dispatch = useDispatch();
+  const post = useSelector((state) => state.post.post);
 
   useEffect(() => {
     const payload = {
@@ -33,6 +37,10 @@ const NewPost = () => {
     };
     setData(payload);
   }, [title, tagList, content, coverImg]);
+
+  useEffect(() => {
+    checkEditPost();
+  }, []);
 
   const onMode = (mode) => {
     setMode(mode);
@@ -49,13 +57,34 @@ const NewPost = () => {
       content,
       coverImg,
     };
-    console.log(payload);
-    dispatch(createPostAsync(payload));
+    if (pageMode === 'edit-post') {
+      console.log('Post updated');
+    } else {
+      dispatch(createPostAsync(payload));
+    }
     // I need to look for a way to remove
     // the data from storage after successfully
     // posting.
     localStorage.removeItem(storeKey);
   };
+
+  const checkEditPost = () => {
+    let isEdit = location.pathname.split('/');
+    if (isEdit[isEdit.length - 1] === 'edit') {
+      setPageMode('edit-post');
+    } else {
+      setPageMode('new-post');
+    }
+  };
+
+  useEffect(() => {
+    if (pageMode === 'edit-post') {
+      setTitle(post.title);
+      setContent(post.content);
+      setTagList(post.tags);
+      setCoverImg(post.coverImg);
+    }
+  }, [pageMode]);
 
   return (
     <>
@@ -94,7 +123,7 @@ const NewPost = () => {
                 <HelpSection focused={focused} />
               </HelpArea>
             </Inner>
-            <NewPostFooter onPublish={onPublish} />
+            <NewPostFooter onPublish={onPublish} pageMode={pageMode} />
           </Main>
         </Container>
       </NewPostWrap>
