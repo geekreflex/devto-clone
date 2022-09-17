@@ -56,7 +56,8 @@ const PostCard = ({ post, index }) => {
       {post.coverImg && index === 0 && (
         <CardImg>
           <img
-            src={post.coverImg}
+            title={post?.title}
+            src={post?.coverImg}
             referrerPolicy="no-referrer"
             alt="Some random picture placeholder"
           />

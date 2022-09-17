@@ -14,11 +14,11 @@ const NewPostFooter = ({ onPublish }) => {
             {status === 'loading' ? 'Publishing...' : 'Publish'}
           </button>
         </ButtonFill>
-        <button className="btn">Save draft</button>
+        <button className="btn">Save</button>
         <button className="btn">
           <HexIcon />
         </button>
-        <button className="btn revert">Revert new changes</button>
+        <button className="btn revert">Revert</button>
       </FooterMain>
     </FooterWrap>
   );
@@ -28,6 +28,11 @@ const FooterWrap = styled.div`
   height: 90px;
   display: flex;
   align-items: center;
+
+  @media (max-width: 768px) {
+    padding: 0 20px;
+    height: 60px;
+  }
 `;
 const FooterMain = styled.div`
   display: flex;

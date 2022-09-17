@@ -108,6 +108,10 @@ const TopSection = styled.div`
     width: 100%;
     font-family: 'Poppins';
   }
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 const TitleField = styled.div`
@@ -119,6 +123,13 @@ const TitleField = styled.div`
     white-space: pre-wrap;
     overflow: hidden;
   }
+
+  @media (max-width: 768px) {
+    textarea {
+      font-size: 2rem;
+      margin-bottom: 0px;
+    }
+  }
 `;
 const TagField = styled.div`
   position: relative;
@@ -128,6 +139,10 @@ const ContentField = styled.div`
   flex: 1;
   padding: 20px 50px;
   display: flex;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 
   textarea {
     width: 100%;
@@ -149,6 +164,11 @@ export const EditToolWrap = styled.div`
   height: 56px;
   display: flex;
   align-items: center;
+  overflow-x: auto;
+
+  @media (max-width: 768px) {
+    padding: 0 10px;
+  }
 `;
 
 export default EditPost;

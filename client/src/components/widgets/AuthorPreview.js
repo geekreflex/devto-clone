@@ -48,7 +48,7 @@ const AuthorPreviewWrap = styled.div`
   position: absolute;
   z-index: 9;
   background-color: ${(props) => props.theme.primary};
-  top: 27px;
+  top: 30px;
   min-width: 280px;
   max-width: 350px;
   box-shadow: ${(props) => props.theme.shadow1};

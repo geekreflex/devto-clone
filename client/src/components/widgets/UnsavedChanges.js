@@ -21,7 +21,7 @@ const UnsavedChanges = () => {
           this page?
         </p>
         <div className="btn-wrap">
-          <ButtonDanger style={{ marginRight: '20px' }}>
+          <ButtonDanger>
             <Link onClick={close} to="/">
               Yes, leave the page
             </Link>
@@ -39,6 +39,7 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   width: 600px;
+  max-width: 100%;
 
   p {
     margin-bottom: 20px;
@@ -48,6 +49,13 @@ const Wrap = styled.div`
   .btn-wrap {
     display: flex;
     align-items: center;
+    gap: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .btn-wrap {
+      gap: 10px;
+    }
   }
 `;
 

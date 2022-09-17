@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { IoCloseSharp } from 'react-icons/io5';
 import styled from 'styled-components';
 
@@ -10,7 +10,7 @@ const SelectedTags = ({ tagList, setTagList }) => {
 
   return (
     <SelectedTagsWrap>
-      {tagList.map((tag) => (
+      {tagList?.map((tag) => (
         <Tag key={tag._id} color={tag.color}>
           <span className="hash">#</span>
           {tag.alias}

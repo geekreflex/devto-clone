@@ -1,26 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Avatar from './excerpts/Avatar';
 import { IoEllipsisHorizontalSharp } from 'react-icons/io5';
 import moment from 'moment';
 import AuthorIcon from '../icons/AuthorIcon';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import AuthorPreview from './widgets/AuthorPreview';
 
 const CommentCard = ({ comment }) => {
+  const [preview, setPreview] = useState(false);
   const me = useSelector((state) => state.user.user);
   return (
     <Wrapper>
-      <Avatar img={comment?.author?.avatar} />
+      <Link to={`/${comment?.author?.username}`}>
+        <Avatar img={comment?.author?.avatar} />
+      </Link>
       <Card>
         <div className="comment_info">
           <div className="comment_deets">
-            <span className="comment_name">
+            <span
+              className="comment_name"
+              onMouseEnter={() => setPreview(true)}
+              onMouseLeave={() => setPreview(false)}
+            >
               {comment?.author?.name}
               {me?.username === comment?.author?.username && (
                 <i>
                   <AuthorIcon />
                 </i>
               )}
+              {preview && <AuthorPreview author={comment?.author} />}
             </span>
             <span className="comment_sep_dot"></span>
             <span className="comment_date">
@@ -57,6 +67,7 @@ const Card = styled.div`
   .comment_deets {
     display: flex;
     align-items: center;
+    position: relative;
   }
 
   .comment_info {
@@ -75,6 +86,12 @@ const Card = styled.div`
   .comment_name {
     display: flex;
     align-items: center;
+    cursor: pointer;
+    padding: 3px 0px;
+    border-radius: 5px;
+    :hover {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
     i {
       display: flex;
       align-items: center;

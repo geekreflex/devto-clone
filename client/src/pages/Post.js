@@ -49,7 +49,7 @@ const Post = () => {
                     <p>Posted on {moment(post?.createdAt).format('MMM, D')}</p>
                   </div>
                 </section>
-                {me?.username === post?.author?.username && (
+                {post?.title && me?.username === post?.author?.username && (
                   <PostAction post={post} />
                 )}
               </PostUserAction>
@@ -185,7 +185,7 @@ const PostMain = styled.div`
   flex-direction: column;
   background-color: ${(props) => props.theme.primary};
   border-radius: 8px;
-  overflow: hidden;
+  /* overflow: hidden; */
   box-shadow: ${(props) => props.theme.cardShadow};
   position: relative;
 

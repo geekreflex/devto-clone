@@ -8,7 +8,7 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 import HelpSection from '../components/excerpts/HelpSection';
 import NewPostFooter from '../components/excerpts/NewPostFooter';
 import { useDispatch, useSelector } from 'react-redux';
-import { createPostAsync } from '../features/postSlice';
+import { createPostAsync, updatePostAsync } from '../features/postSlice';
 import UnsavedChanges from '../components/widgets/UnsavedChanges';
 import { useLocation } from 'react-router-dom';
 
@@ -58,7 +58,7 @@ const NewPost = () => {
       coverImg,
     };
     if (pageMode === 'edit-post') {
-      console.log('Post updated');
+      dispatch(updatePostAsync(post._id));
     } else {
       dispatch(createPostAsync(payload));
     }
@@ -88,8 +88,8 @@ const NewPost = () => {
 
   return (
     <>
-      <NewPostHeader onMode={onMode} storeKey={storeKey} />
       <NewPostWrap>
+        <NewPostHeader onMode={onMode} storeKey={storeKey} />
         <Container>
           <Main>
             <Inner>
@@ -126,18 +126,29 @@ const NewPost = () => {
             <NewPostFooter onPublish={onPublish} pageMode={pageMode} />
           </Main>
         </Container>
+        {unsavedModal && <UnsavedChanges />}
       </NewPostWrap>
-      {unsavedModal && <UnsavedChanges />}
     </>
   );
 };
 
-const NewPostWrap = styled.div``;
+const NewPostWrap = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: ${(props) => props.theme.secondary};
+  z-index: 9998;
+`;
 const Main = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 50px;
   height: calc(100vh - 76px);
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    height: calc(100vh - 57px);
+  }
 `;
 
 const Inner = styled.div`
@@ -145,6 +156,10 @@ const Inner = styled.div`
   gap: 20px;
   flex: 1;
   height: calc(100% - 90px);
+
+  @media (max-width: 768px) {
+    height: calc(100vh - 60px);
+  }
 `;
 const ContentArea = styled.div`
   flex: 1;
@@ -156,6 +171,10 @@ const ContentArea = styled.div`
 `;
 const HelpArea = styled.div`
   width: 30%;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export default NewPost;

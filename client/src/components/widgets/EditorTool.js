@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import BoldIcon from '../../icons/BoldIcon';
 import CodeBlockIcon from '../../icons/CodeBlockIcon';
@@ -21,65 +21,55 @@ import OutsideClickHandler from 'react-outside-click-handler';
 
 const EditorTool = () => {
   const [more, setMore] = useState(false);
+  const [splitNum, setSplitNum] = useState(11);
+
+  const windowSize = () => {
+    if (window.innerWidth < 1200) {
+      setSplitNum(8);
+    } else {
+      setSplitNum(11);
+    }
+
+    if (window.innerWidth < 768) {
+      setSplitNum(6);
+    } else {
+      setSplitNum(8);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      windowSize();
+    });
+    windowSize();
+  }, []);
+
+  const toolList = [
+    { content: 'Bold CTRL + B', icon: <BoldIcon /> },
+    { content: 'Italic CTRL + I', icon: <ItalicIcon /> },
+    { content: 'Link CTRL + K', icon: <LinkIcon /> },
+    { content: 'Ordered list', icon: <OrderedIcon /> },
+    { content: 'Unordered list', icon: <UnorderedIcon /> },
+    { content: 'Heading', icon: <HeadingIcon /> },
+    { content: 'Quote', icon: <QuoteIcon /> },
+    { content: 'Code', icon: <CodeIcon /> },
+    { content: 'Code block', icon: <CodeBlockIcon /> },
+    { content: 'Embed CTRL + SHIFT + K', icon: <EmbedIcon /> },
+    { content: 'Upload image', icon: <UploadImgIcon /> },
+    { content: 'Underline CTRL + U', icon: <UnderlineIcon /> },
+    { content: 'Strikethrough CTRL + SHIFT + X', icon: <StrikeThroughIcon /> },
+    { content: 'Line divider', icon: <LineDividerIcon /> },
+    { content: 'Help', icon: <HelpIcon /> },
+  ];
 
   return (
     <ToolWrap>
       <ToolLeft>
-        <Tooltip content="Bold CTRL + B" pos="bottom">
-          <button className="btn">
-            <BoldIcon />
-          </button>
-        </Tooltip>
-        <Tooltip content="Italic CTRL + I" pos="bottom">
-          <button className="btn">
-            <ItalicIcon />
-          </button>
-        </Tooltip>
-        <Tooltip content="Link CTRL + K" pos="bottom">
-          <button className="btn">
-            <LinkIcon />
-          </button>
-        </Tooltip>
-        <Tooltip content="Ordered list" pos="bottom">
-          <button className="btn">
-            <OrderedIcon />
-          </button>
-        </Tooltip>
-        <Tooltip content="Unordered list" pos="bottom">
-          <button className="btn">
-            <UnorderedIcon />
-          </button>
-        </Tooltip>
-        <Tooltip content="Heading" pos="bottom">
-          <button className="btn">
-            <HeadingIcon />
-          </button>
-        </Tooltip>
-        <Tooltip content="Quote" pos="bottom">
-          <button className="btn">
-            <QuoteIcon />
-          </button>
-        </Tooltip>
-        <Tooltip content="Code" pos="bottom">
-          <button className="btn">
-            <CodeIcon />
-          </button>
-        </Tooltip>
-        <Tooltip content="Code block" pos="bottom">
-          <button className="btn">
-            <CodeBlockIcon />
-          </button>
-        </Tooltip>
-        <Tooltip content="Embed CTRL + SHIFT + K" pos="bottom">
-          <button className="btn">
-            <EmbedIcon />
-          </button>
-        </Tooltip>
-        <Tooltip content="Upload image" pos="bottom">
-          <button className="btn">
-            <UploadImgIcon />
-          </button>
-        </Tooltip>
+        {toolList.slice(0, splitNum).map((tool, index) => (
+          <Tooltip key={index} content={tool.content} pos="bottom">
+            <button className="btn">{tool.icon}</button>
+          </Tooltip>
+        ))}
       </ToolLeft>
       <ToolRight>
         <OutsideClickHandler onOutsideClick={() => setMore(false)}>
@@ -92,24 +82,11 @@ const EditorTool = () => {
         </OutsideClickHandler>
         <OutsideClickHandler onOutsideClick={() => setMore(false)}>
           <MoreOptions visible={more}>
-            <Tooltip content="Underline CTRL + U" pos="bottom">
-              <button className="btn">
-                <UnderlineIcon />
-              </button>
-            </Tooltip>
-            <Tooltip content="Strikethrough CTRL + SHIFT + X" pos="bottom">
-              <button className="btn">
-                <StrikeThroughIcon />
-              </button>
-            </Tooltip>
-            <Tooltip content="Line divider" pos="bottom">
-              <button className="btn">
-                <LineDividerIcon />
-              </button>
-            </Tooltip>
-            <button className="btn">
-              <HelpIcon />
-            </button>
+            {toolList.slice(splitNum, toolList.length).map((tool, index) => (
+              <Tooltip key={index} content={tool.content} pos="bottom">
+                <button className="btn">{tool.icon}</button>
+              </Tooltip>
+            ))}
           </MoreOptions>
         </OutsideClickHandler>
       </ToolRight>
@@ -122,6 +99,7 @@ const ToolWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: 56px;
   background-color: transparent;
 `;
 const ToolLeft = styled.div`

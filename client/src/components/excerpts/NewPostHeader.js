@@ -24,7 +24,9 @@ const NewPostHeader = ({ onMode, storeKey }) => {
       <Container>
         <Main>
           <div className="title-logo">
-            <Logo />
+            <div>
+              <Logo />
+            </div>
             <p>Create Post</p>
           </div>
           <div className="btn-wrap">
@@ -56,6 +58,8 @@ const HeaderWrap = styled.div`
   width: 100%;
   height: 56px;
   padding: 0 20px;
+  z-index: 999;
+  background-color: ${(props) => props.theme.secondary};
 
   .btn {
     padding: 10px;
@@ -79,6 +83,12 @@ const Main = styled.div`
 
   .btn-wrap {
     display: flex;
+  }
+
+  @media (max-width: 768px) {
+    .title-logo div {
+      display: none;
+    }
   }
 `;
 

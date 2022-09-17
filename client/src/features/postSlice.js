@@ -110,6 +110,31 @@ export const createPostAsync = createAsyncThunk(
   }
 );
 
+export const updatePostAsync = createAsyncThunk(
+  'updatePostAsync/post',
+  async (payload, thunkAPI) => {
+    try {
+      const config = {
+        withCredentials: true,
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const { data } = await axios.put(`${BASE_URL}/posts/${payload}`, config);
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
 const postSlice = createSlice({
   name: 'post',
   initialState,
@@ -135,6 +160,18 @@ const postSlice = createSlice({
       window.location.href = `/${post.author.username}/${post.slug}`;
     },
     [createPostAsync.rejected]: (state, action) => {
+      state.status = 'idle';
+    },
+
+    [updatePostAsync.pending]: (state) => {
+      state.status = 'loading';
+    },
+    [updatePostAsync.fulfilled]: (state, action) => {
+      state.status = 'idle';
+      let post = action.payload.payload;
+      window.location.href = `/${post.author.username}/${post.slug}`;
+    },
+    [updatePostAsync.rejected]: (state, action) => {
       state.status = 'idle';
     },
 
