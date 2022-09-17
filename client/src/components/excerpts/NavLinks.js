@@ -9,6 +9,7 @@ import OutsideClickHandler from 'react-outside-click-handler';
 const NavLinks = () => {
   const { user } = useSelector((state) => state.user);
   const [visible, setVisible] = useState(false);
+  const [notification, setNotification] = useState(0);
 
   const linkList = [
     { name: 'Dashboard', path: '#' },
@@ -26,7 +27,11 @@ const NavLinks = () => {
         </Button>
       </span>
       <Link to="#" className="notification">
-        <div className="notification-total">0</div>
+        {notification > 0 && (
+          <div className="notification-total">
+            {notification > 99 ? '99+' : notification}
+          </div>
+        )}
         <NotificationIcon />
       </Link>
       <UserMenu>

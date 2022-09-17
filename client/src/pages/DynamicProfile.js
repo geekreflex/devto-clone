@@ -148,8 +148,9 @@ const Main = styled.div`
   width: 1000px;
   background-color: ${(props) => props.theme.primary};
   box-shadow: ${(props) => props.theme.cardShadow};
-  margin-top: 50px;
+  margin-top: 40px;
   border-radius: 6px;
+  position: relative;
 
   .img-wrap {
     position: absolute;
@@ -197,7 +198,6 @@ const Main = styled.div`
     }
 
     p {
-      width: 500px;
       text-align: center;
       margin-bottom: 20px;
     }
@@ -245,6 +245,40 @@ const Main = styled.div`
     p {
       font-size: 12px;
       color: ${(props) => props.theme.textColor2};
+    }
+  }
+
+  @media (max-width: 768px) {
+    .img-wrap {
+      width: 70px;
+      height: 70px;
+      left: 60px;
+      top: 20px;
+    }
+
+    .card-info {
+      flex-wrap: wrap;
+    }
+
+    .card-user-data {
+      align-items: flex-start;
+      p {
+        text-align: left;
+      }
+    }
+    .card-top,
+    .card-more {
+      padding: 10px;
+      flex-wrap: wrap;
+    }
+
+    .card-more {
+      align-items: flex-start;
+      justify-content: flex-start;
+
+      p {
+        text-align: left;
+      }
     }
   }
 `;
