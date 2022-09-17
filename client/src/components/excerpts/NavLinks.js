@@ -10,6 +10,14 @@ const NavLinks = () => {
   const { user } = useSelector((state) => state.user);
   const [visible, setVisible] = useState(false);
 
+  const linkList = [
+    { name: 'Dashboard', path: '#' },
+    { name: 'Create Post', path: '#' },
+    { name: 'Reading list', path: '#' },
+    { name: 'Settings', path: 'settings' },
+    { name: 'Sign Out', path: 'signout_confirm' },
+  ];
+
   return (
     <NavLinksWrap>
       <span className="create-new-btn">
@@ -34,27 +42,17 @@ const NavLinks = () => {
           </button>
           <Dropdown visible={visible}>
             <ul>
-              <li id="user-info">
+              <li id="user-info" onClick={() => setVisible(false)}>
                 <Link to={`/${user?.username}`}>
                   <span>{user?.name}</span>
                   <span id="username">@{user?.username}</span>
                 </Link>
               </li>
-              <li>
-                <Link to="#">Dashboard</Link>
-              </li>
-              <li>
-                <Link to="#">Create Post</Link>
-              </li>
-              <li>
-                <Link to="#">Reading list</Link>
-              </li>
-              <li>
-                <Link to="settings">Settings</Link>
-              </li>
-              <li>
-                <Link to="signout_confirm">Sign Out</Link>
-              </li>
+              {linkList.map((link) => (
+                <li onClick={() => setVisible(false)}>
+                  <Link to={link.path}>{link.name}</Link>
+                </li>
+              ))}
             </ul>
           </Dropdown>
         </OutsideClickHandler>
