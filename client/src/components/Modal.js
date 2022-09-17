@@ -31,7 +31,7 @@ const ModalWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 999999999998;
 `;
 
 const ModalOverlay = styled.div`
@@ -43,7 +43,7 @@ const ModalOverlay = styled.div`
 const ModalMain = styled.div`
   position: relative;
   background-color: ${(props) => props.theme.primary};
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   border-radius: 15px;
   border: 1px solid ${(props) => props.theme.borderColor};
   overflow: hidden;

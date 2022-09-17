@@ -26,7 +26,7 @@ const NavLinks = () => {
         </Button>
       </span>
       <Link to="#" className="notification">
-        <div className="notification-total">3</div>
+        <div className="notification-total">0</div>
         <NotificationIcon />
       </Link>
       <UserMenu>

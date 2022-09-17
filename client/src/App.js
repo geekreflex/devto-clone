@@ -35,6 +35,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (location.pathname === '/new') {
       document.body.classList.add('hidden');
     } else {

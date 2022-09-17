@@ -1,11 +1,9 @@
-import axios from 'axios';
-import React, { useState } from 'react';
+import React from 'react';
 import { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Reactions from '../components/excerpts/Reactions';
 import { ButtonFill, Container } from '../styles/DefaultStyles';
-import { BASE_URL } from '../utils/constants';
 import moment from 'moment';
 import PostTagList from '../components/widgets/PostTagList';
 import Markdown from '../components/widgets/Markdown';
@@ -17,8 +15,9 @@ import { getOnePostAsync } from '../features/postSlice';
 const Post = () => {
   const { username, postSlug } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const me = useSelector((state) => state.user.user);
-  const post = useSelector((state) => state.post.post);
+  const { post, status } = useSelector((state) => state.post);
 
   useEffect(() => {
     dispatch(getOnePostAsync({ username, postSlug }));
@@ -68,7 +67,7 @@ const Post = () => {
             <PostAuthorCard className="fixed">
               <div
                 className="backdrop"
-                style={{ backgroundColor: post?.author.brandColor1 }}
+                style={{ backgroundColor: post?.author?.brandColor1 }}
               ></div>
               <div className="author-main-info">
                 <div className="author-info_top">
@@ -85,7 +84,11 @@ const Post = () => {
                 <div className="author-info_bottom">
                   <ButtonFill>
                     {me?.username === post?.author?.username ? (
-                      <button>Edit Profile</button>
+                      <button
+                        onClick={() => navigate(`/${post?.author?.username}`)}
+                      >
+                        Edit Profile
+                      </button>
                     ) : (
                       <button>Follow</button>
                     )}

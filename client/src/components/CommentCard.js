@@ -3,15 +3,26 @@ import styled from 'styled-components';
 import Avatar from './excerpts/Avatar';
 import { IoEllipsisHorizontalSharp } from 'react-icons/io5';
 import moment from 'moment';
+import AuthorIcon from '../icons/AuthorIcon';
+import { useSelector } from 'react-redux';
 
 const CommentCard = ({ comment }) => {
+  const me = useSelector((state) => state.user.user);
   return (
     <Wrapper>
       <Avatar img={comment?.author?.avatar} />
       <Card>
         <div className="comment_info">
-          <div className="comment-deets">
-            <span className="comment_name">{comment?.author?.name}</span>
+          <div className="comment_deets">
+            <span className="comment_name">
+              {comment?.author?.name}
+              {me?.username === comment?.author?.username && (
+                <i>
+                  <AuthorIcon />
+                </i>
+              )}
+            </span>
+            <span className="comment_sep_dot"></span>
             <span className="comment_date">
               {moment(comment?.createdAt).format('MMM, D')}
             </span>
@@ -43,14 +54,31 @@ const Card = styled.div`
   flex: 1;
   margin-bottom: 20px;
 
+  .comment_deets {
+    display: flex;
+    align-items: center;
+  }
+
   .comment_info {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
+  .comment_sep_dot {
+    padding: 3px;
+    background-color: ${(props) => props.theme.textColor3};
+    border-radius: 50%;
+    margin: 0 10px;
+  }
+
   .comment_name {
-    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    i {
+      display: flex;
+      align-items: center;
+    }
   }
 
   .comment_date {

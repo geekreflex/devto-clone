@@ -13,12 +13,15 @@ import Avatar from './excerpts/Avatar';
 import EditorTool from './widgets/EditorTool';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCommentsAsync, postCommentAsync } from '../features/commentSlice';
+import { toggleLoginConModal } from '../features/actionSlice';
 
 const CommentSection = ({ post }) => {
   const [comment, setComment] = useState('');
   const { comments } = useSelector((state) => state.comment);
   const [focus, setFocus] = useState(false);
   const [focusBorder, setFocusBorder] = useState(false);
+  const me = useSelector((state) => state.user.user);
+  const isAuth = useSelector((state) => state.user.isAuth);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,6 +40,17 @@ const CommentSection = ({ post }) => {
     dispatch(postCommentAsync(payload));
     setComment('');
   };
+
+  const onCheckAuth = () => {
+    if (!isAuth) {
+      dispatch(toggleLoginConModal(true));
+      return;
+    }
+
+    setFocus(true);
+    setFocusBorder(true);
+  };
+
   return (
     <Wrapper>
       <TopSect>
@@ -46,7 +60,11 @@ const CommentSection = ({ post }) => {
         </h2>
         <div className="btn-wrap">
           <ButtonGrey>
-            <button>Subscribe</button>
+            <button>
+              {me?.username === post?.author?.username
+                ? 'Unsubscribe'
+                : 'Subscribe'}
+            </button>
           </ButtonGrey>
         </div>
       </TopSect>
@@ -58,10 +76,7 @@ const CommentSection = ({ post }) => {
               placeholder="Add to the discussion"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              onFocus={() => {
-                setFocus(true);
-                setFocusBorder(true);
-              }}
+              onFocus={onCheckAuth}
               onBlur={() => setFocusBorder(false)}
             />
             {focus && <EditorTool />}

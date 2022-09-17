@@ -12,7 +12,7 @@ import OutsideClickHandler from 'react-outside-click-handler';
 const Reactions = ({ post }) => {
   const [visible, setVisible] = useState(false);
   let twitterUrl = encodeURIComponent(
-    `"${post?.title}" by @${post?.author?.username} #DEVCommunity #DEVCommunityClone https://clone-devto.herokuapp.com/${post.author.username}/${post.slug}`
+    `"${post?.title}" by @${post?.author?.username} #DEVCommunity #DEVCommunityClone https://clone-devto.herokuapp.com/${post?.author?.username}/${post?.slug}`
   );
   return (
     <ReactionWrap>
@@ -21,7 +21,7 @@ const Reactions = ({ post }) => {
           <span className="reaction-icon ">
             <HeartIconLg />
           </span>
-          <span className="reaction-total">2</span>
+          <span className="reaction-total">0</span>
         </div>
       </Tooltip>
       <Tooltip content="Unicorn" pos="bottom">
@@ -29,7 +29,7 @@ const Reactions = ({ post }) => {
           <span className="reaction-icon">
             <UnicornIcon />
           </span>
-          <span className="reaction-total">10</span>
+          <span className="reaction-total">0</span>
         </div>
       </Tooltip>
       <Tooltip content="Save" pos="bottom">
@@ -37,7 +37,7 @@ const Reactions = ({ post }) => {
           <span className="reaction-icon">
             <BookmarkIconLg />
           </span>
-          <span className="reaction-total">3</span>
+          <span className="reaction-total">0</span>
         </div>
       </Tooltip>
       <div className="option-wrap">

@@ -52,7 +52,7 @@ export const ButtonFill = styled(Button)`
   button,
   a {
     background-color: ${(props) => props.theme.brandColor};
-    color: ${(props) => props.theme.brandTextColor};
+    color: ${(props) => props.theme.brandTextColor} !important;
     border: none;
 
     :hover {
