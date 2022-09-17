@@ -21,6 +21,7 @@ const Post = () => {
 
   useEffect(() => {
     dispatch(getOnePostAsync({ username, postSlug }));
+    console.log(username, postSlug);
   }, [username, postSlug]);
 
   return (

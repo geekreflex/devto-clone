@@ -58,7 +58,7 @@ const NewPost = () => {
       coverImg,
     };
     if (pageMode === 'edit-post') {
-      dispatch(updatePostAsync(post._id));
+      dispatch(updatePostAsync({ payload, id: post._id }));
     } else {
       dispatch(createPostAsync(payload));
     }

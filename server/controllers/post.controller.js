@@ -73,6 +73,9 @@ const updatePost = expressAsyncHandler(async (req, res) => {
         message: 'Post updated successfully',
       });
     }
+  ).populate(
+    'author',
+    'username name avatar location bio email work brandColor1 createdAt'
   );
 });
 

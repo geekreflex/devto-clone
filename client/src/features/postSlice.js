@@ -122,7 +122,11 @@ export const updatePostAsync = createAsyncThunk(
         },
       };
 
-      const { data } = await axios.put(`${BASE_URL}/posts/${payload}`, config);
+      const { data } = await axios.put(
+        `${BASE_URL}/posts/${payload.id}`,
+        payload.payload,
+        config
+      );
 
       return data;
     } catch (error) {

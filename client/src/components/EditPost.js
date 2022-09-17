@@ -35,8 +35,6 @@ const EditPost = ({
     elem.style.minHeight = elem.scrollHeight + 'px';
   };
 
-  console.log(tagList);
-
   return (
     <EditorPostWrap>
       <TopSection>

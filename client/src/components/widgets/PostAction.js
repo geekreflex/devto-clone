@@ -13,8 +13,8 @@ const PostAction = ({ post }) => {
 };
 
 const ActionWrap = styled.div`
-  background-color: rgba(245, 158, 11, 0.2);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  background-color: ${(props) => props.theme.warning};
+  border: 1px solid ${(props) => props.theme.warning};
   padding: 8px;
   border-radius: 5px;
 
@@ -26,7 +26,7 @@ const ActionWrap = styled.div`
     cursor: pointer;
     border-radius: 5px;
     :hover {
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: ${(props) => props.theme.bgHover2};
     }
   }
 

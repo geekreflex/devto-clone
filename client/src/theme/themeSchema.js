@@ -23,7 +23,9 @@ export const lightTheme = {
   colorHover1: '#090909',
   colorHover2: '#090909',
   bgHover1: 'rgba(59,73,223,0.2)',
+  bgHover2: 'rgba(255,255,255,0.1)',
   inputBg: '#ffffff',
+  warning: 'rgba(245, 158, 11, 0.8)',
 };
 
 export const darkTheme = {
@@ -51,5 +53,7 @@ export const darkTheme = {
   colorHover1: 'rgb(129,140,248)',
   colorHover2: 'rgb(165,180,252)',
   bgHover1: 'rgba(79,70,229,0.2)',
+  bgHover2: 'rgba(255,255,255,0.05)',
   inputBg: '#000000',
+  warning: 'rgba(245, 158, 11, 0.2)',
 };
