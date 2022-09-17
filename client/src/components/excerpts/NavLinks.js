@@ -48,8 +48,8 @@ const NavLinks = () => {
                   <span id="username">@{user?.username}</span>
                 </Link>
               </li>
-              {linkList.map((link) => (
-                <li onClick={() => setVisible(false)}>
+              {linkList.map((link, index) => (
+                <li key={index} onClick={() => setVisible(false)}>
                   <Link to={link.path}>{link.name}</Link>
                 </li>
               ))}

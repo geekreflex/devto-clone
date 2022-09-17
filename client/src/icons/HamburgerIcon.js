@@ -6,7 +6,7 @@ const HamburgerIcon = () => {
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
-      ariaLabelledby="ahlraa3asf3882jse07v38b7wl0j8cmo"
+      aria-labelledby="ahlraa3asf3882jse07v38b7wl0j8cmo"
       className="devto-icon"
       viewBox="0 0 24 24"
     >

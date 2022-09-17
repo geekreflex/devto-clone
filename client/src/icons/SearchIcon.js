@@ -6,7 +6,7 @@ const SearchIcon = () => {
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
-      ariaLabelledby="atdf05o83nk951w65cw258eqjhyqbrio"
+      aria-labelledby="atdf05o83nk951w65cw258eqjhyqbrio"
       className="devto-icon"
       viewBox="0 0 24 24"
     >

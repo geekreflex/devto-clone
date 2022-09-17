@@ -9,7 +9,7 @@ const getPosts = expressAsyncHandler(async (req, res) => {
     .populate('tags')
     .populate(
       'author',
-      'username name avatar location bio email work brandColor1'
+      'username name avatar location bio email work brandColor1 createdAt'
     )
     .exec((err, posts) => {
       if (err) {
@@ -115,7 +115,7 @@ const getOnePost = expressAsyncHandler(async (req, res) => {
     .populate('tags')
     .populate(
       'author',
-      'username name avatar location bio email work brandColor1'
+      'username name avatar location bio email work brandColor1 createdAt'
     );
 });
 

@@ -10,10 +10,13 @@ import moment from 'moment';
 import PostTagList from '../components/widgets/PostTagList';
 import Markdown from '../components/widgets/Markdown';
 import CommentSection from '../components/CommentSection';
+import { useSelector } from 'react-redux';
+import PostAction from '../components/widgets/PostAction';
 
 const Post = () => {
   const { username, postSlug } = useParams();
   const [post, setPost] = useState(null);
+  const me = useSelector((state) => state.user.user);
 
   useEffect(() => {
     getPost();
@@ -46,6 +49,7 @@ const Post = () => {
             <Reactions />
           </PostReaction>
           <PostMain>
+            {me?.username === post?.author?.username && <PostAction />}
             {post?.coverImg && (
               <PostImg>
                 <img src={post?.coverImg} />
@@ -93,7 +97,11 @@ const Post = () => {
                 </div>
                 <div className="author-info_bottom">
                   <ButtonFill>
-                    <button>Follow</button>
+                    {me?.username === post?.author?.username ? (
+                      <button>Edit Profile</button>
+                    ) : (
+                      <button>Follow</button>
+                    )}
                   </ButtonFill>
                   <p className="author-bio">{post?.author?.bio}</p>
                   <div>
@@ -135,6 +143,7 @@ const PostMain = styled.div`
   border-radius: 8px;
   overflow: hidden;
   box-shadow: ${(props) => props.theme.cardShadow};
+  position: relative;
 
   @media (max-width: 768px) {
     border-radius: 0;
