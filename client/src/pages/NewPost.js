@@ -79,10 +79,10 @@ const NewPost = () => {
 
   useEffect(() => {
     if (pageMode === 'edit-post') {
-      setTitle(post.title);
-      setContent(post.content);
-      setTagList(post.tags);
-      setCoverImg(post.coverImg);
+      setTitle(post.title || '');
+      setContent(post.content || '');
+      setTagList(post.tags || []);
+      setCoverImg(post.coverImg || '');
     }
   }, [pageMode]);
 

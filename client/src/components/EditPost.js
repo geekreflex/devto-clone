@@ -35,6 +35,8 @@ const EditPost = ({
     elem.style.minHeight = elem.scrollHeight + 'px';
   };
 
+  console.log(tagList);
+
   return (
     <EditorPostWrap>
       <TopSection>
@@ -62,7 +64,7 @@ const EditPost = ({
             id="tags"
             placeholder="Add up to 4 tags..."
           />
-          {focused === 'tags' && (
+          {focused === 'tags' && tagList && (
             <TagList tagList={tagList} setTagList={setTagList} />
           )}
         </TagField>
@@ -165,6 +167,7 @@ export const EditToolWrap = styled.div`
   display: flex;
   align-items: center;
   overflow-x: auto;
+  overflow-y: hidden;
 
   @media (max-width: 768px) {
     padding: 0 10px;
