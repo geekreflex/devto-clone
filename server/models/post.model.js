@@ -18,7 +18,8 @@ const postSchema = mongoose.Schema(
     tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
     slug: { type: String, unique: true },
     author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    savedList: [{ type: mongoose.Schema.Types.ObjectId, ref: ' Bookmark' }],
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
+    savedList: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bookmark' }],
   },
   { timestamps: true }
 );

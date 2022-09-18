@@ -7,7 +7,6 @@ import {
   ButtonGrey,
   InputWrap,
 } from '../styles/DefaultStyles';
-import { BASE_URL } from '../utils/constants';
 import CommentCard from './CommentCard';
 import Avatar from './excerpts/Avatar';
 import EditorTool from './widgets/EditorTool';
@@ -21,7 +20,7 @@ const CommentSection = ({ post }) => {
   const [focus, setFocus] = useState(false);
   const [focusBorder, setFocusBorder] = useState(false);
   const me = useSelector((state) => state.user.user);
-  const isAuth = useSelector((state) => state.user.isAuth);
+  const isAuth = useSelector((state) => state.auth.isAuth);
   const dispatch = useDispatch();
 
   useEffect(() => {

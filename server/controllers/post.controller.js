@@ -2,11 +2,13 @@ const Post = require('../models/post.model');
 const expressAsyncHandler = require('express-async-handler');
 const { generateSlug } = require('../utils/generateSlug');
 const User = require('../models/user.model');
+const Bookmark = require('../models/bookmark.model');
 
 const getPosts = expressAsyncHandler(async (req, res) => {
   Post.find()
     .sort({ createdAt: -1 })
     .populate('tags')
+    .populate('comments')
     .populate(
       'author',
       'username name avatar location bio email work brandColor1 createdAt'
@@ -116,6 +118,8 @@ const getOnePost = expressAsyncHandler(async (req, res) => {
     });
   })
     .populate('tags')
+    .populate('comments')
+    .populate('savedList')
     .populate(
       'author',
       'username name avatar location bio email work brandColor1 createdAt'
@@ -141,6 +145,46 @@ const getUserPosts = expressAsyncHandler(async (req, res) => {
   });
 });
 
+const addPostBookmark = expressAsyncHandler(async (req, res) => {
+  const { postId } = req.body;
+  const userId = req.user.id;
+
+  console.log(userId, postId);
+
+  const bookmark = new Bookmark({
+    post: postId,
+    author: userId,
+  });
+
+  await bookmark.save();
+  const user = await User.findById(userId);
+  const post = await Post.findById(postId);
+
+  user.readingList.push(bookmark);
+  post.savedList.push(bookmark);
+  await post.save();
+
+  user
+    .save()
+    .populate('readingList')
+    .exec(function (err, user) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+
+      return res.status(200).json({
+        status: 'success',
+        user,
+        message: 'Added to reading list',
+      });
+    });
+});
+const removePostBookmark = expressAsyncHandler(async (req, res) => {
+  console.log(req.body);
+  console.log('remove from bookmark');
+});
+
 module.exports = {
   getPosts,
   createPost,
@@ -148,4 +192,6 @@ module.exports = {
   deletePost,
   getOnePost,
   getUserPosts,
+  addPostBookmark,
+  removePostBookmark,
 };

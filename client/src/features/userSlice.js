@@ -45,8 +45,8 @@ export const addToBookmarkAsync = createAsyncThunk(
       };
 
       const { data } = await axios.post(
-        `${BASE_URL}/users/add-bookmark`,
-        payload,
+        `${BASE_URL}/posts/bookmark/add`,
+        { postId: payload },
         config
       );
 
@@ -74,8 +74,8 @@ export const removeBookmarkAsync = createAsyncThunk(
       };
 
       const { data } = await axios.post(
-        `${BASE_URL}/users/remove-bookmark`,
-        payload,
+        `${BASE_URL}/posts/bookmark/remove`,
+        { postId: payload },
         config
       );
 
@@ -144,7 +144,8 @@ const userSlice = createSlice({
     },
     [addToBookmarkAsync.fulfilled]: (state, action) => {
       state.status = 'idle';
-      state.user = action.payload.user;
+      console.log(action.payload);
+      // state.user = action.payload.user;
       localStorage.setItem('auth-user', JSON.stringify(action.payload.user));
     },
 

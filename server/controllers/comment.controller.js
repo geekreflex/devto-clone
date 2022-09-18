@@ -23,6 +23,13 @@ const createComment = expressAsyncHandler(async (req, res) => {
     post: postId,
   });
 
+  post.comments.push(newComment);
+  post.save((err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
+
   newComment.save((err, comment) => {
     if (err) {
       return res.status(400).json({

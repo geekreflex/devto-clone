@@ -31,10 +31,11 @@ const PostCard = ({ post, index }) => {
     }
 
     if (checkBookmark()) {
-      console.log('remove');
-      dispatch(removeBookmarkAsync({ postId: post._id }));
+      dispatch(removeBookmarkAsync(post._id));
+      console.log('remove from bookmark', post._id);
     } else {
-      dispatch(addToBookmarkAsync({ postId: post._id }));
+      dispatch(addToBookmarkAsync(post._id));
+      console.log('add to bookmark', post._id);
     }
   };
 
@@ -98,15 +99,17 @@ const PostCard = ({ post, index }) => {
                 <span>
                   <HeartIcon />
                 </span>
-                <span>11</span>
+                <span>0</span>
                 <span>Reactions</span>
               </Link>
               <Link to="#" onClick={onLink}>
                 <span>
                   <CommentIcon />
                 </span>
-                <span>2</span>
-                <span>Comments</span>
+                <span>{post?.comments?.length}</span>
+                <span>
+                  {post?.comments?.length > 1 ? 'comments' : 'comment'}
+                </span>
               </Link>
             </div>
             <div className="details">
