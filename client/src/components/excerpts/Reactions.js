@@ -8,38 +8,52 @@ import Tooltip from '../widgets/Tooltip';
 import { Link } from 'react-router-dom';
 import CopyIcon from '../../icons/CopyIcon';
 import OutsideClickHandler from 'react-outside-click-handler';
+import { useSelector } from 'react-redux';
 
 const Reactions = ({ post }) => {
   const [visible, setVisible] = useState(false);
+  const me = useSelector((state) => state.user.user);
   let twitterUrl = encodeURIComponent(
     `"${post?.title}" by @${post?.author?.username} #DEVCommunity #DEVCommunityClone https://clone-devto.herokuapp.com/${post?.author?.username}/${post?.slug}`
   );
+
+  const reactionList = [
+    {
+      name: 'Like',
+      icon: <HeartIconLg />,
+      total: 0,
+      color1: 'rgb(238, 68, 68)',
+      color2: 'rgba(239, 68, 68, 0.1)',
+    },
+    {
+      name: 'Unicorn',
+      icon: <UnicornIcon />,
+      total: 0,
+      color1: 'rgb(5, 150, 105)',
+      color2: 'rgba(5, 150, 105, 0.1)',
+    },
+    {
+      name: 'Save',
+      icon: <BookmarkIconLg />,
+      total: post?.savedList?.length,
+      color1: 'rgb(99, 102, 241)',
+      color2: 'rgba(99, 102, 241, 0.1)',
+      active: me?.readingList.some((rd) => rd.post === post._id),
+    },
+  ];
+
   return (
     <ReactionWrap>
-      <Tooltip content="Like" pos="bottom">
-        <div className="reaction like">
-          <span className="reaction-icon ">
-            <HeartIconLg />
-          </span>
-          <span className="reaction-total">0</span>
-        </div>
-      </Tooltip>
-      <Tooltip content="Unicorn" pos="bottom">
-        <div className="reaction unicorn">
-          <span className="reaction-icon">
-            <UnicornIcon />
-          </span>
-          <span className="reaction-total">0</span>
-        </div>
-      </Tooltip>
-      <Tooltip content="Save" pos="bottom">
-        <div className="reaction save">
-          <span className="reaction-icon">
-            <BookmarkIconLg />
-          </span>
-          <span className="reaction-total">0</span>
-        </div>
-      </Tooltip>
+      {reactionList.map((reaction) => (
+        <Reaction
+          active={reaction.active}
+          color1={reaction.color1}
+          color2={reaction.color2}
+        >
+          <span className="reaction-icon">{reaction.icon}</span>
+          <span className="reaction-total">{reaction.total}</span>
+        </Reaction>
+      ))}
       <div className="option-wrap">
         <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
           <div className="reaction" onClick={() => setVisible(!visible)}>
@@ -80,34 +94,13 @@ const Reactions = ({ post }) => {
 const ReactionWrap = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   margin-bottom: 20px;
   position: fixed;
   z-index: 99998;
+  align-items: center;
 
   .option-wrap {
     position: relative;
-  }
-
-  .like:hover {
-    .reaction-icon {
-      color: rgb(238, 68, 68);
-      background-color: rgba(239, 68, 68, 0.1);
-    }
-  }
-
-  .unicorn:hover {
-    .reaction-icon {
-      color: rgb(5, 150, 105);
-      background-color: rgba(5, 150, 105, 0.1);
-    }
-  }
-
-  .save:hover {
-    .reaction-icon {
-      color: rgb(99, 102, 241);
-      background-color: rgba(99, 102, 241, 0.1);
-    }
   }
 
   .more-option:hover {
@@ -116,30 +109,18 @@ const ReactionWrap = styled.div`
     }
   }
 
-  .reaction {
-    width: 60px;
+  .reaction-icon {
+    margin-bottom: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    margin-bottom: 10px;
-    cursor: pointer;
-    color: ${(props) => props.theme.textColor2};
-    fill: currentColor;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
 
-    .reaction-icon {
-      margin-bottom: 5px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
-
-    .reaction-total {
-      font-size: 14px;
-    }
+  .reaction-total {
+    font-size: 14px;
   }
 
   @media (max-width: 768px) {
@@ -154,19 +135,46 @@ const ReactionWrap = styled.div`
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
 
-    .reaction {
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      margin: 0;
-    }
-
     .reaction-icon {
       align-items: center;
       justify-content: center;
       margin-bottom: 0 !important;
       margin-right: 5px;
     }
+  }
+`;
+
+const Reaction = styled.div`
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: ${(props) => props.theme.textColor2};
+  fill: currentColor;
+
+  :hover {
+    .reaction-icon {
+      color: ${(props) => props.color1};
+      background-color: ${(props) => props.color2};
+      border: 2px solid transparent;
+    }
+  }
+
+  .reaction-icon {
+    color: ${(props) => props.active && props.color1};
+    background-color: ${(props) => props.active && props.color2};
+    border: 2px solid
+      ${(props) => (props.active ? props.color1 : 'transparent')};
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
   }
 `;
 
