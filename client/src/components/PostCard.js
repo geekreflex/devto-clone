@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import HeartIcon from '../icons/HeartIcon';
@@ -11,6 +11,7 @@ import BookmarkIcon2 from '../icons/BookmarkIcon2';
 import AuthorPreview from './widgets/AuthorPreview';
 import { toggleLoginConModal } from '../features/actionSlice';
 import moment from 'moment';
+import { bookmarkPost } from '../features/postSlice';
 
 const PostCard = ({ post, index }) => {
   const [focus, setFocus] = useState(false);
@@ -32,10 +33,10 @@ const PostCard = ({ post, index }) => {
 
     if (checkBookmark()) {
       dispatch(removeBookmarkAsync(post._id));
-      console.log('remove from bookmark', post._id);
+      dispatch(bookmarkPost({ postId: post._id, userId: user._id }));
     } else {
       dispatch(addToBookmarkAsync(post._id));
-      console.log('add to bookmark', post._id);
+      dispatch(bookmarkPost({ postId: post._id, userId: user._id }));
     }
   };
 
@@ -44,7 +45,7 @@ const PostCard = ({ post, index }) => {
   };
 
   const checkBookmark = () => {
-    return user?.readingList.some((rd) => rd.post === post._id);
+    return user?.readingList.some((rd) => rd._id === post._id);
   };
 
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -25,6 +25,11 @@ import { ButtonClear, Button } from '../styles/DefaultStyles';
 const LeftSidebar = ({ close }) => {
   const { user } = useSelector((state) => state.user);
   const { isAuth } = useSelector((state) => state.auth);
+  const [readList, setReadList] = useState(0);
+
+  useEffect(() => {
+    setReadList(user?.readingList?.length || 0);
+  }, [user]);
   return (
     <>
       <LeftWrap>
@@ -61,11 +66,7 @@ const LeftSidebar = ({ close }) => {
               <ReadListIcon />
             </span>
             Reading List
-            {user?.readingList.length > 0 && (
-              <span className="total-readlist">
-                {user?.readingList?.length}
-              </span>
-            )}
+            {readList > 0 && <span className="total-readlist">{readList}</span>}
           </Link>
           <Link to="#" onClick={close}>
             <span>

@@ -144,9 +144,15 @@ const userSlice = createSlice({
     },
     [addToBookmarkAsync.fulfilled]: (state, action) => {
       state.status = 'idle';
-      console.log(action.payload);
-      // state.user = action.payload.user;
-      localStorage.setItem('auth-user', JSON.stringify(action.payload.user));
+      state.user = action.payload.user;
+    },
+
+    [removeBookmarkAsync.pending]: (state) => {
+      state.status = 'loading';
+    },
+    [removeBookmarkAsync.fulfilled]: (state, action) => {
+      state.status = 'idle';
+      state.user = action.payload.user;
     },
 
     [updateProfileAsync.pending]: (state) => {

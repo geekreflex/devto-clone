@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { BASE_URL } from '../utils/constants';
 
@@ -142,7 +142,12 @@ export const updatePostAsync = createAsyncThunk(
 const postSlice = createSlice({
   name: 'post',
   initialState,
-  reducers: {},
+  reducers: {
+    bookmarkPost(state, action) {
+      let { postId, userId } = action.payload;
+      console.log(postId);
+    },
+  },
   extraReducers: {
     [getTagsAsync.pending]: (state) => {
       state.status = 'loading';
@@ -197,4 +202,5 @@ const postSlice = createSlice({
   },
 });
 
+export const { bookmarkPost } = postSlice.actions;
 export default postSlice.reducer;

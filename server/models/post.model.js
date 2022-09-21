@@ -19,7 +19,7 @@ const postSchema = mongoose.Schema(
     slug: { type: String, unique: true },
     author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
-    savedList: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bookmark' }],
+    savedList: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   },
   { timestamps: true }
 );

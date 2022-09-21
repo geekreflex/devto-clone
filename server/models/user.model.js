@@ -75,7 +75,7 @@ const userSchema = mongoose.Schema(
     },
     githubUrl: { type: String },
     sawOnboarding: { type: Boolean, default: false },
-    readingList: [{ type: mongoose.Types.ObjectId, ref: 'Bookmark' }],
+    readingList: [{ type: mongoose.Types.ObjectId, ref: 'Post' }],
     followedTags: [{ type: mongoose.Types.ObjectId, ref: 'Tag' }],
     followers: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
     followedUsers: [{ type: mongoose.Types.ObjectId, ref: 'User' }],

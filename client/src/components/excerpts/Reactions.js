@@ -38,7 +38,7 @@ const Reactions = ({ post }) => {
       total: post?.savedList?.length,
       color1: 'rgb(99, 102, 241)',
       color2: 'rgba(99, 102, 241, 0.1)',
-      active: me?.readingList.some((rd) => rd.post === post._id),
+      active: me?.readingList?.some((rd) => rd._id === post?._id),
     },
   ];
 

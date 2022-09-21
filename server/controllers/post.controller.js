@@ -2,7 +2,7 @@ const Post = require('../models/post.model');
 const expressAsyncHandler = require('express-async-handler');
 const { generateSlug } = require('../utils/generateSlug');
 const User = require('../models/user.model');
-const Bookmark = require('../models/bookmark.model');
+const { getUserProfile } = require('./user.controller');
 
 const getPosts = expressAsyncHandler(async (req, res) => {
   Post.find()
@@ -149,40 +149,31 @@ const addPostBookmark = expressAsyncHandler(async (req, res) => {
   const { postId } = req.body;
   const userId = req.user.id;
 
-  console.log(userId, postId);
-
-  const bookmark = new Bookmark({
-    post: postId,
-    author: userId,
-  });
-
-  await bookmark.save();
   const user = await User.findById(userId);
   const post = await Post.findById(postId);
 
-  user.readingList.push(bookmark);
-  post.savedList.push(bookmark);
+  user.readingList.push(postId);
+  post.savedList.push(userId);
   await post.save();
+  await user.save();
 
-  user
-    .save()
-    .populate('readingList')
-    .exec(function (err, user) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-
-      return res.status(200).json({
-        status: 'success',
-        user,
-        message: 'Added to reading list',
-      });
-    });
+  getUserProfile(req, res);
 });
+
 const removePostBookmark = expressAsyncHandler(async (req, res) => {
-  console.log(req.body);
-  console.log('remove from bookmark');
+  const { postId } = req.body;
+  const userId = req.user.id;
+
+  const user = await User.findById(userId);
+  const post = await Post.findById(postId);
+
+  user.readingList.pull(postId);
+  post.savedList.pull(userId);
+
+  await post.save();
+  await user.save();
+
+  getUserProfile(req, res);
 });
 
 module.exports = {
